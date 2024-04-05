@@ -35,6 +35,11 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 36
 text = "Новая игра"
 
+[node name="TextureRect" type="TextureRect" parent="PlayBtn"]
+layout_mode = 0
+offset_right = 264.0
+offset_bottom = 264.0
+
 [node name="LoadBtn" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1

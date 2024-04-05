@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://bgsknyje8pi4b"]
+
+[ext_resource type="Script" path="res://scripts/elf.gd" id="1_8h74m"]
+[ext_resource type="Texture2D" uid="uid://cot8ndyihlykb" path="res://textures/elf-alpha.png" id="2_yeis2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fft26"]
+atlas = ExtResource("2_yeis2")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixp1d"]
+atlas = ExtResource("2_yeis2")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6m63"]
+atlas = ExtResource("2_yeis2")
+region = Rect2(44, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayyp4"]
+atlas = ExtResource("2_yeis2")
+region = Rect2(0, 22, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8ybb"]
+atlas = ExtResource("2_yeis2")
+region = Rect2(22, 22, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yddh"]
+atlas = ExtResource("2_yeis2")
+region = Rect2(44, 22, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40uto"]
+atlas = ExtResource("2_yeis2")
+region = Rect2(0, 44, 22, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_335lb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fft26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixp1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6m63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayyp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8ybb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yddh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40uto")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xg8h4"]
+size = Vector2(22, 22)
+
+[node name="Elf" type="Node2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_8h74m")
+
+[node name="Texture" type="AnimatedSprite2D" parent="."]
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_335lb")
+autoplay = "default"
+frame_progress = 0.178038
+
+[node name="Body" type="RigidBody2D" parent="."]
+
+[node name="Hitbox" type="CollisionShape2D" parent="Body"]
+shape = SubResource("RectangleShape2D_xg8h4")

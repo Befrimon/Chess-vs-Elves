@@ -1,20 +1,80 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqxejonvwn1a0"]
+[gd_scene load_steps=11 format=3 uid="uid://bqxejonvwn1a0"]
 
 [ext_resource type="Script" path="res://scripts/figure.gd" id="1_cfvwq"]
-[ext_resource type="Texture2D" uid="uid://ca3jn4iptmc61" path="res://textures/figures_alpha.png" id="1_lq7g0"]
+[ext_resource type="Texture2D" uid="uid://br1fr3nhqjewv" path="res://textures/figures_alpha.png" id="1_lq7g0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypjr2"]
+atlas = ExtResource("1_lq7g0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xew48"]
+atlas = ExtResource("1_lq7g0")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5x3um"]
+atlas = ExtResource("1_lq7g0")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fvb0a"]
 atlas = ExtResource("1_lq7g0")
 region = Rect2(80, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxksb"]
+atlas = ExtResource("1_lq7g0")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf377"]
+atlas = ExtResource("1_lq7g0")
+region = Rect2(0, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_335lb"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypjr2")
+}],
+"loop": true,
+"name": &"bishop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xew48")
+}],
+"loop": true,
+"name": &"king",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5x3um")
+}],
+"loop": true,
+"name": &"knight",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fvb0a")
 }],
 "loop": true,
-"name": &"default",
+"name": &"pawn",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxksb")
+}],
+"loop": true,
+"name": &"queen",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf377")
+}],
+"loop": true,
+"name": &"rook",
 "speed": 5.0
 }]
 
@@ -27,6 +87,7 @@ script = ExtResource("1_cfvwq")
 
 [node name="Texture" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_335lb")
+animation = &"pawn"
 
 [node name="Body" type="RigidBody2D" parent="."]
 

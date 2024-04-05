@@ -3,6 +3,9 @@ extends Node
 ## Global variables
 var game_state = "None"
 
+const MIN_TICK = 1
+const MAX_TICK = 5
+
 
 ## Open game scene function
 func change_scene(action: String):

@@ -3,5 +3,4 @@
 builds/
 *.keystore
 *.import
-*.godot
 *.cfg

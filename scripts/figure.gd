@@ -1,13 +1,13 @@
 extends Node2D
 
-var TEXTURE : AnimatedSprite2D
-var BODY : RigidBody2D
+var texture : AnimatedSprite2D
+var body : RigidBody2D
 var size : Vector2
 
 func _ready():
-	TEXTURE = get_node("Texture")
-	BODY = get_node("Body")
-	size = TEXTURE.sprite_frames.get_frame_texture("default", 0).get_size() * scale.x
+	texture = get_node("Texture")
+	body = get_node("Body")
+	size = texture.sprite_frames.get_frame_texture("pawn", 0).get_size() * scale.x
 
 
 func _unhandled_input(event):

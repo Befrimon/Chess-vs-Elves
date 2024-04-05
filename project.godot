@@ -1,0 +1,36 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="ShizoChess"
+run/main_scene="res://scenes/menu.tscn"
+config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/image="res://splash.png"
+config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://scripts/global.gd"
+Entity="*res://scripts/entity_controller.gd"
+
+[display]
+
+window/size/viewport_width=1334
+window/size/viewport_height=750
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+viewport/hdr_2d=true
