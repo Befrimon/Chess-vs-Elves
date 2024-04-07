@@ -19,7 +19,7 @@ script = ExtResource("1_ai5jy")
 
 [node name="Texture" type="AnimatedSprite2D" parent="."]
 process_mode = 3
-animation = &"idle"
+animation = &""
 
 [node name="HPbar" type="Sprite2D" parent="."]
 position = Vector2(-2, -45)

@@ -34,3 +34,6 @@ func _physics_process(delta):
 			parent.audio.play()
 			the_rook = true
 
+func get_info():
+	return [parent.type, "inf", "State" , "ready"]
+

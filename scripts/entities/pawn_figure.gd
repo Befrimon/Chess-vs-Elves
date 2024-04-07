@@ -25,12 +25,17 @@ func _physics_process(delta):
 		parent.kill()
 	
 	for body in eat_area.get_overlapping_bodies():
-		if body.type != "elf": continue
+		if "elf" not in body.type: continue
 		
-		var new_pos = Preview.convert_pos(body.position)
+		var new_pos = EntityController.convert_pos(body.position)
+		if not EntityController.check_close(new_pos):
+			return
 		parent.position = new_pos
 		kill_count -= 1
 		body.kill()
 	if kill_count == 0:
 		parent.kill()
+
+func get_info():
+	return [parent.type, str(hp*parent.hpbar.scale.x), "Uses" , str(kill_count)]
 

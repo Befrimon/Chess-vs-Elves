@@ -21,3 +21,7 @@ func _physics_process(delta):
 	if parent.hpbar.scale.x <= 0:
 		parent.kill()
 
+func get_info():
+	return [parent.type, str(hp*parent.hpbar.scale.x), "State" , "useless"]
+
+

@@ -1,11 +1,15 @@
 extends Control
 
 var spw_buttons : Control
+var figure_info : TextEdit
 var menu_opened : bool
+
+const text_info = "Name: %s\nHits: %s\n%s: %s"
 
 
 func _ready():
 	spw_buttons = get_node("SpawnButttons")
+	figure_info = get_node("FigureInfo")
 	menu_opened = true
 	
 	get_node("SpawnBtn").pressed.connect(toggle_menu)
@@ -24,4 +28,10 @@ func toggle_menu(menu_state : bool = !menu_opened):
 			cur_btn.position = Vector2(10, 80 + 60*i)
 		if !menu_opened:
 			cur_btn.position = Vector2(10, 0)
+
+func change_info(entity: Entity):
+	if !entity:
+		figure_info.text = ""
+	else:
+		figure_info.text = text_info % entity.controller.get_info()
 

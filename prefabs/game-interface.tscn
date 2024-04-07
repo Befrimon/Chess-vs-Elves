@@ -20,7 +20,7 @@ offset_top = 20.0
 offset_right = 200.0
 offset_bottom = 80.0
 
-[node name="king" type="Button" parent="SpawnButttons"]
+[node name="king_figure" type="Button" parent="SpawnButttons"]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 10.0
@@ -32,7 +32,7 @@ toggle_mode = true
 button_group = ExtResource("1_lka8w")
 text = "King"
 
-[node name="pawn" type="Button" parent="SpawnButttons"]
+[node name="pawn_figure" type="Button" parent="SpawnButttons"]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 10.0
@@ -66,3 +66,13 @@ offset_bottom = 80.0
 theme_override_font_sizes/font_size = 28
 text = "Spawn
 "
+
+[node name="FigureInfo" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 850.0
+offset_top = 20.0
+offset_right = 1100.0
+offset_bottom = 200.0
+editable = false
+virtual_keyboard_enabled = false

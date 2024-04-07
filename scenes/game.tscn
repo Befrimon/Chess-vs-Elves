@@ -140,4 +140,8 @@ tile_set = SubResource("TileSet_ste7u")
 rendering_quadrant_size = 90
 format = 2
 
+[node name="Elfs" type="Node2D" parent="."]
+
+[node name="Figures" type="Node2D" parent="."]
+
 [node name="GameInterface" parent="." instance=ExtResource("2_nm5fl")]

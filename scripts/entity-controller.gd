@@ -13,34 +13,59 @@ const MAX_TICK = 2
 const ROOK_SPEED = 400
 const ROOK_POSITIONS = [310, 390, 470, 550, 630, 710]
 
-const BATTLE_FIG = ["pawn", "knight", "bishop", "queen"]
+const BATTLE_FIG = ["pawn_figure", "knight_figure", "bishop_figure", "queen_figure"]
 
 # Nodes
 var controller_group : Node
+var elfs_group : Node2D
+var figures_group : Node2D
 
 
-func new_entity(parent: Node2D, name: String, pos: Vector2):
-	print("Creating new %s" % name)
+func new_entity(ename: String, pos: Vector2):
+	print("Creating new %s" % ename)
+	
+	if "elf" not in ename and not check_close(pos):
+		return
 	
 	# Create entity
 	var entity = ENTITY.duplicate().instantiate()
-	entity.init(name, pos)
+	entity.init(ename, pos)
 	
 	# Create controller 
-	var controller = load("res://scripts/entities/%s.gd" % name).new(entity)
+	var controller = load("res://scripts/entities/%s.gd" % ename).new(entity)
 	entity.set_controller(controller)
 	controller_group.add_child(controller)
 	
 	# Create eat area
-	if name in BATTLE_FIG:
-		var eat_area = load("res://prefabs/areas/pawn.tscn").instantiate()
+	if ename in BATTLE_FIG:
+		var eat_area = load("res://prefabs/areas/%s.tscn" % ename).instantiate()
 		entity.add_child(eat_area)
 		controller.eat_area = eat_area
 	
-	parent.add_child(entity)
+	if "elf" in ename:
+		elfs_group.add_child(entity)
+	elif "figure" in ename:
+		figures_group.add_child(entity)
+
+func get_figure(pos: Vector2):
+	for entity in figures_group.get_child_count():
+		var figure = figures_group.get_child(entity)
+		if figure.position == convert_pos(pos): return figure
+	return null
+
+func convert_pos(raw_pos: Vector2):
+	var map_pos = Preview.MAP_POS
+	var index_pos = Vector2(int((raw_pos.x - map_pos.x) / 80), int((raw_pos.y - map_pos.y) / 80))
+	return map_pos + index_pos*80 + Vector2(1, 1)*TILE_SIZE/2
+
+func check_close(pos: Vector2):
+	for entity in figures_group.get_child_count():
+		var figure = figures_group.get_child(entity)
+		if figure.position == pos: return false
+	return true
 
 
-func pregen_rooks(parent: Node2D):
+func pregen_rooks():
 	for y_pos in ROOK_POSITIONS:
-		new_entity(parent, "rook", Vector2(220, y_pos))
+		new_entity("rook_figure", Vector2(220, y_pos))
 
