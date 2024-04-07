@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqxejonvwn1a0"]
+
+[ext_resource type="Script" path="res://scripts/entity.gd" id="1_ai5jy"]
+
+[sub_resource type="Gradient" id="Gradient_jujkm"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.612299, 8.18223e-07, 1.44392e-07, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j1qam"]
+gradient = SubResource("Gradient_jujkm")
+width = 60
+height = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xg8h4"]
+size = Vector2(2, 60)
+
+[node name="Entity" type="CharacterBody2D"]
+script = ExtResource("1_ai5jy")
+
+[node name="Texture" type="AnimatedSprite2D" parent="."]
+process_mode = 3
+animation = &"idle"
+
+[node name="HPbar" type="Sprite2D" parent="."]
+position = Vector2(-2, -45)
+texture = SubResource("GradientTexture2D_j1qam")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(36, 0)
+shape = SubResource("RectangleShape2D_xg8h4")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]

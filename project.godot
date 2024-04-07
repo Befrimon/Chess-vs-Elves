@@ -10,27 +10,31 @@ config_version=5
 
 [application]
 
-config/name="ShizoChess"
+config/name="Chess vs Elfs"
 run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/image="res://splash.png"
-config/icon="res://icon.svg"
+config/icon="res://logo.png"
 
 [autoload]
 
 Global="*res://scripts/global.gd"
-Entity="*res://scripts/entity_controller.gd"
+EntityController="*res://scripts/entity-controller.gd"
+Preview="*res://scripts/preview-controller.gd"
 
 [display]
 
 window/size/viewport_width=1334
 window/size/viewport_height=750
+window/size/resizable=false
+window/size/borderless=true
 window/stretch/mode="viewport"
-window/stretch/aspect="keep_height"
+window/vsync/vsync_mode=2
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 viewport/hdr_2d=true

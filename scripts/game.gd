@@ -1,23 +1,33 @@
 extends Node2D
 
-func pregen_rooks():
-	for y in range(310, 711, 80):
-		Entity.new_figure(self, "rook", Vector2(220, y))
-
-
 func _ready():
-	if Global.game_state == "New":
-		pregen_rooks()
+	EntityController.controller_group = get_node("Controllers")
+	Preview.preview_map = get_node("PreviewMap")
+	Global.game_root = self
+
+	if Global.game_state == "GenNew":
+		EntityController.pregen_rooks(self)
+		Global.game_state = "Run"
+	
+	elif Global.game_state == "LoadNew":
+		pass
 
 
 var timer = 0
-var tick = randi_range(Global.MIN_TICK, Global.MAX_TICK)
+var tick = randi_range(EntityController.MIN_TICK, EntityController.MAX_TICK)
 func _process(delta):
 	timer += delta
 	
 	if timer >= tick:
-		tick = randi_range(Global.MIN_TICK, Global.MAX_TICK)
+		tick = randi_range(EntityController.MIN_TICK, EntityController.MAX_TICK)
 		timer = 0
-		Entity.new_elf(self)
+		EntityController.new_entity(self, "elf", Vector2(1660, 310 + 80*randi_range(0, 5)))
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		Preview.figure_preview(event.position)
+	if event is InputEventMouseButton and event.button_index == 1 and Preview.check_place(event.position):
+		EntityController.new_entity(self, Preview.shadow, Preview.convert_pos(event.position))
+		get_node("GameInterface").toggle_menu(true)
 
 

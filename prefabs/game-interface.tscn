@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://81aqshcytuci"]
+
+[ext_resource type="ButtonGroup" uid="uid://cj7cm765kqt1i" path="res://prefabs/figure-creators.tres" id="1_lka8w"]
+[ext_resource type="Script" path="res://scripts/UI.gd" id="1_r16wq"]
+
+[node name="GameInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r16wq")
+
+[node name="SpawnButttons" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 80.0
+
+[node name="king" type="Button" parent="SpawnButttons"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 10.0
+offset_top = 80.0
+offset_right = 160.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 28
+toggle_mode = true
+button_group = ExtResource("1_lka8w")
+text = "King"
+
+[node name="pawn" type="Button" parent="SpawnButttons"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 10.0
+offset_top = 140.0
+offset_right = 160.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 28
+toggle_mode = true
+button_group = ExtResource("1_lka8w")
+text = "Pawn"
+
+[node name="PauseBtn" type="Button" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = -1
+offset_left = 1150.0
+offset_top = 20.0
+offset_right = 1300.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 28
+text = "PAUSE"
+
+[node name="SpawnBtn" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 28
+text = "Spawn
+"
