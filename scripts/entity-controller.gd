@@ -5,15 +5,21 @@ const TILE_SIZE = 80  # Entity size
 const ENTITY = preload("res://prefabs/entity.tscn")  # Entity object
 
 # Elf spawning
-const ELF_SPEED = 150
-const MIN_TICK = 1
-const MAX_TICK = 2
+const ELF_SPEED = 50
+const MIN_TICK = 5
+const MAX_TICK = 15
 
 # Figures spawning
 const ROOK_SPEED = 400
 const ROOK_POSITIONS = [310, 390, 470, 550, 630, 710]
 
 const BATTLE_FIG = ["pawn_figure", "knight_figure", "bishop_figure", "queen_figure"]
+const costs = {
+	"rook_figure": ["Rook", 0],
+	"king_figure": ["King", 100],
+	"pawn_figure": ["Pawn", 50],
+}
+var crown_count : int
 
 # Nodes
 var controller_group : Node
@@ -24,12 +30,15 @@ var figures_group : Node2D
 func new_entity(ename: String, pos: Vector2):
 	print("Creating new %s" % ename)
 	
-	if "elf" not in ename and not check_close(pos):
+	if "elf" not in ename and (not check_close(pos) or costs[ename][1] > crown_count):
 		return
+	elif "elf" not in ename:
+		crown_count -= costs[ename][1]
 	
 	# Create entity
 	var entity = ENTITY.duplicate().instantiate()
-	entity.init(ename, pos)
+	var display_name = ename.split("_")[0].capitalize()
+	entity.init(display_name, ename, pos)
 	
 	# Create controller 
 	var controller = load("res://scripts/entities/%s.gd" % ename).new(entity)

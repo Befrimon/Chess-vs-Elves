@@ -7,18 +7,20 @@ var hpbar : Sprite2D
 var audio : AudioStreamPlayer2D
 var size : Vector2
 var controller : Node
-var type : String
+var dname : String
+var bid : String
 
 ## Init function
-func init(sname: String, pos: Vector2):
+func init(sname: String, id: String, pos: Vector2):
 	## Set variables
 	texture = get_node("Texture")
 	hpbar = get_node("HPbar")
 	audio = get_node("Audio")
-	type = sname
+	dname = sname
+	bid = id 
 	
 	## Configure texture
-	texture.sprite_frames = load("res://animations/%s.tres" % sname)
+	texture.sprite_frames = load("res://animations/%s.tres" % bid)
 	var orig_size = texture.sprite_frames.get_frame_texture("idle", 0).get_size()
 	texture.scale *= 90 / orig_size.x
 	

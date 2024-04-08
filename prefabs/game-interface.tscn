@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://81aqshcytuci"]
+[gd_scene load_steps=2 format=3 uid="uid://81aqshcytuci"]
 
-[ext_resource type="ButtonGroup" uid="uid://cj7cm765kqt1i" path="res://prefabs/figure-creators.tres" id="1_lka8w"]
 [ext_resource type="Script" path="res://scripts/UI.gd" id="1_r16wq"]
 
 [node name="GameInterface" type="Control"]
@@ -19,30 +18,6 @@ offset_left = 30.0
 offset_top = 20.0
 offset_right = 200.0
 offset_bottom = 80.0
-
-[node name="king_figure" type="Button" parent="SpawnButttons"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 10.0
-offset_top = 80.0
-offset_right = 160.0
-offset_bottom = 130.0
-theme_override_font_sizes/font_size = 28
-toggle_mode = true
-button_group = ExtResource("1_lka8w")
-text = "King"
-
-[node name="pawn_figure" type="Button" parent="SpawnButttons"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 10.0
-offset_top = 140.0
-offset_right = 160.0
-offset_bottom = 190.0
-theme_override_font_sizes/font_size = 28
-toggle_mode = true
-button_group = ExtResource("1_lka8w")
-text = "Pawn"
 
 [node name="PauseBtn" type="Button" parent="."]
 process_mode = 3
@@ -76,3 +51,14 @@ offset_right = 1100.0
 offset_bottom = 200.0
 editable = false
 virtual_keyboard_enabled = false
+
+[node name="CrownLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 230.0
+offset_top = 20.0
+offset_right = 450.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 28
+text = "Crowns: %s"
+vertical_alignment = 1

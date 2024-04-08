@@ -12,6 +12,7 @@ func change_scene(action: String):
 	
 	if action == "new_game":
 		print("Configuring new game")
+		EntityController.crown_count = 100
 		game_state = "GenNew"
 
 	elif action == "load_game":
