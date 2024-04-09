@@ -59,7 +59,9 @@ func new_entity(ename: String, pos: Vector2):
 func get_figure(pos: Vector2):
 	for entity in figures_group.get_child_count():
 		var figure = figures_group.get_child(entity)
-		if figure.position == convert_pos(pos): return figure
+		if figure.position == convert_pos(pos): 
+			figure.selector.visible = true
+			return figure
 	return null
 
 func convert_pos(raw_pos: Vector2):

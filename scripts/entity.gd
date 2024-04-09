@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 ## Variables
 var texture : AnimatedSprite2D
+var selector : AnimatedSprite2D
 var hpbar : Sprite2D
 var audio : AudioStreamPlayer2D
 var size : Vector2
@@ -14,6 +15,7 @@ var bid : String
 func init(sname: String, id: String, pos: Vector2):
 	## Set variables
 	texture = get_node("Texture")
+	selector = get_node("Selector")
 	hpbar = get_node("HPbar")
 	audio = get_node("Audio")
 	dname = sname
@@ -26,6 +28,10 @@ func init(sname: String, id: String, pos: Vector2):
 	
 	## Set position
 	position = pos
+
+func _input(event):
+	if event is InputEventMouseButton:
+		selector.visible = false
 
 func set_controller(contr: Node):
 	controller = contr

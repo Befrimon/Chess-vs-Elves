@@ -1,7 +1,7 @@
 extends Node
 
 ## Variables
-const MAP_POS = Vector2(260, 265)
+const MAP_POS = Vector2(260, 255)
 const PREV_ID = {
 	"king_figure": Vector2(6, 4),
 	"pawn_figure": Vector2(5, 0)

@@ -9,6 +9,7 @@ const text_info = "Name: %s\nHits: %s\n%s: %s"
 const crown_text = "Crowns: %s"
 
 var spawn_group : ButtonGroup
+var current_figure : Entity
 
 func _ready():
 	spw_buttons = get_node("SpawnButttons")
@@ -39,6 +40,7 @@ func _ready():
 
 func _process(delta):
 	crown_label.text = crown_text % EntityController.crown_count
+	figure_info.text = "" if !current_figure else text_info % current_figure.controller.get_info()
 
 func toggle_menu(menu_state : bool = !menu_opened):
 	menu_opened = menu_state
@@ -52,8 +54,5 @@ func toggle_menu(menu_state : bool = !menu_opened):
 			cur_btn.position = Vector2(10, 0)
 
 func change_info(entity: Entity):
-	if !entity:
-		figure_info.text = ""
-	else:
-		figure_info.text = text_info % entity.controller.get_info()
+	current_figure = entity
 

@@ -37,5 +37,5 @@ func _physics_process(delta):
 		parent.kill()
 
 func get_info():
-	return [parent.dname, str(hp*parent.hpbar.scale.x), "Uses" , str(kill_count)]
+	return [parent.dname, int(hp*parent.hpbar.scale.x), "Uses" , kill_count]
 

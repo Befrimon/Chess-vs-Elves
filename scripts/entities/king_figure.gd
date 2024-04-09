@@ -34,6 +34,6 @@ func _process(delta):
 		timer = 0
 
 func get_info():
-	return [parent.dname, str(hp*parent.hpbar.scale.x), "Cooldown", str(int(gen_cooldown-timer))]
+	return [parent.dname, int(hp*parent.hpbar.scale.x), "Cooldown", int(gen_cooldown-timer)]
 
 
