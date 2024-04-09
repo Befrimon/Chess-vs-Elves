@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://g8pxmhe2xgxx"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_3s2n8"]
-[ext_resource type="Texture2D" uid="uid://djbi5quulmvgw" path="res://textures/board-alpha.png" id="2_dtig5"]
+[ext_resource type="Texture2D" uid="uid://bg56qqmokk8mo" path="res://textures/board-alpha.png" id="2_dtig5"]
 [ext_resource type="PackedScene" uid="uid://81aqshcytuci" path="res://prefabs/game-interface.tscn" id="2_nm5fl"]
-[ext_resource type="Texture2D" uid="uid://dmgdhnnvwkqhy" path="res://textures/figures-alpha.png" id="3_bwhhl"]
+[ext_resource type="Texture2D" uid="uid://cp4swly5ky3gl" path="res://textures/figures-alpha.png" id="3_bwhhl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgpfn"]
 texture = ExtResource("3_bwhhl")

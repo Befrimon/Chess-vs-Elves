@@ -35,5 +35,9 @@ func _physics_process(delta):
 			the_rook = true
 
 func get_info():
-	return [parent.dname, "inf", "State" , "ready"]
-
+	return "
+	Name: Rook
+	Type: defender
+	State: ready
+	THE ROOOOOOK!
+	"

@@ -9,8 +9,7 @@ func _ready():
 	EntityController.figures_group = get_node("Figures")
 	Preview.preview_map = get_node("PreviewMap")
 	Global.game_root = self
-	
-	interface = get_node("GameInterface")
+	Global.game_ui = get_node("GameInterface")
 
 	if Global.game_state == "GenNew":
 		EntityController.pregen_rooks()
@@ -35,15 +34,9 @@ func _input(event):
 		if Preview.enabled:
 			Preview.figure_preview(event.position)
 	if event is InputEventMouseButton:
-		if !Preview.enabled:
-			var fig = EntityController.get_figure(event.position)
-			if not fig: 
-				interface.change_info(null)
-				return
-			interface.change_info(fig)
 		if event.button_index == 1 and Preview.on_map(event.position):
 			EntityController.new_entity(Preview.shadow, EntityController.convert_pos(event.position))
-			interface.toggle_menu(true)
+			Global.game_ui.toggle_menu(true)
 		
 
 

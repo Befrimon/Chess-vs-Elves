@@ -4,6 +4,7 @@ extends Node
 
 # Game process
 var game_root : Node2D
+var game_ui : Control
 var game_state : String
 
 ## Open game scene function

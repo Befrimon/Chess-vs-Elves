@@ -5,9 +5,6 @@ var figure_info : TextEdit
 var crown_label : Label
 var menu_opened : bool
 
-const text_info = "Name: %s\nHits: %s\n%s: %s"
-const crown_text = "Crowns: %s"
-
 var spawn_group : ButtonGroup
 var current_figure : Entity
 
@@ -39,8 +36,8 @@ func _ready():
 		y_pos += 60
 
 func _process(delta):
-	crown_label.text = crown_text % EntityController.crown_count
-	figure_info.text = "" if !current_figure else text_info % current_figure.controller.get_info()
+	crown_label.text = "Crowns: %s" % EntityController.crown_count
+	figure_info.text = "" if !(current_figure and current_figure.selector.visible) else current_figure.controller.get_info()
 
 func toggle_menu(menu_state : bool = !menu_opened):
 	menu_opened = menu_state

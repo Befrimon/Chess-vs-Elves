@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bqxejonvwn1a0"]
 
 [ext_resource type="Script" path="res://scripts/entity.gd" id="1_ai5jy"]
-[ext_resource type="Texture2D" uid="uid://diydwle3avfag" path="res://textures/selector.png" id="3_lvmpc"]
+[ext_resource type="Texture2D" uid="uid://cyxjqi2xn0a8a" path="res://textures/selector.png" id="3_lvmpc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t6gf3"]
 atlas = ExtResource("3_lvmpc")
@@ -67,7 +67,6 @@ autoplay = "default"
 [node name="Texture" type="AnimatedSprite2D" parent="."]
 process_mode = 3
 animation = &"idle"
-autoplay = "idle"
 
 [node name="HPbar" type="Sprite2D" parent="."]
 position = Vector2(-2, -45)

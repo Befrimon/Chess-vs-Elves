@@ -37,5 +37,9 @@ func _physics_process(delta):
 		parent.kill()
 
 func get_info():
-	return [parent.dname, int(hp*parent.hpbar.scale.x), "Uses" , kill_count]
-
+	return "
+	Name: Pawn
+	Type: figure
+	Hits: %s
+	Uses: %s
+	" % [int(hp), kill_count]

@@ -11,7 +11,6 @@ const MAX_TICK = 15
 
 # Figures spawning
 const ROOK_SPEED = 400
-const ROOK_POSITIONS = [310, 390, 470, 550, 630, 710]
 
 const BATTLE_FIG = ["pawn_figure", "knight_figure", "bishop_figure", "queen_figure"]
 const costs = {
@@ -77,6 +76,6 @@ func check_close(pos: Vector2):
 
 
 func pregen_rooks():
-	for y_pos in ROOK_POSITIONS:
+	for y_pos in range(Preview.MAP_POS.y+TILE_SIZE/2, Preview.MAP_POS.y+TILE_SIZE*5.6, TILE_SIZE):
 		new_entity("rook_figure", Vector2(220, y_pos))
 

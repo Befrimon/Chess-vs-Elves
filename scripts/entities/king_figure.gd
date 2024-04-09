@@ -34,6 +34,11 @@ func _process(delta):
 		timer = 0
 
 func get_info():
-	return [parent.dname, int(hp*parent.hpbar.scale.x), "Cooldown", int(gen_cooldown-timer)]
+	return "
+	Name: King
+	Type: figure
+	Hits: %s
+	Cooldown: %s
+	" % [int(hp), int(gen_cooldown-timer)]
 
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bfhtdfej32r5i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1obi6"]
-size = Vector2(30, 80)
+size = Vector2(30, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e17ui"]
-size = Vector2(24, 80)
+size = Vector2(24, 60)
 
 [node name="PawnArea" type="Area2D"]
 

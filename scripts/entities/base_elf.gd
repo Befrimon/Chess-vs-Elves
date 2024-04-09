@@ -24,3 +24,9 @@ func _physics_process(delta):
 		print("Win ", parent.name)
 		Global.game_over()
 
+func get_info():
+	return "
+	Name: Base elf
+	Type: elf
+	Cocaina???
+	"

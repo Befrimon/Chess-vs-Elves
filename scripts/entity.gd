@@ -24,14 +24,21 @@ func init(sname: String, id: String, pos: Vector2):
 	## Configure texture
 	texture.sprite_frames = load("res://animations/%s.tres" % bid)
 	var orig_size = texture.sprite_frames.get_frame_texture("idle", 0).get_size()
-	texture.scale *= 90 / orig_size.x
+	texture.scale *= EntityController.TILE_SIZE / orig_size.x
 	
 	## Set position
 	position = pos
 
 func _input(event):
 	if event is InputEventMouseButton:
-		selector.visible = false
+		var pos = event.position
+		var delta = EntityController.TILE_SIZE / 2
+		if !Preview.enabled and position.x - delta <= pos.x and pos.x <= position.x + delta and \
+			position.y - delta <= pos.y and pos.y <= position.y + delta:
+			selector.visible = true
+			Global.game_ui.change_info(self)
+		else:
+			selector.visible = false
 
 func set_controller(contr: Node):
 	controller = contr
