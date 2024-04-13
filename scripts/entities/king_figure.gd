@@ -1,44 +1,33 @@
 extends Node
 
-var parent : Entity
+## Declare variables
+var parent :Entity
 
-var crown_gen : int
-var gen_cooldown : int
-var hp : float
+# Move properties
+const SPEED :int = 500
+const MOVE_TEMPLATE :Array[Vector2] = [
+	Vector2(1, -1),Vector2(1, 0),Vector2(1, 1),
+	Vector2(-1, -1),Vector2(-1, 0),Vector2(-1, 1),
+	Vector2(0, 1),Vector2(0, -1)
+]
 
-func _init(king_parent: Entity):
-	## Set variables
-	parent = king_parent
-	crown_gen = 50
-	gen_cooldown = 10
-	hp = 3
+func _init(parent_obj :Entity):
+	## Assign variables
+	parent = parent_obj
+	parent.allow_move = false
+	parent.stun_cooldown = INF
 	
-	## Set animation
-	parent.texture.play("idle")
+	for pos in MOVE_TEMPLATE:
+		var cell = Global.MOVE_CELL.duplicate().instantiate()
+		cell.position = (Global.POS_DELTA + pos * Global.TILE_SIZE) / parent.scale
+		cell.set_meta("delta", pos)
+		cell.scale = Global.TILE_SIZE / cell.sprite_frames.get_frame_texture("default", 0).get_size() / parent.scale
+		parent.move_cells.add_child(cell)
 
-func _physics_process(delta):
-	parent.velocity = Vector2.ZERO
-	parent.move_and_slide()
-	if parent.get_slide_collision_count() > 0:
-		parent.hpbar.scale.x -= delta / hp
-	
-	if parent.hpbar.scale.x <= 0:
-		parent.kill()
+func get_skill_target():
+	return "crowns"
 
-var timer = 0
-func _process(delta):
-	timer += delta
-	if timer >= gen_cooldown:
-		print("King generate %s crowns" % crown_gen)
-		EntityController.crown_count += crown_gen
-		timer = 0
-
-func get_info():
-	return "
-	Name: King
-	Type: figure
-	Hits: %s
-	Cooldown: %s
-	" % [int(hp), int(gen_cooldown-timer)]
-
-
+func get_unique_info() -> String:
+	return "Crowns: %s\nCooldown: %s" % \
+	  [Global.ENTITY_PARAM[parent.full_id]["level%s" % parent.level]["value"], 
+	  str(int(parent.skill_cooldown-Global.timer))]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8ur744pxcr82"]
+[gd_scene load_steps=2 format=3 uid="uid://c8tc4bd4gii6n"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_h1by2"]
 
 [node name="Menu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,52 +13,44 @@ grow_vertical = 2
 script = ExtResource("1_h1by2")
 
 [node name="Title" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 120.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 48
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 60
 text = "Шахматы против эльфов"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayBtn" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -225.0
-offset_top = 230.0
-offset_right = 225.0
-offset_bottom = 300.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 36
-text = "Новая игра"
+[node name="LinkButtons" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 660.0
+offset_top = 250.0
+offset_right = 1260.0
+offset_bottom = 670.0
 
-[node name="LoadBtn" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -225.0
-offset_top = 330.0
-offset_right = 225.0
-offset_bottom = 400.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 36
+[node name="PlayBtn" type="Button" parent="LinkButtons"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 46
+text = "Новая игра"
+metadata/scene_action = "new_game"
+
+[node name="LoadBtn" type="Button" parent="LinkButtons"]
+layout_mode = 0
+offset_top = 150.0
+offset_right = 600.0
+offset_bottom = 270.0
+theme_override_font_sizes/font_size = 46
 disabled = true
 text = "Продолжить"
+metadata/scene_action = "load_game"
 
-[node name="ExitBtn" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -225.0
-offset_top = 430.0
-offset_right = 225.0
-offset_bottom = 500.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 36
+[node name="ExitBtn" type="Button" parent="LinkButtons"]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 600.0
+offset_bottom = 420.0
+theme_override_font_sizes/font_size = 46
 text = "Выйти из игры"
+metadata/scene_action = "quit_game"

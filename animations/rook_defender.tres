@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://c67rkhf8wqof4"]
+
+[ext_resource type="Texture2D" uid="uid://bv17f81wisvqj" path="res://textures/figures/rook_defender.png" id="1_38qbh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2ppq"]
+atlas = ExtResource("1_38qbh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uvsq"]
+atlas = ExtResource("1_38qbh")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2ppq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uvsq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]

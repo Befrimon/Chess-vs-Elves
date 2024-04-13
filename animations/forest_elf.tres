@@ -1,0 +1,79 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://cnxam4mi2jvuv"]
+
+[ext_resource type="Texture2D" uid="uid://dcat3wr2rn4lu" path="res://textures/elf-alpha.png" id="1_3bkod"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jgtl"]
+atlas = ExtResource("1_3bkod")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u3ak"]
+atlas = ExtResource("1_3bkod")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35u2i"]
+atlas = ExtResource("1_3bkod")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_facod"]
+atlas = ExtResource("1_3bkod")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7pu0"]
+atlas = ExtResource("1_3bkod")
+region = Rect2(44, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w75ae"]
+atlas = ExtResource("1_3bkod")
+region = Rect2(0, 22, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqfmu"]
+atlas = ExtResource("1_3bkod")
+region = Rect2(22, 22, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7goyu"]
+atlas = ExtResource("1_3bkod")
+region = Rect2(44, 22, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eurv7"]
+atlas = ExtResource("1_3bkod")
+region = Rect2(0, 44, 22, 22)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jgtl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u3ak")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35u2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_facod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7pu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w75ae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqfmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7goyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eurv7")
+}],
+"loop": true,
+"name": &"run",
+"speed": 14.0
+}]

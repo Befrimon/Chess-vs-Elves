@@ -13,23 +13,18 @@ config_version=5
 config/name="Chess vs Elfs"
 run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-boot_splash/image="res://splash.png"
 config/icon="res://logo.png"
 
 [autoload]
 
 Global="*res://scripts/global.gd"
-EntityController="*res://scripts/entity-controller.gd"
-Preview="*res://scripts/preview-controller.gd"
 
 [display]
 
-window/size/viewport_width=1334
-window/size/viewport_height=750
-window/size/resizable=false
-window/size/borderless=true
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="viewport"
-window/vsync/vsync_mode=2
 
 [rendering]
 
@@ -37,4 +32,3 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
-viewport/hdr_2d=true

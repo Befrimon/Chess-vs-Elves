@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cx1ugqeynb85l"]
+
+[ext_resource type="Texture2D" uid="uid://de48m0yml00yi" path="res://textures/move-cell.png" id="1_nuqv4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iatxo"]
+atlas = ExtResource("1_nuqv4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hqvh"]
+atlas = ExtResource("1_nuqv4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlcsn"]
+atlas = ExtResource("1_nuqv4")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqhc5"]
+atlas = ExtResource("1_nuqv4")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_adwhn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iatxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hqvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlcsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqhc5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MoveCell" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_adwhn")
+autoplay = "default"
+frame_progress = 0.685484
+metadata/delta = Vector2(0, 0)
