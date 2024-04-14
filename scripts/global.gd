@@ -3,6 +3,7 @@ extends Node
 const TILE_SIZE :Vector2 = Vector2(92, 92)
 const MAP_POS :Vector2 = Vector2(460, 530)
 const MAP_SIZE :Vector2 = Vector2(20, 6)
+const MAP_RECT :Rect2 = Rect2(MAP_POS-TILE_SIZE/2, MAP_SIZE*TILE_SIZE)
 const POS_DELTA :Vector2 = Vector2(0, 20)
 const ENTITY :PackedScene = preload("res://prefabs/entity.tscn")
 const HITBOX :Shape2D = preload("res://prefabs/entity_hitbox.tres")

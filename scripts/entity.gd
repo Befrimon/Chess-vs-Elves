@@ -106,6 +106,8 @@ func _physics_process(delta):
 			texture.play("run")
 	
 	if global_position.distance_to(target) < 10:
+		highlighting.visible = true
+		name = "Active"
 		position = target
 		target = Vector2.ZERO
 	
@@ -118,23 +120,23 @@ func _physics_process(delta):
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == 1:
-		if move_cells.visible and Rect2(Global.MAP_POS-Global.TILE_SIZE/2, Global.MAP_SIZE*Global.TILE_SIZE).has_point(event.position):
-			move_cells.visible = false
-			for cell in move_cells.get_children():
-				if Rect2(position+cell.get_meta("delta")*Global.TILE_SIZE - Global.TILE_SIZE/2, Global.TILE_SIZE).has_point(event.position):
-					target = position+cell.get_meta("delta")*Global.TILE_SIZE
-					highlighting.visible = true
-					if target in Global.busy_cells:
-						target = Vector2.ZERO
-					else:
-						Global.busy_cells.remove_at(Global.busy_cells.find(position))
-						Global.busy_cells.append(target)
-		elif Rect2(position - Global.TILE_SIZE / 2, Global.TILE_SIZE).has_point(event.position):
-			highlighting.visible = true
-			name = "Active"
-		else:
-			highlighting.visible = false
-			name = node_name
+		var entity_click = Rect2(position - Global.TILE_SIZE / 2, Global.TILE_SIZE).has_point(event.position)
+		
+		highlighting.visible = entity_click
+		name = "Active" if entity_click else node_name
+		
+		for cell in move_cells.get_children():
+			if !move_cells.visible: break
+			if cell.visible and Rect2(cell.global_position-Global.TILE_SIZE/2, Global.TILE_SIZE).has_point(event.position):
+				target = Global.position_normilize(cell.global_position)
+				Global.busy_cells.remove_at(Global.busy_cells.find(position))
+				Global.busy_cells.append(target)
+		move_cells.visible = false
+
+func _move_changed():
+	for cell in move_cells.get_children():
+		cell.visible = Global.MAP_RECT.has_point(cell.global_position) and \
+		  Global.position_normilize(cell.global_position) not in Global.busy_cells
 
 func get_info() -> String:
 	return "Name: %s\nLevel: %s\nHits: %s/%s\n" % \
@@ -156,3 +158,4 @@ func kill():
 	get_parent().remove_child(self)
 	set_physics_process(false)
 	queue_free()
+

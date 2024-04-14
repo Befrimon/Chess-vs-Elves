@@ -75,20 +75,17 @@ func _process(delta):
 
 func _input(event):
 	if preview_enable and event is InputEventMouseMotion:
-		if Rect2(Global.MAP_POS-Global.TILE_SIZE/2, Global.MAP_SIZE*Global.TILE_SIZE).has_point(event.position) and \
-		  Global.position_normilize(event.position) not in Global.busy_cells:
-			preview_figure.set_new(Global.position_normilize(event.position))
-		else:
-			preview_figure.clear()
+		var move_pos = Global.position_normilize(event.position)
+		preview_figure.visible = Global.MAP_RECT.has_point(event.position) and move_pos not in Global.busy_cells
+		preview_figure.set_new(move_pos)
 	
-	if event is InputEventMouseButton and event.button_index == 1 and \
-	  Rect2(Global.MAP_POS-Global.TILE_SIZE/2, Global.MAP_SIZE*Global.TILE_SIZE).has_point(event.position):
-		if preview_enable and Global.position_normilize(event.position) not in Global.busy_cells:
-			preview_figure.clear()
-			preview_enable = false
-			create_entity(preview_figure.figure, Global.position_normilize(event.position))
-		if move_enable:
-			move_enable = false
+	if event is InputEventMouseButton and event.button_index == 1 and preview_enable:
+		var click_pos = Global.position_normilize(event.position)
+		preview_figure.visible = false
+		preview_enable = false
+		if Global.MAP_RECT.has_point(event.position) and click_pos not in Global.busy_cells:
+			interface.get_node("SpawnButtons/%s" % preview_figure.figure).button_pressed = false
+			create_entity(preview_figure.figure, click_pos)
 
 
 func create_entity(eid :String, pos :Vector2 = Vector2.ZERO):

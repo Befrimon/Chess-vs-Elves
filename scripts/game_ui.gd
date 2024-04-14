@@ -15,6 +15,7 @@ func _ready():
 	## Assign variables
 	spawn_btn_parent = get_node("SpawnButtons")
 	spawn_group = ButtonGroup.new()
+	spawn_group.allow_unpress = true
 	
 	timer_label = get_node("TimerLabel")
 	crown_label = get_node("CrownLabel")
@@ -27,6 +28,7 @@ func _ready():
 		
 		var info = Global.ENTITY_PARAM[entity]
 		var spawn_button = Button.new()
+		spawn_button.name = entity
 		spawn_button.text = "%s - %s" % [info["name"], info["level1"]["cost"]]
 		spawn_button.add_theme_font_size_override("font_size", 32)
 		spawn_button.toggle_mode = true
@@ -63,6 +65,8 @@ func change_move(btn :Button):
 	parent.active.move_cells.visible = true
 
 func change_preview(btn :Button, ename :String):
+	if parent.active:
+		parent.active.move_cells.visible = false
 	parent.preview_enable = btn.button_pressed
 	parent.preview_figure.set_figure(ename)
 
