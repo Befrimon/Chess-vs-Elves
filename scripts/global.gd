@@ -12,7 +12,8 @@ const MOVE_CELL :PackedScene = preload("res://prefabs/move_cell.tscn")
 const MAX_FIGURE :Dictionary = {
 	"king_figure": 1,
 	"pawn_figure": 6,
-	"bishop_figure": 2
+	"bishop_figure": 2,
+	"knight_figure": 2
 }
 const LEVEL_EXP :Array[int] = [0, 100, 600, 1600, 3100]
 const ENTITY_PARAM :Dictionary = {
@@ -28,7 +29,6 @@ const ENTITY_PARAM :Dictionary = {
 		"name": "Dark elf",
 		"type": "attacker",
 		"exp_value": 50,
-		# Levels for elfs its his waves
 		"level1": {"hits": 3., "value": -2., "cooldown": 1}
 	},
 	
@@ -39,15 +39,6 @@ const ENTITY_PARAM :Dictionary = {
 		"level1": {"hits": INF, "value": INF, "cooldown": 0}
 		# Rook defender has no levels
 	},
-	"king_figure": {
-		"name": "King",
-		"type": "support",
-		"level1": {"cost": 100, "hits": 1., "value": 25, "cooldown": 10},
-		"level2": {"cost": 200, "hits": 1., "value": 50, "cooldown": 10},
-		"level3": {"cost": 350, "hits": 2., "value": 50, "cooldown": 8},
-		"level4": {"cost": 600, "hits": 2., "value": 75, "cooldown": 8},
-		"level5": {"cost": 850, "hits": 3., "value": 100, "cooldown": 6}
-	},
 	"pawn_figure": {
 		"name": "Pawn",
 		"type": "attacker",
@@ -57,6 +48,15 @@ const ENTITY_PARAM :Dictionary = {
 		"level4": {"cost": 500, "hits": 5., "value": -4., "cooldown": 1},
 		"level5": {"cost": 800, "hits": 7., "value": -5., "cooldown": 1}
 	},
+	"king_figure": {
+		"name": "King",
+		"type": "support",
+		"level1": {"cost": 100, "hits": 1., "value": 25, "cooldown": 10},
+		"level2": {"cost": 200, "hits": 1., "value": 50, "cooldown": 10},
+		"level3": {"cost": 350, "hits": 2., "value": 50, "cooldown": 8},
+		"level4": {"cost": 600, "hits": 2., "value": 75, "cooldown": 8},
+		"level5": {"cost": 850, "hits": 3., "value": 100, "cooldown": 6}
+	},
 	"bishop_figure": {
 		"name": "Bishop",
 		"type": "healer",
@@ -65,6 +65,15 @@ const ENTITY_PARAM :Dictionary = {
 		"level3": {"cost": 500, "hits": 1., "value": 2., "cooldown": 3},
 		"level4": {"cost": 800, "hits": 2., "value": 3., "cooldown": 3},
 		"level5": {"cost": 1000, "hits": 2., "value": 5., "cooldown": 3},
+	},
+	"knight_figure": {
+		"name": "Knight",
+		"type": "attacker",
+		"level1": {"cost": 300, "hits": 3., "value": -2., "cooldown": 1},
+		"level2": {"cost": 500, "hits": 4., "value": -3., "cooldown": 1},
+		"level3": {"cost": 800, "hits": 6., "value": -4., "cooldown": 1},
+		"level4": {"cost": 1100, "hits": 7., "value": -6., "cooldown": 1},
+		"level5": {"cost": 1500, "hits": 9., "value": -8., "cooldown": 1},
 	}
 }
 
