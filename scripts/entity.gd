@@ -78,24 +78,30 @@ func _process(delta):
 		return
 	
 	if Global.timer > skill_cooldown:
-		skill_cooldown += Global.ENTITY_PARAM[full_id]["level%s" % str(level)]["cooldown"]
 		var res = controller.get_skill_target()
 		var value = Global.ENTITY_PARAM[full_id]["level%s" % str(level)]["value"]
+		var skill_type = Global.ENTITY_PARAM[full_id]["type"]
+		
+		if res != null:
+			skill_cooldown += Global.ENTITY_PARAM[full_id]["level%s" % str(level)]["cooldown"]
+		else:
+			skill_cooldown += 1
 		
 		if res is String and res == "crowns":
 			get_node("/root/Game").crown_count += value
 			if exp < Global.LEVEL_EXP[level]:
 				exp += 10
-		elif res is Entity:
-			var type = Global.ENTITY_PARAM[res.full_id]["type"]
+		elif skill_type == "attacker" and res is Entity:
 			res.change_hits(value)
-			if type == "attacker":
+			if Global.ENTITY_PARAM[res.full_id]["type"] == "attacker":
 				var attack = Global.ENTITY_PARAM[res.full_id]["level%s" % res.level]["value"]
 				change_hits(attack/5 if res.hits > 0 else attack/10)
 				if exp < Global.LEVEL_EXP[level] and res.type == "elf" and res.hits <= 0:
 					exp += Global.ENTITY_PARAM[res.full_id]["exp_value"]
-			elif type == "healer":
-				pass  # TODO bishop skill
+		elif skill_type == "healer" and res is Entity:
+			res.change_hits(value)
+			if exp < Global.LEVEL_EXP[level]:
+				exp += 25
 		elif res is Array[Entity]:
 			pass  # TODO queen skill
 	
@@ -163,6 +169,8 @@ func change_hits(value :float):
 	hits += ceil(randf()*value*100)/100.0
 	if hits <= 0:
 		kill()
+	if hits > max_hits:
+		hits = max_hits
 	
 	stun_cooldown += 1
 	allow_move = false
@@ -178,6 +186,7 @@ func levelup():
 func kill():
 	print("[INFO] Killing entity (%s)" % node_name)
 	
+	Global.busy_cells.remove_at(Global.busy_cells.find(position))
 	get_parent().remove_child(self)
 	set_physics_process(false)
 	queue_free()

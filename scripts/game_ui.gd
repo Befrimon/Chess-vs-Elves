@@ -46,7 +46,7 @@ func _ready():
 	get_node("PauseButton").pressed.connect(pause)
 
 func _process(delta):
-	timer_label.text = "Timer: %s" % str(int(Global.timer))
+	timer_label.text = "%s wave: %s left" % [str(parent.wave), str(int(parent.wave_time - Global.timer))]
 	crown_label.text = "Crowns: %s" % str(parent.crown_count)
 
 func upgrade_figure():
@@ -73,7 +73,7 @@ func change_move(btn :Button):
 	parent.active.move_cells.visible = true
 
 func change_preview(btn :Button, ename :String):
-	if parent.active:
+	if parent.active and is_instance_valid(parent.active):
 		parent.active.move_cells.visible = false
 	parent.preview_enable = btn.button_pressed
 	parent.preview_figure.set_figure(ename)

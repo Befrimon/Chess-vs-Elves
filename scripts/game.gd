@@ -10,6 +10,8 @@ var interface :Control
 
 var entity_count :int
 var crown_count :int
+var wave_time :float
+var wave :int
 
 var preview_figure :Preview
 var preview_enable :bool
@@ -28,6 +30,8 @@ func _ready():
 	
 	entity_count = 0
 	crown_count = 125
+	wave_time = Global.WAVES[0]["duration"]
+	wave = 0
 	
 	preview_figure = load("res://scripts/preview_figure.gd").new()
 	preview_enable = false
@@ -47,8 +51,8 @@ func _ready():
 	for y in range(Global.MAP_SIZE.y):
 		create_entity("rook_defender", Vector2(Global.MAP_POS + Vector2(-1, y)*Global.TILE_SIZE))
 
-
-var next_event :int = Global.PREPARE_TIME
+var spawn_time :int = 0
+var wave_info :Dictionary = Global.WAVES[wave]
 func _process(delta):
 	if int(Global.timer+delta) % CROWN_COOLDOWN == 0 and int(Global.timer) % CROWN_COOLDOWN == 9:
 		crown_count += 25
@@ -56,13 +60,27 @@ func _process(delta):
 	if !get_tree().paused:
 		Global.timer += delta
 
-	if Global.timer >= next_event:
-		print("[INFO] New event now!")
-		create_entity(
-			"forest_elf", 
-			Vector2(Global.ELF_XCOORD, Global.MAP_POS.y + Global.TILE_SIZE.y*randi_range(0, 5))
-		)
-		next_event += randi_range(Global.SPAWN_TIME[0], Global.SPAWN_TIME[1])
+	if Global.timer >= wave_time:
+		print("[INFO] New wave now!")
+		wave_info = Global.WAVES[wave+1]
+		wave_time += wave_info["duration"]
+		spawn_time = Global.timer
+		wave += 1
+	
+	for i in range(wave_info["epe"]):
+		if Global.timer < spawn_time: break
+		var chance = randf()
+		for elf_id in Global.ELF_CHANCE[wave]:
+			if chance > Global.ELF_CHANCE[wave][elf_id]:
+				chance -= Global.ELF_CHANCE[wave][elf_id]
+				continue
+			create_entity(elf_id,
+				Vector2(Global.ELF_XCOORD + Global.TILE_SIZE.x*i,
+				Global.MAP_POS.y + Global.TILE_SIZE.y*randi_range(0, 5))
+			)
+			break
+	if Global.timer >= spawn_time:
+		spawn_time += randi_range(wave_info["elf_spawn"][0], wave_info["elf_spawn"][1])
 	
 	# Find active entity
 	var flag :bool = false
