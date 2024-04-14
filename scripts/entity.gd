@@ -17,6 +17,7 @@ var full_id :String
 var type :String
 
 var level :int
+var exp :int
 var max_hits :float
 var hits :float
 var skill_cooldown :float
@@ -83,12 +84,18 @@ func _process(delta):
 		
 		if res is String and res == "crowns":
 			get_node("/root/Game").crown_count += value
+			if exp < Global.LEVEL_EXP[level]:
+				exp += 10
 		elif res is Entity:
 			var type = Global.ENTITY_PARAM[res.full_id]["type"]
 			res.change_hits(value)
 			if type == "attacker":
 				var attack = Global.ENTITY_PARAM[res.full_id]["level%s" % res.level]["value"]
-				change_hits(attack/5 if is_instance_valid(res) else attack/10)
+				change_hits(attack/5 if res.hits > 0 else attack/10)
+				if exp < Global.LEVEL_EXP[level] and res.type == "elf" and res.hits <= 0:
+					exp += Global.ENTITY_PARAM[res.full_id]["exp_value"]
+			elif type == "healer":
+				pass  # TODO bishop skill
 		elif res is Array[Entity]:
 			pass  # TODO queen skill
 	
@@ -139,10 +146,19 @@ func _move_changed():
 		  Global.position_normilize(cell.global_position) not in Global.busy_cells
 
 func get_info() -> String:
-	return "Name: %s\nLevel: %s\nHits: %s/%s\n" % \
-	  [display_name, str(level), str(hits), str(max_hits)] \
+	return "Name: %s\nLevel: %s %s\nHits: %s/%s\n" % \
+	  [display_name, str(level), get_exp_info(), str(hits), str(max_hits)]\
 	  + controller.get_unique_info()
-	
+
+func get_exp_info() -> String:
+	if type == "elf":
+		return ""
+	if level == 5:
+		return "(MAX)"
+	if exp < Global.LEVEL_EXP[level]:
+		return "(%s/%s)" % [exp, Global.LEVEL_EXP[level]]
+	return "(UP: %s crowns)" % Global.ENTITY_PARAM[full_id]["level%s" % str(level+1)]["cost"]
+
 func change_hits(value :float):
 	hits += ceil(randf()*value*100)/100.0
 	if hits <= 0:
@@ -151,6 +167,13 @@ func change_hits(value :float):
 	stun_cooldown += 1
 	allow_move = false
 	texture.play("idle")
+
+func levelup():
+	var info = Global.ENTITY_PARAM[full_id]["level%s" % str(level+1)]
+	level += 1
+	max_hits = info["hits"]
+	hits = info["hits"]
+	skill_cooldown = Global.timer+info["cooldown"]
 
 func kill():
 	print("[INFO] Killing entity (%s)" % node_name)

@@ -50,7 +50,15 @@ func _process(delta):
 	crown_label.text = "Crowns: %s" % str(parent.crown_count)
 
 func upgrade_figure():
-	pass
+	if active.type != "figure":
+		return
+	var cost = Global.ENTITY_PARAM[active.full_id]["level%s" % str(active.level+1)]["cost"]
+	var exp = Global.LEVEL_EXP[active.level]
+	if parent.crown_count < cost or active.exp < exp:
+		print("[ERROR] Not enough crowns or EXP")
+		return
+	parent.crown_count -= cost
+	active.levelup()
 
 func kill_figure():
 	if active.type != "figure":
