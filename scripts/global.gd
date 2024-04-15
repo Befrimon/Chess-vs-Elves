@@ -18,12 +18,12 @@ const MAX_FIGURE :Dictionary = {
 }
 const LEVEL_EXP :Array[int] = [0, 100, 600, 1600, 3100]
 const ENTITY_PARAM :Dictionary = {
-	## Elfs params
+	## Elves params
 	"forest_elf": {
 		"name": "Forest elf",
 		"type": "attacker",
 		"exp_value": 25,
-		# Levels for elfs its his waves
+		# Levels for elves its his waves
 		"level1": {"hits": 1., "value": -1., "cooldown": 1}
 	},
 	"dark_elf": {
@@ -89,7 +89,7 @@ const ENTITY_PARAM :Dictionary = {
 
 var timer :float = 0
 const WAVES :Array[Dictionary] = [
-	# epe - elfs spawn count per spawn event
+	# epe - elves spawn count per spawn event
 	{"name": "Get ready", "epe": 0, "elf_spawn": [1, 1], "duration": 10},
 	{"name": "1 wave", "epe": 1, "elf_spawn": [5, 15], "duration": 120},
 	{"name": "2 wave", "epe": 2, "elf_spawn": [5, 15], "duration": 60},
