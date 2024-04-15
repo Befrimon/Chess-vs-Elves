@@ -39,7 +39,10 @@ func init(sname :String, eid :String, pos :Vector2):
 	skill_area = get_node("SkillArea")
 	
 	# Configure texture
-	texture.sprite_frames = load("res://animations/%s.tres" % eid)
+	if eid in []:#["pawn_figure", "rook_defender"]:
+		texture.sprite_frames = load("res://animations-new/%s.tres" % eid)
+	else:
+		texture.sprite_frames = load("res://animations/%s.tres" % eid)
 	texture.play("idle")
 	
 	# Configure node
@@ -137,6 +140,7 @@ func _physics_process(delta):
 		name = "Active"
 		position = target
 		move_cells.visible = true
+		hitbox.disabled = false
 		target = Vector2.ZERO
 	
 	if target != Vector2.ZERO:
@@ -160,6 +164,7 @@ func _input(event):
 				Global.busy_cells.remove_at(Global.busy_cells.find(position))
 				Global.busy_cells.append(target)
 				move_cells.visible = false
+				hitbox.disabled = true
 		move_cells.visible = entity_click
 
 func _move_changed():
@@ -219,4 +224,3 @@ func kill():
 	get_parent().remove_child(self)
 	set_physics_process(false)
 	queue_free()
-

@@ -4,3 +4,7 @@ builds/
 *.keystore
 *.import
 *.cfg
+
+# In-dev
+textures/figures/
+animations-new/
