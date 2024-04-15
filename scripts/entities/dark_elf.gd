@@ -5,8 +5,9 @@ var parent :Entity
 
 # Move properties
 const SPEED :int = 80
+const MOVE_RANGE :Dictionary = {}
 
-const SKILL_TEMPLATE :Array[Vector2] = [Vector2(-.3, 0)]
+const SKILL_RANGE :Array[Vector2] = [Vector2(-1, 0)]
 var target :Entity
 
 func _init(parent_obj :Entity):
@@ -16,13 +17,6 @@ func _init(parent_obj :Entity):
 	
 	parent.texture.flip_h = true
 	parent.texture.play("run")
-	
-	for cell in SKILL_TEMPLATE:
-		var collider = CollisionShape2D.new()
-		collider.shape = Global.HITBOX
-		collider.position = cell * Global.TILE_SIZE / parent.scale
-		collider.scale = parent.hitbox.scale
-		parent.skill_area.add_child(collider)
 
 func _process(delta):
 	if parent.position.x < 300:

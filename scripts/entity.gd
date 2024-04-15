@@ -21,6 +21,7 @@ var exp :int
 var max_hits :float
 var hits :float
 var skill_cooldown :float
+var buff_value :int
 
 # Move param
 var direction :Vector2
@@ -72,6 +73,13 @@ func init(sname :String, eid :String, pos :Vector2):
 	controller = load("res://scripts/entities/%s.gd" % eid).new(self)
 	controller.name = "Controller"
 	add_child(controller)
+	
+	for i in controller.SKILL_RANGE:
+		var collider = CollisionShape2D.new()
+		collider.shape = Global.HITBOX
+		collider.position = i * Global.TILE_SIZE / scale
+		collider.scale = hitbox.scale
+		skill_area.add_child(collider)
 
 func _process(delta):
 	if get_tree().paused:
@@ -81,6 +89,9 @@ func _process(delta):
 		var res = controller.get_skill_target()
 		var value = Global.ENTITY_PARAM[full_id]["level%s" % str(level)]["value"]
 		var skill_type = Global.ENTITY_PARAM[full_id]["type"]
+		if skill_type != "buffer":
+			value += buff_value
+			buff_value = 0
 		
 		if res != null:
 			skill_cooldown += Global.ENTITY_PARAM[full_id]["level%s" % str(level)]["cooldown"]
@@ -103,7 +114,8 @@ func _process(delta):
 			if exp < Global.LEVEL_EXP[level]:
 				exp += 25
 		elif res is Array[Entity]:
-			pass  # TODO queen skill
+			for entity in res:
+				entity.buff_value = value[1] if entity.full_id == "king_figure" else value[0]
 	
 
 func _physics_process(delta):
@@ -122,6 +134,7 @@ func _physics_process(delta):
 		highlighting.visible = true
 		name = "Active"
 		position = target
+		move_cells.visible = true
 		target = Vector2.ZERO
 	
 	if target != Vector2.ZERO:
@@ -132,7 +145,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _input(event):
-	if event is InputEventMouseButton and event.button_index == 1:
+	if event is InputEventMouseButton and event.button_index == 1 and event.is_pressed():
 		var entity_click = Rect2(position - Global.TILE_SIZE / 2, Global.TILE_SIZE).has_point(event.position)
 		
 		highlighting.visible = entity_click
@@ -144,12 +157,26 @@ func _input(event):
 				target = Global.position_normilize(cell.global_position)
 				Global.busy_cells.remove_at(Global.busy_cells.find(position))
 				Global.busy_cells.append(target)
-		move_cells.visible = false
+				move_cells.visible = false
+		move_cells.visible = entity_click
 
 func _move_changed():
-	for cell in move_cells.get_children():
-		cell.visible = Global.MAP_RECT.has_point(cell.global_position) and \
-		  Global.position_normilize(cell.global_position) not in Global.busy_cells
+	for child in move_cells.get_children():
+		child.queue_free()
+	
+	for dir in controller.MOVE_RANGE:
+		var length = controller.MOVE_RANGE[dir]
+		for i in range(1, length+1):
+			var new_pos = Global.position_normilize(-Global.TILE_SIZE/2 + position + Global.TILE_SIZE*dir*i)
+			if new_pos in Global.busy_cells or !Global.MAP_RECT.has_point(new_pos):
+				break
+			new_move_cell(Global.TILE_SIZE * dir*i)
+
+func new_move_cell(pos :Vector2):
+	var cell = Global.MOVE_CELL.duplicate().instantiate()
+	cell.position = (Global.POS_DELTA + pos) / scale
+	cell.scale = Global.TILE_SIZE / cell.sprite_frames.get_frame_texture("default", 0).get_size() / scale
+	move_cells.add_child(cell)
 
 func get_info() -> String:
 	return "Name: %s\nLevel: %s %s\nHits: %s/%s\n" % \

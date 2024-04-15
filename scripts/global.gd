@@ -13,7 +13,8 @@ const MAX_FIGURE :Dictionary = {
 	"king_figure": 1,
 	"pawn_figure": 6,
 	"bishop_figure": 2,
-	"knight_figure": 2
+	"knight_figure": 2,
+	"queen_figure": 1
 }
 const LEVEL_EXP :Array[int] = [0, 100, 600, 1600, 3100]
 const ENTITY_PARAM :Dictionary = {
@@ -74,6 +75,15 @@ const ENTITY_PARAM :Dictionary = {
 		"level3": {"cost": 800, "hits": 6., "value": -4., "cooldown": 1},
 		"level4": {"cost": 1100, "hits": 7., "value": -6., "cooldown": 1},
 		"level5": {"cost": 1500, "hits": 9., "value": -8., "cooldown": 1},
+	},
+	"queen_figure": {
+		"name": "Queen",
+		"type": "buffer",
+		"level1": {"cost": 500, "hits": 1., "value": [1, 25], "cooldown": 0},
+		"level2": {"cost": 700, "hits": 1., "value": [2, 50], "cooldown": 0},
+		"level3": {"cost": 1100, "hits": 1., "value": [3, 75], "cooldown": 0},
+		"level4": {"cost": 1500, "hits": 2., "value": [4, 100], "cooldown": 0},
+		"level5": {"cost": 2000, "hits": 2., "value": [5, 150], "cooldown": 0},
 	}
 }
 

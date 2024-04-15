@@ -7,6 +7,8 @@ var audio :AudioStreamPlayer2D
 # Move properties
 const SPEED :int = 500
 var run_mode :bool
+const MOVE_RANGE :Dictionary = {}
+const SKILL_RANGE :Array[Vector2] = []
 
 func _init(parent_obj :Entity):
 	## Assign variables

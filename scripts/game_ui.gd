@@ -41,7 +41,7 @@ func _ready():
 	
 	get_node("EntityButtons/UpgradeButton").pressed.connect(upgrade_figure)
 	get_node("EntityButtons/KillButton").pressed.connect(kill_figure)
-	get_node("EntityButtons/MoveButton").pressed.connect(change_move.bind(get_node("EntityButtons/MoveButton")))
+	# get_node("EntityButtons/MoveButton").pressed.connect(change_move.bind(get_node("EntityButtons/MoveButton")))
 	get_node("ExitButton").pressed.connect(get_tree().change_scene_to_file.bind("res://scenes/menu.tscn"))
 	get_node("PauseButton").pressed.connect(pause)
 
