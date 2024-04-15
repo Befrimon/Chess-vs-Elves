@@ -29,7 +29,7 @@ func _ready():
 	interface = get_node("UserInterface")
 	
 	entity_count = 0
-	crown_count = 125**5
+	crown_count = 125
 	wave_time = Global.WAVES[0]["duration"]
 	wave = 0
 	

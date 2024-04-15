@@ -6,9 +6,7 @@ var parent :Entity
 # Move properties
 const SPEED :int = 500
 const MOVE_RANGE :Dictionary = {
-	Vector2(-1, 1): 1, Vector2(0, 1): 1, Vector2(1, 1): 1,
-	Vector2(-1, -1): 1, Vector2(0, -1): 1, Vector2(1, -1): 1,
-	Vector2(1, 0): 1, Vector2(-1, 0): 1
+	Vector2(1, 0): 2, Vector2(-1, 0): 1
 }
 
 const SKILL_RANGE :Array[Vector2] = [Vector2(1, 1), Vector2(1, -1)]

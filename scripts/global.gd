@@ -90,12 +90,12 @@ const ENTITY_PARAM :Dictionary = {
 var timer :float = 0
 const WAVES :Array[Dictionary] = [
 	# epe - elfs spawn count per spawn event
-	{"epe": 0, "elf_spawn": [1, 1], "duration": 10},    # Prepare time
-	{"epe": 1, "elf_spawn": [5, 15], "duration": 120},  # 1 wave
-	{"epe": 2, "elf_spawn": [5, 15], "duration": 60},   # 2 wave
-	{"epe": 2, "elf_spawn": [5, 10], "duration": 60},   # 3 wave
-	{"epe": 2, "elf_spawn": [5, 15], "duration": 120},  # 4 wave
-	{"epe": 3, "elf_spawn": [5, 15], "duration": INF}   # Infinity wave
+	{"name": "Get ready", "epe": 0, "elf_spawn": [1, 1], "duration": 10},
+	{"name": "1 wave", "epe": 1, "elf_spawn": [5, 15], "duration": 120},
+	{"name": "2 wave", "epe": 2, "elf_spawn": [5, 15], "duration": 60},
+	{"name": "3 wave", "epe": 2, "elf_spawn": [5, 10], "duration": 60},
+	{"name": "4 wave", "epe": 2, "elf_spawn": [5, 15], "duration": 120},
+	{"name": "Good luck", "epe": 3, "elf_spawn": [5, 15], "duration": INF}
 ]
 const ELF_CHANCE :Array[Dictionary] = [
 	{"forest_elf": 0., "dark_elf": 0.},  # Prepare wave
@@ -103,7 +103,7 @@ const ELF_CHANCE :Array[Dictionary] = [
 	{"forest_elf": 1., "dark_elf": 0.},  # 2 wave
 	{"forest_elf": 1., "dark_elf": 0.},  # 3 wave
 	{"forest_elf": .8, "dark_elf": .2},  # 4 wave
-	{"forest_elf": .6, "dark_elf": .4},  # Infinity wave
+	{"forest_elf": .5, "dark_elf": .5},  # Infinity wave
 ]
 const ELF_XCOORD :int = 2000
 var busy_cells :Array[Vector2] = []

@@ -79,7 +79,7 @@ offset_top = 220.0
 offset_right = 1380.0
 offset_bottom = 300.0
 theme_override_font_sizes/font_size = 22
-text = "MOVE"
+text = "???"
 
 [node name="ExitButton" type="Button" parent="."]
 process_mode = 3

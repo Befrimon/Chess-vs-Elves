@@ -91,7 +91,6 @@ func _process(delta):
 		var skill_type = Global.ENTITY_PARAM[full_id]["type"]
 		if skill_type != "buffer":
 			value += buff_value
-			buff_value = 0
 		
 		if res != null:
 			skill_cooldown += Global.ENTITY_PARAM[full_id]["level%s" % str(level)]["cooldown"]
@@ -100,10 +99,12 @@ func _process(delta):
 		
 		if res is String and res == "crowns":
 			get_node("/root/Game").crown_count += value
+			buff_value = 0
 			if exp < Global.LEVEL_EXP[level]:
 				exp += 10
 		elif skill_type == "attacker" and res is Entity:
 			res.change_hits(value)
+			buff_value = 0
 			if Global.ENTITY_PARAM[res.full_id]["type"] == "attacker":
 				var attack = Global.ENTITY_PARAM[res.full_id]["level%s" % res.level]["value"]
 				change_hits(attack/5 if res.hits > 0 else attack/10)
@@ -111,9 +112,10 @@ func _process(delta):
 					exp += Global.ENTITY_PARAM[res.full_id]["exp_value"]
 		elif skill_type == "healer" and res is Entity:
 			res.change_hits(value)
+			buff_value = 0
 			if exp < Global.LEVEL_EXP[level]:
 				exp += 25
-		elif res is Array[Entity]:
+		elif skill_type == "buffer" and res is Array[Entity]:
 			for entity in res:
 				entity.buff_value = value[1] if entity.full_id == "king_figure" else value[0]
 	

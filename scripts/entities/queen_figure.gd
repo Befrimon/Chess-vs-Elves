@@ -6,12 +6,16 @@ var parent :Entity
 # Move properties
 const SPEED :int = 500
 const MOVE_RANGE :Dictionary = {
-	Vector2(-1, 1): 10, Vector2(0, 1): 10, Vector2(1, 1): 10,
-	Vector2(-1, -1): 10, Vector2(0, -1): 10, Vector2(1, -1): 10,
-	Vector2(1, 0): 10, Vector2(-1, 0): 10
+	Vector2(-1, 1): 20, Vector2(0, 1): 20, Vector2(1, 1): 20,
+	Vector2(-1, -1): 20, Vector2(0, -1): 20, Vector2(1, -1): 20,
+	Vector2(1, 0): 20, Vector2(-1, 0): 20
 }
 
-const SKILL_RANGE :Array[Vector2] = []
+const SKILL_RANGE :Array[Vector2] = [
+	Vector2(-1, 1), Vector2(0, 1), Vector2(1, 1),
+	Vector2(-1, -1), Vector2(0, -1), Vector2(1, -1),
+	Vector2(1, 0), Vector2(-1, 0)
+]
 
 func _init(parent_obj :Entity):
 	## Assign variables
