@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8tc4bd4gii6n"]
+[gd_scene load_steps=7 format=3 uid="uid://c8tc4bd4gii6n"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_h1by2"]
+[ext_resource type="Texture2D" uid="uid://depj7e7hlvx06" path="res://textures/GUI/button_normal.png" id="2_ulp7d"]
+[ext_resource type="Texture2D" uid="uid://b5ps0uhfj6vi3" path="res://textures/GUI/title.png" id="3_2exxd"]
+[ext_resource type="Texture2D" uid="uid://dmw3ggvnh5c0r" path="res://textures/GUI/button_pressed.png" id="3_5c1nl"]
+[ext_resource type="Texture2D" uid="uid://0lhd5x8eg0av" path="res://textures/GUI/button_disabled.png" id="4_vucb8"]
+[ext_resource type="TileSet" uid="uid://b4jba1f58iqgt" path="res://sources/tiles.tres" id="5_0cdqw"]
 
 [node name="Menu" type="Control"]
 process_mode = 3
@@ -12,10 +17,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h1by2")
 
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("5_0cdqw")
+format = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 50.0
+offset_right = 1410.0
+offset_bottom = 200.0
+texture = ExtResource("3_2exxd")
+
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
+offset_top = 50.0
 offset_right = 1920.0
-offset_bottom = 150.0
+offset_bottom = 200.0
 theme_override_font_sizes/font_size = 60
 text = "Шахматы против эльфов"
 horizontal_alignment = 1
@@ -24,33 +42,66 @@ vertical_alignment = 1
 [node name="LinkButtons" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 660.0
-offset_top = 250.0
+offset_top = 300.0
 offset_right = 1260.0
-offset_bottom = 670.0
+offset_bottom = 720.0
 
-[node name="PlayBtn" type="Button" parent="LinkButtons"]
+[node name="PlayBtn" type="TextureButton" parent="LinkButtons"]
 layout_mode = 0
 offset_right = 600.0
 offset_bottom = 120.0
-theme_override_font_sizes/font_size = 46
-text = "Новая игра"
+texture_normal = ExtResource("2_ulp7d")
+texture_pressed = ExtResource("3_5c1nl")
+texture_disabled = ExtResource("4_vucb8")
+stretch_mode = 0
 metadata/scene_action = "new_game"
 
-[node name="LoadBtn" type="Button" parent="LinkButtons"]
+[node name="Label" type="Label" parent="LinkButtons/PlayBtn"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 46
+text = "Новая игра"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadBtn" type="TextureButton" parent="LinkButtons"]
 layout_mode = 0
 offset_top = 150.0
 offset_right = 600.0
 offset_bottom = 270.0
-theme_override_font_sizes/font_size = 46
 disabled = true
-text = "Продолжить"
+texture_normal = ExtResource("2_ulp7d")
+texture_pressed = ExtResource("3_5c1nl")
+texture_disabled = ExtResource("4_vucb8")
+stretch_mode = 0
 metadata/scene_action = "load_game"
 
-[node name="ExitBtn" type="Button" parent="LinkButtons"]
+[node name="Label" type="Label" parent="LinkButtons/LoadBtn"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 46
+text = "Продолжить"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitBtn" type="TextureButton" parent="LinkButtons"]
 layout_mode = 0
 offset_top = 300.0
 offset_right = 600.0
 offset_bottom = 420.0
+texture_normal = ExtResource("2_ulp7d")
+texture_pressed = ExtResource("3_5c1nl")
+texture_disabled = ExtResource("4_vucb8")
+stretch_mode = 0
+metadata/scene_action = "quit_game"
+
+[node name="Label" type="Label" parent="LinkButtons/ExitBtn"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 100.0
 theme_override_font_sizes/font_size = 46
 text = "Выйти из игры"
-metadata/scene_action = "quit_game"
+horizontal_alignment = 1
+vertical_alignment = 1

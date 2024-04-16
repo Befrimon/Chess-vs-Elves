@@ -23,7 +23,7 @@ func get_skill_target():
 	return "crowns"
 
 func get_unique_info() -> String:
-	return "Короны: %s +%s\nОткат: %s" % \
+	return "Короны: %s +%s (%s сек)" % \
 	  [Global.ENTITY_PARAM[parent.full_id]["level%s" % parent.level]["value"],
 	  parent.buff_value, str(int(parent.skill_cooldown-Global.timer))
 	]

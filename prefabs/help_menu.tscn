@@ -1,38 +1,50 @@
 [gd_scene load_steps=7 format=3 uid="uid://de0pch3ueexr3"]
 
-[ext_resource type="Script" path="res://scripts/help_scene.gd" id="1_6lpyx"]
-[ext_resource type="Texture2D" uid="uid://782qe6jewu2x" path="res://textures/help_book/help_notebook.png" id="1_ga7f8"]
-[ext_resource type="Texture2D" uid="uid://cis0t5rmvuubl" path="res://textures/help_book/tab.png" id="3_ce3ml"]
-[ext_resource type="Texture2D" uid="uid://btw0eo8ascit4" path="res://textures/help_book/help_notebook1.png" id="4_x37p8"]
-[ext_resource type="Texture2D" uid="uid://c1jy8dr1cw1ew" path="res://textures/help_book/arrow-left.png" id="5_vkdob"]
-[ext_resource type="Texture2D" uid="uid://bcxool7s3kb6p" path="res://textures/help_book/arrow-right.png" id="6_64epm"]
+[ext_resource type="Script" path="res://scripts/help_menu.gd" id="1_mu40d"]
+[ext_resource type="Texture2D" uid="uid://c2t3nuva16gyb" path="res://textures/helpbook/help_notebook.png" id="2_rvb58"]
+[ext_resource type="Texture2D" uid="uid://cv2h46khc31u" path="res://textures/helpbook/help_notebook1.png" id="3_8tv8h"]
+[ext_resource type="Texture2D" uid="uid://bk52yrji3pxdp" path="res://textures/helpbook/close.png" id="4_4e0ub"]
+[ext_resource type="Texture2D" uid="uid://bsyj3qi2kt08a" path="res://textures/helpbook/arrow-left.png" id="5_2jfj0"]
+[ext_resource type="Texture2D" uid="uid://624s2e701xhr" path="res://textures/helpbook/arrow-right.png" id="6_fwnpl"]
 
 [node name="HelpScene" type="Node2D"]
-script = ExtResource("1_6lpyx")
+process_mode = 3
+script = ExtResource("1_mu40d")
 
 [node name="Notebook" type="Sprite2D" parent="."]
+process_mode = 3
 texture_filter = 1
 position = Vector2(960, 540)
 scale = Vector2(17, 17)
-texture = ExtResource("1_ga7f8")
-
-[node name="Tab" type="Sprite2D" parent="."]
-position = Vector2(1822, 300)
-scale = Vector2(5, 5)
-texture = ExtResource("3_ce3ml")
+texture = ExtResource("2_rvb58")
 
 [node name="HelpNotebook1" type="Sprite2D" parent="."]
+process_mode = 3
 position = Vector2(960, 531)
 scale = Vector2(17, 17)
-texture = ExtResource("4_x37p8")
+texture = ExtResource("3_8tv8h")
 
 [node name="Control" type="Control" parent="."]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CloseButton" type="TextureButton" parent="Control"]
+process_mode = 3
+layout_mode = 0
+offset_left = 1742.0
+offset_top = 200.0
+offset_right = 1902.0
+offset_bottom = 280.0
+texture_normal = ExtResource("4_4e0ub")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="Label" parent="Control"]
+process_mode = 3
 layout_mode = 0
 offset_left = 180.0
 offset_top = 150.0
@@ -42,8 +54,10 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Desctiption" type="RichTextLabel" parent="Control"]
+process_mode = 3
 layout_mode = 0
 offset_left = 230.0
 offset_top = 250.0
@@ -53,39 +67,48 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
 bbcode_enabled = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Desctiption2" type="RichTextLabel" parent="Control"]
+process_mode = 3
 layout_mode = 0
 offset_left = 1090.0
 offset_top = 180.0
 offset_right = 1690.0
-offset_bottom = 830.0
+offset_bottom = 840.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
 bbcode_enabled = true
+metadata/_edit_use_anchors_ = true
 
 [node name="ImageDescription" type="TextureRect" parent="Control"]
+process_mode = 3
 layout_mode = 0
 offset_left = 1090.0
 offset_top = 180.0
 offset_right = 1690.0
 offset_bottom = 830.0
+metadata/_edit_use_anchors_ = true
 
 [node name="ButtonLeft" type="TextureButton" parent="Control"]
+process_mode = 3
 layout_mode = 0
 offset_left = 210.0
 offset_top = 850.0
 offset_right = 285.0
 offset_bottom = 900.0
-texture_normal = ExtResource("5_vkdob")
+texture_normal = ExtResource("5_2jfj0")
 stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="ButtonRight" type="TextureButton" parent="Control"]
+process_mode = 3
 layout_mode = 0
 offset_left = 1635.0
 offset_top = 850.0
 offset_right = 1710.0
 offset_bottom = 900.0
-texture_normal = ExtResource("6_64epm")
+texture_normal = ExtResource("6_fwnpl")
 stretch_mode = 0
+metadata/_edit_use_anchors_ = true

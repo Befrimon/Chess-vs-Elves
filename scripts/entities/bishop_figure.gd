@@ -31,6 +31,6 @@ func get_skill_target():
 	return target
 
 func get_unique_info() -> String:
-	return "Лечение: %s +%s\nОткат: %s" % \
+	return "Лечение: %s +%s (%s сек)" % \
 	  [Global.ENTITY_PARAM[parent.full_id]["level%s" % parent.level]["value"], 
 	  parent.buff_value, str(int(parent.skill_cooldown-Global.timer))]

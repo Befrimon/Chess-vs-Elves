@@ -7,6 +7,7 @@ var elf_group :Node2D
 var other_group :Node2D
 var map_group :TileMap
 var interface :Control
+var help_menu :Node2D
 
 var entity_count :int
 var crown_count :int
@@ -27,6 +28,7 @@ func _ready():
 	other_group = get_node("OtherEntities")
 	map_group = get_node("TileMap")
 	interface = get_node("UserInterface")
+	help_menu = get_node("HelpScene")
 	
 	entity_count = 0
 	crown_count = 125
@@ -43,6 +45,10 @@ func _ready():
 	interface.parent = self
 	
 	## Generate map
+	for x in range(-5, 17):
+		for y in range(-6, 7):
+			map_group.set_cell(0, Vector2(x, y), 2, Vector2.ZERO)
+	
 	for x in range(Global.MAP_SIZE.x):
 		for y in range(Global.MAP_SIZE.y):
 			map_group.set_cell(0, Vector2i(x, y), (x+y)%2, Vector2i.ZERO)

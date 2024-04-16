@@ -1,28 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpcej8lt7f7bc"]
+[gd_scene load_steps=5 format=3 uid="uid://bpcej8lt7f7bc"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_07ytg"]
-[ext_resource type="Texture2D" uid="uid://d1m5smtbjaib4" path="res://textures/board-1.png" id="2_5aju7"]
-[ext_resource type="Texture2D" uid="uid://fyyc0vivmer7" path="res://textures/board-2.png" id="3_ojcw1"]
+[ext_resource type="TileSet" uid="uid://b4jba1f58iqgt" path="res://sources/tiles.tres" id="2_fqt3s"]
 [ext_resource type="PackedScene" uid="uid://dms6v30blwv27" path="res://prefabs/game_ui.tscn" id="4_y6s1j"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m1hus"]
-texture = ExtResource("2_5aju7")
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xp2uq"]
-texture = ExtResource("3_ojcw1")
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_bnk2u"]
-sources/0 = SubResource("TileSetAtlasSource_m1hus")
-sources/1 = SubResource("TileSetAtlasSource_xp2uq")
+[ext_resource type="PackedScene" uid="uid://de0pch3ueexr3" path="res://prefabs/help_menu.tscn" id="5_eeyp1"]
 
 [node name="Game" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_07ytg")
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_bnk2u")
+tile_set = ExtResource("2_fqt3s")
 format = 2
 
 [node name="ChessEntities" type="Node2D" parent="."]
@@ -32,3 +20,6 @@ format = 2
 [node name="OtherEntities" type="Node2D" parent="."]
 
 [node name="UserInterface" parent="." instance=ExtResource("4_y6s1j")]
+
+[node name="HelpScene" parent="." instance=ExtResource("5_eeyp1")]
+visible = false
