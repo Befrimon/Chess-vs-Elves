@@ -46,11 +46,11 @@ func _ready():
 	get_node("PauseButton").pressed.connect(pause)
 
 func _process(delta):
-	timer_label.text = "%s %s left" % [
+	timer_label.text = "%s %s секунд" % [
 		Global.WAVES[parent.wave]["name"],
-		str(int(parent.wave_time - Global.timer)) if parent.wave_time < 600 else "Infinity"
+		str(int(parent.wave_time - Global.timer)) if parent.wave_time < 600 else "0"
 	]
-	crown_label.text = "Crowns: %s" % str(parent.crown_count)
+	crown_label.text = "Короны: %s" % str(parent.crown_count)
 
 func upgrade_figure():
 	if active.type != "figure":

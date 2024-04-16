@@ -16,18 +16,18 @@ const MAX_FIGURE :Dictionary = {
 	"knight_figure": 2,
 	"queen_figure": 1
 }
-const LEVEL_EXP :Array[int] = [0, 100, 600, 1600, 3100]
+const LEVEL_EXP :Array[float] = [0, 100, 600, 1600, 3100]
 const ENTITY_PARAM :Dictionary = {
 	## Elves params
 	"forest_elf": {
-		"name": "Forest elf",
+		"name": "Лесной эльф",
 		"type": "attacker",
 		"exp_value": 25,
 		# Levels for elves its his waves
 		"level1": {"hits": 1., "value": -1., "cooldown": 1}
 	},
 	"dark_elf": {
-		"name": "Dark elf",
+		"name": "Тёмный эльф",
 		"type": "attacker",
 		"exp_value": 50,
 		"level1": {"hits": 3., "value": -2., "cooldown": 1}
@@ -41,7 +41,7 @@ const ENTITY_PARAM :Dictionary = {
 		# Rook defender has no levels
 	},
 	"pawn_figure": {
-		"name": "Pawn",
+		"name": "Пешка",
 		"type": "attacker",
 		"level1": {"cost": 50, "hits": 2., "value": -1., "cooldown": 1},
 		"level2": {"cost": 150, "hits": 2., "value": -2., "cooldown": 1},
@@ -50,7 +50,7 @@ const ENTITY_PARAM :Dictionary = {
 		"level5": {"cost": 800, "hits": 7., "value": -5., "cooldown": 1}
 	},
 	"king_figure": {
-		"name": "King",
+		"name": "Король",
 		"type": "support",
 		"level1": {"cost": 100, "hits": 1., "value": 25, "cooldown": 10},
 		"level2": {"cost": 200, "hits": 1., "value": 50, "cooldown": 10},
@@ -59,7 +59,7 @@ const ENTITY_PARAM :Dictionary = {
 		"level5": {"cost": 850, "hits": 3., "value": 100, "cooldown": 6}
 	},
 	"bishop_figure": {
-		"name": "Bishop",
+		"name": "Епископ",
 		"type": "healer",
 		"level1": {"cost": 200, "hits": 1., "value": 1., "cooldown": 5},
 		"level2": {"cost": 300, "hits": 1., "value": 2., "cooldown": 5},
@@ -68,7 +68,7 @@ const ENTITY_PARAM :Dictionary = {
 		"level5": {"cost": 1000, "hits": 2., "value": 5., "cooldown": 3},
 	},
 	"knight_figure": {
-		"name": "Knight",
+		"name": "Рыцарь",
 		"type": "attacker",
 		"level1": {"cost": 300, "hits": 3., "value": -2., "cooldown": 1},
 		"level2": {"cost": 500, "hits": 4., "value": -3., "cooldown": 1},
@@ -77,7 +77,7 @@ const ENTITY_PARAM :Dictionary = {
 		"level5": {"cost": 1500, "hits": 9., "value": -8., "cooldown": 1},
 	},
 	"queen_figure": {
-		"name": "Queen",
+		"name": "Ферзь",
 		"type": "buffer",
 		"level1": {"cost": 500, "hits": 1., "value": [1, 25], "cooldown": 0},
 		"level2": {"cost": 700, "hits": 1., "value": [2, 50], "cooldown": 0},
@@ -90,12 +90,12 @@ const ENTITY_PARAM :Dictionary = {
 var timer :float = 0
 const WAVES :Array[Dictionary] = [
 	# epe - elves spawn count per spawn event
-	{"name": "Get ready", "epe": 0, "elf_spawn": [1, 1], "duration": 10},
-	{"name": "1 wave", "epe": 1, "elf_spawn": [5, 15], "duration": 120},
-	{"name": "2 wave", "epe": 2, "elf_spawn": [5, 15], "duration": 60},
-	{"name": "3 wave", "epe": 2, "elf_spawn": [5, 10], "duration": 60},
-	{"name": "4 wave", "epe": 2, "elf_spawn": [5, 15], "duration": 120},
-	{"name": "Good luck", "epe": 3, "elf_spawn": [5, 15], "duration": INF}
+	{"name": "Приготовься", "epe": 0, "elf_spawn": [1, 1], "duration": 10},
+	{"name": "1 волна", "epe": 1, "elf_spawn": [5, 15], "duration": 120},
+	{"name": "2 волна", "epe": 2, "elf_spawn": [5, 15], "duration": 60},
+	{"name": "3 волна", "epe": 2, "elf_spawn": [5, 10], "duration": 60},
+	{"name": "4 волна", "epe": 2, "elf_spawn": [5, 15], "duration": 120},
+	{"name": "Удачи!", "epe": 3, "elf_spawn": [5, 15], "duration": INF}
 ]
 const ELF_CHANCE :Array[Dictionary] = [
 	{"forest_elf": 0., "dark_elf": 0.},  # Prepare wave

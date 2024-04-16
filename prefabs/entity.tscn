@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dusu0c4gw6b56"]
+[gd_scene load_steps=9 format=3 uid="uid://dusu0c4gw6b56"]
 
 [ext_resource type="Script" path="res://scripts/entity.gd" id="1_i50rf"]
 [ext_resource type="Texture2D" uid="uid://2gcnjpppq0hu" path="res://textures/highlighting.png" id="2_bu4u6"]
+[ext_resource type="SpriteFrames" uid="uid://bmpn6anmy0r6n" path="res://animations/pawn_figure.tres" id="3_iivbn"]
 [ext_resource type="Shape2D" uid="uid://c4ejks4bc5lp5" path="res://prefabs/entity_hitbox.tres" id="3_tq42j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0hce"]
@@ -56,7 +57,8 @@ visible = false
 
 [node name="Texture" type="AnimatedSprite2D" parent="."]
 process_mode = 3
-animation = &""
+sprite_frames = ExtResource("3_iivbn")
+animation = &"idle"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 process_mode = 1

@@ -33,4 +33,4 @@ func get_skill_target() -> Array[Entity]:
 	return target
 
 func get_unique_info() -> String:
-	return "Heal/DMG buff: %s\nCrown buff: %s" % Global.ENTITY_PARAM[parent.full_id]["level%s" % parent.level]["value"]
+	return "Бонус лечения/урона: %s\nБонус корон: %s" % Global.ENTITY_PARAM[parent.full_id]["level%s" % parent.level]["value"]

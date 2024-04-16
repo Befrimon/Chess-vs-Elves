@@ -10,6 +10,11 @@ var highlighting :AnimatedSprite2D
 var move_cells :Node2D
 var skill_area :Area2D
 
+#var hp_frame :Sprite2D
+#var hp_bar :Sprite2D
+#var exp_frame :Sprite2D
+#var exp_bar :Sprite2D
+
 # Entity properties
 var node_name :String
 var display_name :String
@@ -38,6 +43,11 @@ func init(sname :String, eid :String, pos :Vector2):
 	move_cells = get_node("MoveCells")
 	skill_area = get_node("SkillArea")
 	
+	#hp_frame = get_node("Info/HpFrame")
+	#hp_bar = hp_frame.get_node("HpActive")
+	#exp_frame = get_node("Info/ExpFrame")
+	#exp_bar = exp_frame.get_node("ExpActive")
+	
 	# Configure texture
 	if eid in []:#["pawn_figure", "rook_defender"]:
 		texture.sprite_frames = load("res://animations-new/%s.tres" % eid)
@@ -57,6 +67,7 @@ func init(sname :String, eid :String, pos :Vector2):
 	highlighting.position = Global.POS_DELTA / scale.x
 	highlighting.scale = texture.sprite_frames.get_frame_texture("idle", 0).get_size() / \
 		highlighting.sprite_frames.get_frame_texture("idle", 0).get_size()
+	#get_node("Info").scale = Global.TILE_SIZE / hp_frame.texture.get_size() / scale
 	
 	# Set properties
 	full_id = eid
@@ -87,6 +98,11 @@ func init(sname :String, eid :String, pos :Vector2):
 func _process(delta):
 	if get_tree().paused:
 		return
+	
+	#hp_bar.scale.x = 23 * (hits / max_hits)
+	#hp_bar.position.x = 4 - (23-hp_bar.scale.x)/2
+	#exp_bar.scale.x = 23 * ((exp - Global.LEVEL_EXP[level-1]) / Global.LEVEL_EXP[level])
+	#exp_bar.position.x = .5 - (23-exp_bar.scale.x)/2
 	
 	if Global.timer > skill_cooldown:
 		var res = controller.get_skill_target()
@@ -186,7 +202,7 @@ func new_move_cell(pos :Vector2):
 	move_cells.add_child(cell)
 
 func get_info() -> String:
-	return "Name: %s\nLevel: %s %s\nHits: %s/%s\n" % \
+	return "Название: %s\nУровень: %s %s\nХиты: %s/%s\n" % \
 	  [display_name, str(level), get_exp_info(), str(hits), str(max_hits)]\
 	  + controller.get_unique_info()
 
@@ -197,7 +213,7 @@ func get_exp_info() -> String:
 		return "(MAX)"
 	if exp < Global.LEVEL_EXP[level]:
 		return "(%s/%s)" % [exp, Global.LEVEL_EXP[level]]
-	return "(UP: %s crowns)" % Global.ENTITY_PARAM[full_id]["level%s" % str(level+1)]["cost"]
+	return "(UP: %s корон)" % Global.ENTITY_PARAM[full_id]["level%s" % str(level+1)]["cost"]
 
 func change_hits(value :float):
 	hits += ceil(randf()*value*100)/100.0

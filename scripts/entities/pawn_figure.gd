@@ -20,18 +20,18 @@ func _init(parent_obj :Entity):
 	
 
 func get_skill_target() -> Entity:
-	if is_instance_valid(target):
-		return target
-	
+	var target_candidate = [null]
 	for body in parent.skill_area.get_overlapping_bodies():
 		if body.type == "elf":
-			target = body
-			return body
+			target_candidate.append(body)
 	
-	return null
+	if target in target_candidate and target != null:
+		return target
+	target = target_candidate[-1]
+	return target
 
 func get_unique_info() -> String:
-	return "Damage: %s +%s" % [\
+	return "Урон: %s +%s" % [\
 	  str(-1*Global.ENTITY_PARAM[parent.full_id]["level%s" % parent.level]["value"]),
 	  parent.buff_value
 	]

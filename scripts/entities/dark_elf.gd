@@ -23,15 +23,15 @@ func _process(delta):
 		get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
 func get_skill_target() -> Entity:
-	if is_instance_valid(target):
-		return target
-	
+	var target_candidate = [null]
 	for body in parent.skill_area.get_overlapping_bodies():
 		if body.type == "figure":
-			target = body
-			return body
+			target_candidate.append(body)
 	
-	return null
+	if target in target_candidate and target != null:
+		return target
+	target = target_candidate[-1]
+	return target
 
 func get_unique_info() -> String:
 	return ""
