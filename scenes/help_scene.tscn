@@ -1,23 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://188eisn1lovb"]
+[gd_scene load_steps=3 format=3 uid="uid://de0pch3ueexr3"]
 
-[ext_resource type="Texture2D" uid="uid://ry007a8t7k7r" path="res://textures/help_notebook.png" id="1_ga7f8"]
-[ext_resource type="SpriteFrames" uid="uid://bmpn6anmy0r6n" path="res://animations/pawn_figure.tres" id="2_sjo8i"]
+[ext_resource type="Script" path="res://scripts/help_scene.gd" id="1_6lpyx"]
+[ext_resource type="Texture2D" uid="uid://782qe6jewu2x" path="res://textures/help_notebook.png" id="1_ga7f8"]
 
 [node name="HelpScene" type="Node2D"]
+script = ExtResource("1_6lpyx")
 
 [node name="Notebook" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(960, 540)
 scale = Vector2(17, 17)
 texture = ExtResource("1_ga7f8")
 
-[node name="FigurePreview" type="AnimatedSprite2D" parent="."]
-position = Vector2(500, 600)
-scale = Vector2(30, 30)
-sprite_frames = ExtResource("2_sjo8i")
-animation = &"idle"
-frame_progress = 0.841959
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="Control"]
 offset_left = 180.0
 offset_top = 150.0
 offset_right = 860.0
@@ -28,18 +29,18 @@ text = "Пешка"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="."]
-offset_left = 1060.0
-offset_top = 150.0
-offset_right = 1740.0
-offset_bottom = 390.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
-theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
-theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 48
-text = "Стоимость: 50 корон
-Хиты (на 1 ур): 2
-Урон (на 1 ур): 1"
-editable = false
+[node name="Desctiption" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 250.0
+offset_right = 830.0
+offset_bottom = 850.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 46
+theme_override_font_sizes/bold_font_size = 46
+bbcode_enabled = true
+text = "Самая слабая фигура, но ее проще получить и улучшить
+
+[b]Хар-ки на 1 уровне:[/b]
+Хиты: 2
+Урон: 1"
