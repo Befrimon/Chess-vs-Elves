@@ -17,75 +17,7 @@ const MAX_FIGURE :Dictionary = {
 	"queen_figure": 1
 }
 const LEVEL_EXP :Array[float] = [0, 100, 600, 1600, 3100]
-const ENTITY_PARAM :Dictionary = {
-	## Elves params
-	"forest_elf": {
-		"name": "Лесной эльф",
-		"type": "attacker",
-		"exp_value": 25,
-		# Levels for elves its his waves
-		"level1": {"hits": 1., "value": -1., "cooldown": 1}
-	},
-	"dark_elf": {
-		"name": "Тёмный эльф",
-		"type": "attacker",
-		"exp_value": 50,
-		"level1": {"hits": 3., "value": -2., "cooldown": 1}
-	},
-	
-	## Figure params
-	"rook_defender": {
-		"name": "ROOOOK!",
-		"type": "attacker",
-		"level1": {"hits": INF, "value": INF, "cooldown": 0}
-		# Rook defender has no levels
-	},
-	"pawn_figure": {
-		"name": "Пешка",
-		"type": "attacker",
-		"level1": {"cost": 50, "hits": 2., "value": -1., "cooldown": 1},
-		"level2": {"cost": 150, "hits": 2., "value": -2., "cooldown": 1},
-		"level3": {"cost": 300, "hits": 3., "value": -3., "cooldown": 1},
-		"level4": {"cost": 500, "hits": 5., "value": -4., "cooldown": 1},
-		"level5": {"cost": 800, "hits": 7., "value": -5., "cooldown": 1}
-	},
-	"king_figure": {
-		"name": "Король",
-		"type": "support",
-		"level1": {"cost": 100, "hits": 1., "value": 25, "cooldown": 10},
-		"level2": {"cost": 200, "hits": 1., "value": 50, "cooldown": 10},
-		"level3": {"cost": 350, "hits": 2., "value": 50, "cooldown": 8},
-		"level4": {"cost": 600, "hits": 2., "value": 75, "cooldown": 8},
-		"level5": {"cost": 850, "hits": 3., "value": 100, "cooldown": 6}
-	},
-	"bishop_figure": {
-		"name": "Епископ",
-		"type": "healer",
-		"level1": {"cost": 200, "hits": 1., "value": 1., "cooldown": 5},
-		"level2": {"cost": 300, "hits": 1., "value": 2., "cooldown": 5},
-		"level3": {"cost": 500, "hits": 1., "value": 2., "cooldown": 3},
-		"level4": {"cost": 800, "hits": 2., "value": 3., "cooldown": 3},
-		"level5": {"cost": 1000, "hits": 2., "value": 5., "cooldown": 3},
-	},
-	"knight_figure": {
-		"name": "Рыцарь",
-		"type": "attacker",
-		"level1": {"cost": 300, "hits": 3., "value": -2., "cooldown": 1},
-		"level2": {"cost": 500, "hits": 4., "value": -3., "cooldown": 1},
-		"level3": {"cost": 800, "hits": 6., "value": -4., "cooldown": 1},
-		"level4": {"cost": 1100, "hits": 7., "value": -6., "cooldown": 1},
-		"level5": {"cost": 1500, "hits": 9., "value": -8., "cooldown": 1},
-	},
-	"queen_figure": {
-		"name": "Ферзь",
-		"type": "buffer",
-		"level1": {"cost": 500, "hits": 1., "value": [1, 25], "cooldown": 0},
-		"level2": {"cost": 700, "hits": 1., "value": [2, 50], "cooldown": 0},
-		"level3": {"cost": 1100, "hits": 1., "value": [3, 75], "cooldown": 0},
-		"level4": {"cost": 1500, "hits": 2., "value": [4, 100], "cooldown": 0},
-		"level5": {"cost": 2000, "hits": 2., "value": [5, 150], "cooldown": 0},
-	}
-}
+var ENTITY_PARAM :Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://sources/entity_info.json"))
 
 var timer :float = 0
 const WAVES :Array[Dictionary] = [

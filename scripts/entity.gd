@@ -216,7 +216,7 @@ func get_exp_info() -> String:
 	return "(UP: %s корон)" % Global.ENTITY_PARAM[full_id]["level%s" % str(level+1)]["cost"]
 
 func change_hits(value :float):
-	hits += ceil(randf()*value*100)/100.0
+	hits += ceil(randf_range(.1, 1)*value*100)/100.0
 	if hits <= 0:
 		kill()
 	if hits > max_hits:

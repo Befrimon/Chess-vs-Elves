@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://de0pch3ueexr3"]
+[gd_scene load_steps=7 format=3 uid="uid://de0pch3ueexr3"]
 
 [ext_resource type="Script" path="res://scripts/help_scene.gd" id="1_6lpyx"]
-[ext_resource type="Texture2D" uid="uid://782qe6jewu2x" path="res://textures/help_notebook.png" id="1_ga7f8"]
+[ext_resource type="Texture2D" uid="uid://782qe6jewu2x" path="res://textures/help_book/help_notebook.png" id="1_ga7f8"]
+[ext_resource type="Texture2D" uid="uid://cis0t5rmvuubl" path="res://textures/help_book/tab.png" id="3_ce3ml"]
+[ext_resource type="Texture2D" uid="uid://btw0eo8ascit4" path="res://textures/help_book/help_notebook1.png" id="4_x37p8"]
+[ext_resource type="Texture2D" uid="uid://c1jy8dr1cw1ew" path="res://textures/help_book/arrow-left.png" id="5_vkdob"]
+[ext_resource type="Texture2D" uid="uid://bcxool7s3kb6p" path="res://textures/help_book/arrow-right.png" id="6_64epm"]
 
 [node name="HelpScene" type="Node2D"]
 script = ExtResource("1_6lpyx")
@@ -12,6 +16,16 @@ position = Vector2(960, 540)
 scale = Vector2(17, 17)
 texture = ExtResource("1_ga7f8")
 
+[node name="Tab" type="Sprite2D" parent="."]
+position = Vector2(1822, 300)
+scale = Vector2(5, 5)
+texture = ExtResource("3_ce3ml")
+
+[node name="HelpNotebook1" type="Sprite2D" parent="."]
+position = Vector2(960, 531)
+scale = Vector2(17, 17)
+texture = ExtResource("4_x37p8")
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -19,13 +33,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Title" type="Label" parent="Control"]
+layout_mode = 0
 offset_left = 180.0
 offset_top = 150.0
 offset_right = 860.0
 offset_bottom = 250.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
-text = "Пешка"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -36,11 +50,42 @@ offset_top = 250.0
 offset_right = 830.0
 offset_bottom = 850.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 46
-theme_override_font_sizes/bold_font_size = 46
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
 bbcode_enabled = true
-text = "Самая слабая фигура, но ее проще получить и улучшить
 
-[b]Хар-ки на 1 уровне:[/b]
-Хиты: 2
-Урон: 1"
+[node name="Desctiption2" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 1090.0
+offset_top = 180.0
+offset_right = 1690.0
+offset_bottom = 830.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+
+[node name="ImageDescription" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 1090.0
+offset_top = 180.0
+offset_right = 1690.0
+offset_bottom = 830.0
+
+[node name="ButtonLeft" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 850.0
+offset_right = 285.0
+offset_bottom = 900.0
+texture_normal = ExtResource("5_vkdob")
+stretch_mode = 0
+
+[node name="ButtonRight" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 1635.0
+offset_top = 850.0
+offset_right = 1710.0
+offset_bottom = 900.0
+texture_normal = ExtResource("6_64epm")
+stretch_mode = 0
