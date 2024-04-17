@@ -91,4 +91,4 @@ Distributed under the Apache-2.0 License. See `LICENSE` for more information.
 [issues-url]: https://github.com/Befrimon/Chess-vs-Elves/issues
 [license-shield]: https://img.shields.io/github/license/Befrimon/Chess-vs-Elves.svg?style=for-the-badge
 [license-url]: https://github.com/Befrimon/Chess-vs-Elves/blob/master/LICENSE
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: screenshot.png
