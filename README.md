@@ -72,7 +72,7 @@ There are no restrictions for desktop versions. To run on Android devices, you n
 See the [open issues](https://github.com/Befrimon/Chess-vs-Elves/issues) for a full list of proposed features (and known issues).
 
 
-## License!
+## License
 Distributed under the Apache-2.0 License. See `LICENSE` for more information.
 
 
