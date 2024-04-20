@@ -1,25 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpcej8lt7f7bc"]
+[gd_scene load_steps=3 format=3 uid="uid://1md8dm1vbwnm"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_07ytg"]
-[ext_resource type="TileSet" uid="uid://b4jba1f58iqgt" path="res://sources/tiles.tres" id="2_fqt3s"]
-[ext_resource type="PackedScene" uid="uid://dms6v30blwv27" path="res://prefabs/game_ui.tscn" id="4_y6s1j"]
-[ext_resource type="PackedScene" uid="uid://de0pch3ueexr3" path="res://prefabs/help_menu.tscn" id="5_eeyp1"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_ywi3w"]
+[ext_resource type="PackedScene" uid="uid://c6vmqwoxc4lq7" path="res://prefabs/game_ui.tscn" id="2_kwp6t"]
 
 [node name="Game" type="Node2D"]
-process_mode = 3
-script = ExtResource("1_07ytg")
+script = ExtResource("1_ywi3w")
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource("2_fqt3s")
-format = 2
+[node name="GUI" parent="." instance=ExtResource("2_kwp6t")]
+z_index = 1
 
-[node name="ChessEntities" type="Node2D" parent="."]
-
-[node name="ElfEntities" type="Node2D" parent="."]
-
-[node name="OtherEntities" type="Node2D" parent="."]
-
-[node name="UserInterface" parent="." instance=ExtResource("4_y6s1j")]
-
-[node name="HelpScene" parent="." instance=ExtResource("5_eeyp1")]
+[node name="BackgroundMap" type="Sprite2D" parent="."]
 visible = false
+
+[node name="Entities" type="Node2D" parent="."]
+z_index = 1
+
+[node name="MoveCells" type="Node2D" parent="."]
+z_index = 1

@@ -1,0 +1,15 @@
+{
+	"name": "Епископ",
+	"description": "Читает молитвы и восстанавливает хиты фигурам",
+	"counterattack": false,
+	"max_count": 2,
+	
+	"skillbox": {"Vector2(1, 1)": 1, "Vector2(1, 0)": 1, "Vector2(1, -1)": 1},
+	"move": {"Vector2(1, 1)": 20, "Vector2(1, -1)": 20, "Vector2(-1, 1)": 20, "Vector2(-1, -1)": 20},
+	
+	"level1": {"cost": 200, "hits": 1, "heal": 1, "cooldown": 5},
+	"level2": {"cost": 300, "hits": 1, "heal": 2, "cooldown": 5},
+	"level3": {"cost": 500, "hits": 1, "heal": 2, "cooldown": 3},
+	"level4": {"cost": 800, "hits": 2, "heal": 3, "cooldown": 3},
+	"level5": {"cost": 1000, "hits": 2, "heal": 5, "cooldown": 3},
+}

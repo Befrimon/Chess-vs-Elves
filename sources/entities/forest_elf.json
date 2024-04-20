@@ -1,0 +1,10 @@
+{
+	"name": "Лесной эльф",
+	"description": "Один он слаб, но когда приходят его сородичи, он крайне опасен",
+	"counterattack": true,
+	
+	"skillbox": {"Vector2(-1, 0)": 0.3},
+	"move": {},
+	
+	"level1": {"hits": 1, "attack": 1, "cooldown": 1},
+}

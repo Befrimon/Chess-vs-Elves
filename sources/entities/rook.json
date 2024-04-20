@@ -1,0 +1,11 @@
+{
+	"name": "Башня",
+	"description": "Если эльф доходит до нее, то она едет вперед и сносит все на своем пути, даже фигуры",
+	"counterattack": false,
+	"max_count": 6,
+	
+	"skillbox": {"Vector2(1, 0)": 0.1},
+	"move": {},
+	
+	"level1": {"hits": 100, "cooldown": 1}
+}

@@ -1,0 +1,342 @@
+[gd_scene load_steps=13 format=3 uid="uid://bgfug44ljxqev"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_2f0ah"]
+[ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/menu_theme.tres" id="2_1liwl"]
+[ext_resource type="Texture2D" uid="uid://c2wcs5bmosnto" path="res://textures/GUI/title.png" id="2_ynhvr"]
+[ext_resource type="Texture2D" uid="uid://cdparavv8ffoy" path="res://textures/GUI/button_normal.png" id="3_kpgrl"]
+[ext_resource type="Texture2D" uid="uid://cvftw0hgqeday" path="res://textures/GUI/button_pressed.png" id="4_0tfc0"]
+[ext_resource type="Texture2D" uid="uid://bkej6gv2dk683" path="res://textures/GUI/button_disabled.png" id="5_p0qbp"]
+[ext_resource type="Texture2D" uid="uid://dbdtcfph8v5ay" path="res://textures/GUI/small_button_normal.png" id="7_r3q1l"]
+[ext_resource type="Texture2D" uid="uid://ceiqbx55gqtpj" path="res://textures/GUI/small_button_pressed.png" id="8_5wkny"]
+[ext_resource type="Texture2D" uid="uid://b54sls1f1qxmn" path="res://textures/GUI/small_button_disabled.png" id="9_yhxjw"]
+[ext_resource type="Texture2D" uid="uid://bg6o856kdf2ag" path="res://textures/GUI/HELP.png" id="10_chv2w"]
+[ext_resource type="Texture2D" uid="uid://cscer3toplgyt" path="res://textures/GUI/power.png" id="10_pkw25"]
+[ext_resource type="Texture2D" uid="uid://bvfxbx43ojqfa" path="res://textures/GUI/confirm.png" id="12_s2078"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_2f0ah")
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1liwl")
+
+[node name="Title" type="TextureRect" parent="GUI"]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 80.0
+offset_right = 1410.0
+offset_bottom = 230.0
+texture = ExtResource("2_ynhvr")
+
+[node name="Label" type="Label" parent="GUI/Title"]
+layout_mode = 0
+offset_right = 900.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 60
+text = "Шахматы против Эльфов"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainButtons" type="Control" parent="GUI"]
+anchors_preset = 0
+offset_left = 660.0
+offset_top = 350.0
+offset_right = 1260.0
+offset_bottom = 950.0
+
+[node name="NewGameBtn" type="TextureButton" parent="GUI/MainButtons"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 120.0
+texture_normal = ExtResource("3_kpgrl")
+texture_pressed = ExtResource("4_0tfc0")
+texture_disabled = ExtResource("5_p0qbp")
+stretch_mode = 0
+metadata/click_action = 0
+
+[node name="Label" type="Label" parent="GUI/MainButtons/NewGameBtn"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 46
+text = "Новая игра"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadGameBtn" type="TextureButton" parent="GUI/MainButtons"]
+layout_mode = 0
+offset_top = 150.0
+offset_right = 600.0
+offset_bottom = 270.0
+texture_normal = ExtResource("3_kpgrl")
+texture_pressed = ExtResource("4_0tfc0")
+texture_disabled = ExtResource("5_p0qbp")
+stretch_mode = 0
+metadata/click_action = 1
+
+[node name="Label" type="Label" parent="GUI/MainButtons/LoadGameBtn"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 46
+text = "Продолжить"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsBtn" type="TextureButton" parent="GUI/MainButtons"]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 600.0
+offset_bottom = 420.0
+texture_normal = ExtResource("3_kpgrl")
+texture_pressed = ExtResource("4_0tfc0")
+texture_disabled = ExtResource("5_p0qbp")
+stretch_mode = 0
+metadata/click_action = 2
+
+[node name="Label" type="Label" parent="GUI/MainButtons/OptionsBtn"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 46
+text = "Настройки"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SmallButtons" type="Control" parent="GUI"]
+anchors_preset = 0
+offset_left = 1780.0
+offset_top = 780.0
+offset_right = 1900.0
+offset_bottom = 1080.0
+
+[node name="HelpBtn" type="TextureButton" parent="GUI/SmallButtons"]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 120.0
+texture_normal = ExtResource("7_r3q1l")
+texture_pressed = ExtResource("8_5wkny")
+texture_disabled = ExtResource("9_yhxjw")
+stretch_mode = 0
+metadata/click_action = 3
+
+[node name="Icon" type="TextureRect" parent="GUI/SmallButtons/HelpBtn"]
+layout_mode = 0
+offset_left = 10.0
+offset_right = 110.0
+offset_bottom = 100.0
+texture = ExtResource("10_chv2w")
+
+[node name="QuitBtn" type="TextureButton" parent="GUI/SmallButtons"]
+layout_mode = 0
+offset_top = 150.0
+offset_right = 120.0
+offset_bottom = 270.0
+texture_normal = ExtResource("7_r3q1l")
+texture_pressed = ExtResource("8_5wkny")
+texture_disabled = ExtResource("9_yhxjw")
+stretch_mode = 0
+metadata/click_action = 4
+
+[node name="Icon" type="TextureRect" parent="GUI/SmallButtons/QuitBtn"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 100.0
+offset_bottom = 95.0
+texture = ExtResource("10_pkw25")
+
+[node name="CloseConfirm" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1liwl")
+
+[node name="Shading" type="ColorRect" parent="CloseConfirm"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.54902)
+
+[node name="ConfirmWindow" type="TextureRect" parent="CloseConfirm"]
+layout_mode = 0
+offset_left = 610.0
+offset_top = 300.0
+offset_right = 1310.0
+offset_bottom = 600.0
+texture = ExtResource("12_s2078")
+
+[node name="Title" type="TextureRect" parent="CloseConfirm/ConfirmWindow"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 20.0
+offset_right = 575.0
+offset_bottom = 95.0
+texture = ExtResource("2_ynhvr")
+
+[node name="Label" type="Label" parent="CloseConfirm/ConfirmWindow/Title"]
+layout_mode = 0
+offset_right = 450.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 42
+text = "Выйти из игры?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="Control" parent="CloseConfirm/ConfirmWindow"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CancelBtn" type="TextureButton" parent="CloseConfirm/ConfirmWindow/Buttons"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 200.0
+offset_right = 290.0
+offset_bottom = 270.0
+texture_normal = ExtResource("3_kpgrl")
+texture_pressed = ExtResource("4_0tfc0")
+texture_disabled = ExtResource("5_p0qbp")
+stretch_mode = 0
+metadata/click_action = 5
+
+[node name="Label" type="Label" parent="CloseConfirm/ConfirmWindow/Buttons/CancelBtn"]
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 32
+text = "Нет"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmBtn" type="TextureButton" parent="CloseConfirm/ConfirmWindow/Buttons"]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 200.0
+offset_right = 630.0
+offset_bottom = 270.0
+texture_normal = ExtResource("3_kpgrl")
+texture_pressed = ExtResource("4_0tfc0")
+texture_disabled = ExtResource("5_p0qbp")
+stretch_mode = 0
+metadata/click_action = 6
+
+[node name="Label" type="Label" parent="CloseConfirm/ConfirmWindow/Buttons/ConfirmBtn"]
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 32
+text = "Да"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeleteConfirm" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_1liwl")
+
+[node name="Shading" type="ColorRect" parent="DeleteConfirm"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.54902)
+
+[node name="ConfirmWindow" type="TextureRect" parent="DeleteConfirm"]
+layout_mode = 0
+offset_left = 610.0
+offset_top = 300.0
+offset_right = 1310.0
+offset_bottom = 600.0
+texture = ExtResource("12_s2078")
+
+[node name="Title" type="TextureRect" parent="DeleteConfirm/ConfirmWindow"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 675.0
+offset_bottom = 180.0
+texture = ExtResource("2_ynhvr")
+
+[node name="Label" type="Label" parent="DeleteConfirm/ConfirmWindow/Title"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 10.0
+offset_right = 635.0
+offset_bottom = 185.0
+theme_override_font_sizes/font_size = 32
+text = "Начав новую игру, вы сбросите сохраненный прогресс
+
+Вы уверены?"
+horizontal_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Buttons" type="Control" parent="DeleteConfirm/ConfirmWindow"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CancelBtn" type="TextureButton" parent="DeleteConfirm/ConfirmWindow/Buttons"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 200.0
+offset_right = 290.0
+offset_bottom = 270.0
+texture_normal = ExtResource("3_kpgrl")
+texture_pressed = ExtResource("4_0tfc0")
+texture_disabled = ExtResource("5_p0qbp")
+stretch_mode = 0
+metadata/click_action = 7
+
+[node name="Label" type="Label" parent="DeleteConfirm/ConfirmWindow/Buttons/CancelBtn"]
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 32
+text = "Нет"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmBtn" type="TextureButton" parent="DeleteConfirm/ConfirmWindow/Buttons"]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 200.0
+offset_right = 630.0
+offset_bottom = 270.0
+texture_normal = ExtResource("3_kpgrl")
+texture_pressed = ExtResource("4_0tfc0")
+texture_disabled = ExtResource("5_p0qbp")
+stretch_mode = 0
+metadata/click_action = 8
+
+[node name="Label" type="Label" parent="DeleteConfirm/ConfirmWindow/Buttons/ConfirmBtn"]
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 32
+text = "Да"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="GUI/MainButtons/NewGameBtn" to="." method="_on_btn_down" binds= [&"MainButtons/NewGameBtn"]]
+[connection signal="button_up" from="GUI/MainButtons/NewGameBtn" to="." method="_on_btn_up" binds= [&"MainButtons/NewGameBtn"]]
+[connection signal="button_down" from="GUI/MainButtons/LoadGameBtn" to="." method="_on_btn_down" binds= [&"MainButtons/LoadGameBtn"]]
+[connection signal="button_up" from="GUI/MainButtons/LoadGameBtn" to="." method="_on_btn_up" binds= [&"MainButtons/LoadGameBtn"]]
+[connection signal="button_down" from="GUI/MainButtons/OptionsBtn" to="." method="_on_btn_down" binds= [&"MainButtons/OptionsBtn"]]
+[connection signal="button_up" from="GUI/MainButtons/OptionsBtn" to="." method="_on_btn_up" binds= [&"MainButtons/OptionsBtn"]]
+[connection signal="button_down" from="GUI/SmallButtons/HelpBtn" to="." method="_on_btn_down" binds= [&"SmallButtons/HelpBtn"]]
+[connection signal="button_up" from="GUI/SmallButtons/HelpBtn" to="." method="_on_btn_up" binds= [&"SmallButtons/HelpBtn"]]
+[connection signal="button_down" from="GUI/SmallButtons/QuitBtn" to="." method="_on_btn_down" binds= [&"SmallButtons/QuitBtn"]]
+[connection signal="button_up" from="GUI/SmallButtons/QuitBtn" to="." method="_on_btn_up" binds= [&"SmallButtons/QuitBtn"]]

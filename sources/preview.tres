@@ -1,0 +1,34 @@
+[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://b8qy8pl5lkwe6"]
+
+[ext_resource type="Texture2D" uid="uid://c1j588yn4n6om" path="res://textures/previews/pawn.png" id="1_0k2vb"]
+[ext_resource type="Texture2D" uid="uid://dkfm4shvowq1j" path="res://textures/previews/king.png" id="2_84unu"]
+[ext_resource type="Texture2D" uid="uid://ctvhrk2r1dxbj" path="res://textures/previews/bishop.png" id="3_y67jy"]
+[ext_resource type="Texture2D" uid="uid://bnhkkgtb63ai" path="res://textures/previews/knight.png" id="4_mjqer"]
+[ext_resource type="Texture2D" uid="uid://devanq5qv6my4" path="res://textures/previews/queen.png" id="5_40n7n"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m8c0n"]
+texture = ExtResource("1_0k2vb")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_735gj"]
+texture = ExtResource("2_84unu")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gacls"]
+texture = ExtResource("3_y67jy")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o4up6"]
+texture = ExtResource("4_mjqer")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2iu43"]
+texture = ExtResource("5_40n7n")
+0:0/0 = 0
+
+[resource]
+sources/1 = SubResource("TileSetAtlasSource_m8c0n")
+sources/2 = SubResource("TileSetAtlasSource_735gj")
+sources/3 = SubResource("TileSetAtlasSource_gacls")
+sources/4 = SubResource("TileSetAtlasSource_o4up6")
+sources/5 = SubResource("TileSetAtlasSource_2iu43")

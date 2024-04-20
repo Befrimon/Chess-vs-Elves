@@ -1,0 +1,19 @@
+{
+	"name": "Король",
+	"description": "Не может сражаться, но зато генерирует короны",
+	"counterattack": false,
+	"max_count": 1,
+	
+	"skillbox": {},
+	"move": {
+		"Vector2(1, 1)": 1, "Vector2(1, 0)": 1, "Vector2(1, -1)": 1,
+		 "Vector2(0, -1)": 1, "Vector2(-1, -1)": 1, "Vector2(-1, 0)": 1,
+		 "Vector2(-1, 1)": 1, "Vector2(0, 1)": 1
+	},
+	
+	"level1": {"cost": 100, "hits": 1, "crown": 25, "cooldown": 10},
+	"level2": {"cost": 200, "hits": 1, "crown": 50, "cooldown": 10},
+	"level3": {"cost": 350, "hits": 2, "crown": 50, "cooldown": 8},
+	"level4": {"cost": 600, "hits": 2, "crown": 75, "cooldown": 8},
+	"level5": {"cost": 850, "hits": 3, "crown": 100, "cooldown": 6}
+}

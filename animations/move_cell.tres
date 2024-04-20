@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dwylwqxlks1am"]
+
+[ext_resource type="Texture2D" uid="uid://ctfvry5ie56qf" path="res://textures/move-cell.png" id="1_5kyhn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql5sm"]
+atlas = ExtResource("1_5kyhn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhfyf"]
+atlas = ExtResource("1_5kyhn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bim3m"]
+atlas = ExtResource("1_5kyhn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66r7t"]
+atlas = ExtResource("1_5kyhn")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ql5sm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhfyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bim3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66r7t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]

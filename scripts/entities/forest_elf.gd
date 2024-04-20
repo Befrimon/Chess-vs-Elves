@@ -1,38 +1,38 @@
-extends Node
+class_name ForestElf extends Entity
 
-## Declare variables
-var parent :Entity
+var skill_target :Entity
 
-# Move properties
-const SPEED :int = 70
-const MOVE_RANGE :Dictionary = {}
-
-const SKILL_RANGE :Array[Vector2] = [Vector2(-1, 0)]
-var target :Entity
-
-func _init(parent_obj :Entity):
-	## Assign variables
-	parent = parent_obj
-	parent.direction = Vector2(-1, 0)
+func _init(pos :Vector2, index :int) -> void:
+	# load data from configs
+	name = "forest_elf-%s" % index
+	data = JSON.parse_string(FileAccess.get_file_as_string("res://sources/entities/forest_elf.json"))
 	
-	parent.texture.flip_h = true
-	parent.texture.play("run")
-
-func _process(delta):
-	if parent.position.x < 300:
-		get_tree().change_scene_to_file("res://scenes/menu.tscn")
-
-func get_skill_target() -> Entity:
-	var target_candidate = [null]
-	for body in parent.skill_area.get_overlapping_bodies():
-		if body.type == "figure":
-			target_candidate.append(body)
+	super(pos, index)  # Parent init
 	
-	if target in target_candidate and target != null:
-		return target
-	target = target_candidate[-1]
-	return target
+	texture.flip_h = true
+	
+	type = Type.ELF
+	iname = Name.FOREST_ELF
+	speed = 70
+	target = Vector2(0, position.y)
 
-func get_unique_info() -> String:
-	return ""
+func get_info() -> String:
+	return "Название: %s\nХиты: %s/%s\nУрон: %s"\
+	% [data["name"], data["level%s"%level]["hits"]-int(damage*100)/100.0, 
+	data["level%s"%level]["hits"], data["level%s"%level]["attack"]]
 
+func skill() -> void:
+	if skill_target != null and is_instance_valid(skill_target) and skill_target.type == Type.FIGURE:
+		skill_cooldown += data["level%s" % level]["cooldown"]
+		skill_target.change_hits(data["level%s" % level]["attack"] + bonus_value, self)
+		skill_target.allow_move = false
+		skill_target.stun_time = 1
+		return
+	elif skill_target != null and is_instance_valid(skill_target) and skill_target.type == Type.ELF:
+		skill_target.bonus_value = data["level%s" % level]["attack"] / 2
+		return 
+	
+	for entity in skillbox.get_overlapping_bodies():
+		if entity != self:
+			skill_target = entity
+			break

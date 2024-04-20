@@ -1,0 +1,61 @@
+{
+"game_map": {
+	"tile": 90,
+	"position": "Vector2(4, 6)",
+	"size": "Vector2(20, 6)"
+},
+"elf_start_x": 2100,
+"start_crown_count": 125,
+"figures": ["pawn", "king", "bishop", "knight", "queen"],
+"levels": [0, 100, 600, 1600, 3100],
+"waves": {
+	"count": 5,
+	"wave0": {
+		"name": "Приготовься", "duration": 10, "elves_at_time": 0, "spawn_delay": [15, 15],
+		"crown_per10": 0,
+		"spawn_chance": {
+			"forest_elf": 0,
+			"dark_elf": 0
+		}
+	},
+	"wave1": {
+		"name": "Волна 1", "duration": 120, "elves_at_time": 1, "spawn_delay": [5, 15], 
+		"crown_per10": 25,
+		"spawn_chance": {
+			"forest_elf": 1,
+			"dark_elf": 0
+		}
+	},
+	"wave2": {
+		"name": "Волна 2", "duration": 60, "elves_at_time": 2, "spawn_delay": [5, 15],
+		"crown_per10": 25,
+		"spawn_chance": {
+			"forest_elf": 1,
+			"dark_elf": 0
+		}
+	},
+	"wave3": {
+		"name": "Волна 3", "duration": 60, "elves_at_time": 2, "spawn_delay": [5, 10],
+		"crown_per10": 50,
+		"spawn_chance": {
+			"forest_elf": 1,
+			"dark_elf": 0
+		}
+	},
+	"wave4": {
+		"name": "Волна 4", "duration": 120, "elves_at_time": 2, "spawn_delay": [5, 15],
+		"crown_per10": 50,
+		"spawn_chance": {
+			"forest_elf": 0.7,
+			"dark_elf": 0.3
+		}
+	},
+	"wave5": {
+		"name": "Удачи!", "duration": -1, "elves_at_time": 3, "spawn_delay": [5, 15],
+		"crown_per10": 75,
+		"spawn_chance": {
+			"forest_elf": 0.5,
+			"dark_elf": 0.5
+		}
+	}
+}}

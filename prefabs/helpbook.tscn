@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=3 uid="uid://xbs21ow38ut5"]
+
+[ext_resource type="Texture2D" uid="uid://c0pgolifj3jpu" path="res://textures/helpbook/help_notebook1.png" id="1_tth7y"]
+[ext_resource type="Texture2D" uid="uid://dkjk7u3almipw" path="res://textures/helpbook/help_notebook.png" id="2_gdsgj"]
+[ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/menu_theme.tres" id="3_jod2d"]
+[ext_resource type="Texture2D" uid="uid://crccy2de1kppi" path="res://textures/helpbook/pawn_figure.png" id="4_wrpf7"]
+[ext_resource type="Texture2D" uid="uid://brncxl24lqolp" path="res://textures/helpbook/arrow-left.png" id="5_n1ymq"]
+[ext_resource type="Texture2D" uid="uid://cov1wbg73s7lw" path="res://textures/helpbook/arrow-right.png" id="6_cf3rq"]
+
+[node name="Helpbook" type="Node2D"]
+
+[node name="Notebook" type="Node2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(16, 16)
+
+[node name="HelpNotebook1" type="Sprite2D" parent="Notebook"]
+texture = ExtResource("1_tth7y")
+
+[node name="HelpNotebook" type="Sprite2D" parent="Notebook"]
+texture = ExtResource("2_gdsgj")
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_jod2d")
+
+[node name="Shading" type="ColorRect" parent="GUI"]
+z_index = -1
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.54902)
+
+[node name="Title" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 200.0
+offset_right = 875.0
+offset_bottom = 270.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "Заголовок"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BigTextBlock" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 280.0
+offset_right = 865.0
+offset_bottom = 830.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+autowrap_mode = 2
+clip_text = true
+
+[node name="HelpImage" type="TextureRect" parent="GUI"]
+layout_mode = 0
+offset_left = 1090.0
+offset_top = 200.0
+offset_right = 1690.0
+offset_bottom = 850.0
+texture = ExtResource("4_wrpf7")
+
+[node name="SideTextBlock" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 1060.0
+offset_top = 240.0
+offset_right = 1430.0
+offset_bottom = 480.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+autowrap_mode = 2
+clip_text = true
+
+[node name="SideTextBlock2" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 1060.0
+offset_top = 580.0
+offset_right = 1430.0
+offset_bottom = 820.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+autowrap_mode = 2
+clip_text = true
+
+[node name="ButtonLeft" type="TextureButton" parent="GUI"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 820.0
+offset_right = 315.0
+offset_bottom = 870.0
+texture_normal = ExtResource("5_n1ymq")
+stretch_mode = 0
+
+[node name="ButtonRight" type="TextureButton" parent="GUI"]
+layout_mode = 0
+offset_left = 1605.0
+offset_top = 820.0
+offset_right = 1680.0
+offset_bottom = 870.0
+texture_normal = ExtResource("6_cf3rq")
+stretch_mode = 0

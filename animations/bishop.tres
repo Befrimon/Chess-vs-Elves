@@ -1,0 +1,47 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://c0gxnu3twagqd"]
+
+[ext_resource type="Texture2D" uid="uid://m6b524aw6unr" path="res://textures/entities/bishop.png" id="1_edqxo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yjhu"]
+atlas = ExtResource("1_edqxo")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngrm0"]
+atlas = ExtResource("1_edqxo")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wds3p"]
+atlas = ExtResource("1_edqxo")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fvv8"]
+atlas = ExtResource("1_edqxo")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yjhu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ngrm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wds3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ngrm0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fvv8")
+}],
+"loop": true,
+"name": &"rest",
+"speed": 1.0
+}]

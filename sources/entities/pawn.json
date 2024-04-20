@@ -1,0 +1,15 @@
+{
+	"name": "Пешка",
+	"description": "Самая слабая фигура, но ее проще всего получить и улучшить",
+	"counterattack": true,
+	"max_count": 6,
+	
+	"skillbox": {"Vector2(1, 1)": 1, "Vector2(1, -1)": 1},
+	"move": {"Vector2(1, 0)": 2, "Vector2(-1, 0)": 1},
+	
+	"level1": {"cost": 50, "hits": 2, "attack": 1, "cooldown": 1},
+	"level2": {"cost": 150, "hits": 3, "attack": 2, "cooldown": 1},
+	"level3": {"cost": 300, "hits": 4, "attack": 3, "cooldown": 1},
+	"level4": {"cost": 500, "hits": 5, "attack": 4, "cooldown": 1},
+	"level5": {"cost": 800, "hits": 7, "attack": 5, "cooldown": 1}, 
+}

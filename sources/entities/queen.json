@@ -1,0 +1,23 @@
+{
+	"name": "Ферзь",
+	"description": "Воодушевляет фигуры в соседних клетках, усиливая их способности",
+	"counterattack": false,
+	"max_count": 1,
+	
+	"skillbox": {
+		"Vector2(1, 1)": 1, "Vector2(1, 0)": 1, "Vector2(1, -1)": 1,
+		 "Vector2(0, -1)": 1, "Vector2(-1, -1)": 1, "Vector2(-1, 0)": 1,
+		 "Vector2(-1, 1)": 1, "Vector2(0, 1)": 1
+	},
+	"move": {
+		"Vector2(1, 1)": 20, "Vector2(1, 0)": 20, "Vector2(1, -1)": 20,
+		 "Vector2(0, -1)": 20, "Vector2(-1, -1)": 20, "Vector2(-1, 0)": 20,
+		 "Vector2(-1, 1)": 20, "Vector2(0, 1)": 20
+	},
+	
+	"level1": {"cost": 500, "hits": 1, "attack": 1, "crown": 25, "cooldown": 0},
+	"level2": {"cost": 700, "hits": 1, "attack": 2, "crown": 50, "cooldown": 0},
+	"level3": {"cost": 1100, "hits": 1, "attack": 3, "crown": 75, "cooldown": 0},
+	"level4": {"cost": 1500, "hits": 2, "attack": 4, "crown": 100, "cooldown": 0},
+	"level5": {"cost": 2000, "hits": 2, "attack": 5, "crown": 150, "cooldown": 0},
+}

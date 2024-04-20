@@ -1,0 +1,37 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://vd6s52xtwcxl"]
+
+[ext_resource type="Texture2D" uid="uid://dcdsv1eb6xqw1" path="res://textures/entities/queen.png" id="1_6huwo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjvxu"]
+atlas = ExtResource("1_6huwo")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5rkd"]
+atlas = ExtResource("1_6huwo")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qan77"]
+atlas = ExtResource("1_6huwo")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjvxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5rkd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qan77")
+}],
+"loop": true,
+"name": &"rest",
+"speed": 1.0
+}]
