@@ -30,7 +30,8 @@ func skill() -> void:
 	if skill_target != null and is_instance_valid(skill_target):
 		skill_cooldown += data["level%s" % level]["cooldown"]
 		skill_target.change_hits(-1*(data["level%s" % level]["heal"] + bonus_value), self)
-		exp += 25
+		if exp != Global.config["levels"][level]:
+			exp += 25
 		return
 	
 	

@@ -5,6 +5,7 @@ class_name Game extends Node2D
 var tile_map :TileMap = TileMap.new()  # Replace later on texture (BackgroundMap node)
 var preview_map :TileMap = TileMap.new()
 var entities :Node2D
+var helpbook :Node2D
 
 var busy_cells :Array[Vector2] = []
 var entity_count :int = 0
@@ -15,7 +16,7 @@ var timer :float = 0
 var spawn :float = 0
 var wave_duration :float = 0
 
-var entity_ids :Array = [Rook, Pawn, King, Bishop, Knight, Queen, ForestElf]
+var entity_ids :Array = [Rook, Pawn, King, Bishop, Knight, Queen, Elf]
 var total_entities :Dictionary = {
 	Entity.Name.ROOK: 0,
 	Entity.Name.PAWN: 0,
@@ -31,11 +32,14 @@ var upgrade_btn :TextureButton
 var sell_btn :TextureButton
 var rest_btn :TextureButton
 
+var help_btn :TextureButton
+
 func _ready() -> void:
-	# Get child nodes
+	## Get child nodes
 	entities = get_node("Entities")
+	helpbook = get_node("Helpbook")
 	
-	# Configure tile map
+	## Configure tile map
 	tile_map.tile_set = load("res://sources/map_tiles.tres")
 	tile_map.scale = Vector2(1, 1) * Global.config["game_map"]["tile"]\
 					/ Vector2(tile_map.tile_set.tile_size)
@@ -66,13 +70,16 @@ func _ready() -> void:
 			else:
 				tile_map.set_cell(0, Vector2i(x, y), 2, Vector2i.ZERO)
 	
+	## Configure entity buttons
 	upgrade_btn = get_node("GUI/EntityButtons/UpgradeButton")
 	sell_btn = get_node("GUI/EntityButtons/SellButton")
 	rest_btn = get_node("GUI/EntityButtons/RestButton")
+	help_btn = get_node("GUI/SmallButtons/HelpBtn")
 	
 	upgrade_btn.button_down.connect(upgrade_active)
 	sell_btn.button_down.connect(sell_active)
 	rest_btn.button_down.connect(rest_active)
+	help_btn.button_down.connect(open_help)
 	
 	## Configure game
 	match Global.status:
@@ -146,6 +153,7 @@ func _process(delta :float) -> void:
 	wave_duration -= delta
 	draw_move()
 	
+	## Give crowns every 10 seconds
 	if int(timer+delta)%10 == 0 and int(timer)%10 == 9:
 		crown_count += Global.config["waves"]["wave%s"%cur_wave]["crown_per10"]
 	
@@ -157,21 +165,28 @@ func _process(delta :float) -> void:
 	## Update entity info
 	get_node("GUI/EntityInfo/Label").text = selected_entity.get_info() if selected_entity != null else ""
 	if selected_entity == null or selected_entity.type == Entity.Type.ELF:
-		for btn in get_node("GUI/EntityButtons").get_children(): btn.disabled = true
+		for btn in get_node("GUI/EntityButtons").get_children(): 
+			# Disable all if selected elf
+			btn.disabled = true
 	else:
+		# Disable buttons for selected figure
 		for btn in get_node("GUI/EntityButtons").get_children(): 
 			if btn.get_meta("action") not in selected_entity.disabled_actions:
 				btn.disabled = false
 			else:
 				btn.disabled = true
+		
 		if !upgrade_btn.disabled and crown_count < selected_entity.data["level%s"%(selected_entity.level+1)]["cost"]:
+			# Disable upgrade if crowns is not enough
 			upgrade_btn.disabled = true
+		
+		# Toggle rest button text
 		if selected_entity.rest_active:
 			rest_btn.get_child(0).text = "Разбудить"
 		else:
 			rest_btn.get_child(0).text = "Усыпить"
 	
-	## Update spawn buttons
+	## Disable spawn button if crowns is not enough for btn figure
 	for btn in get_node("GUI/SpawnButtons").get_children():
 		if crown_count < btn.get_meta("crown") or total_entities[btn.get_meta("eid")] == btn.get_meta("max"):
 			btn.disabled = true
@@ -182,18 +197,18 @@ func _process(delta :float) -> void:
 	if int(wave_duration) == 0:
 		cur_wave += 1
 		wave_duration = Global.config["waves"]["wave%s" % cur_wave]["duration"]
-		spawn = timer
+		spawn = timer  # Spawn new elves now!
 	
 	## Spawn elves
 	if spawn <= timer:
 		for i in range(Global.config["waves"]["wave%s" % cur_wave]["elves_at_time"]):
-			var type :String = get_elf()
-			if type == "forest_elf":
-				var new_pos :Vector2 = Vector2(Global.config["elf_start_x"],
+			var new_pos :Vector2 = Vector2(Global.config["elf_start_x"],
 						Global.config["game_map"]["tile"] * \
 						(str_to_var(Global.config["game_map"]["position"]).y + randi_range(0, 5)))
-				get_node("Entities").add_child(ForestElf.new(new_pos, entity_count))
-				busy_cells.append(Global.position_normilize(new_pos))
+			get_node("Entities").add_child(Elf.new(new_pos, entity_count, get_elf()))
+			
+			# Set config data about new elf
+			busy_cells.append(Global.position_normilize(new_pos))
 			entity_count += 1
 		spawn += randi_range(
 			Global.config["waves"]["wave%s" % cur_wave]["spawn_delay"][0],
@@ -201,41 +216,49 @@ func _process(delta :float) -> void:
 		)
 
 func _input(event :InputEvent) -> void:
+	## Draw preview figure
 	if event is InputEventMouseMotion and Global.status == Global.GameState.PREVIEW:
 		preview_map.clear()
 		if Global.map_rect.has_point(event.position):
 			preview_map.set_cell(0, Global.position_normilize(event.position), cur_preview, Vector2.ZERO)
 	
+	## Create new figure
 	if event is InputEventMouseButton and event.button_index == 1 and Global.status == Global.GameState.PREVIEW:
 		for btn in get_node("GUI/SpawnButtons").get_children():
-			btn.button_pressed = false
+			btn.button_pressed = false  # Unpress spawn button
 		if Global.map_rect.has_point(event.position):
 			var new_pos :Vector2 = Global.position_normilize(event.position) * Global.config["game_map"]["tile"]
 			var new_fig :Entity = entity_ids[cur_preview].new(new_pos, entity_count)
 			get_node("Entities").add_child(new_fig)
+			
+			# Set config data about new figure
 			crown_count -= new_fig.data["level1"]["cost"]
 			busy_cells.append(Global.position_normilize(new_pos))
 			total_entities[new_fig.iname] += 1
 			entity_count += 1
-			
+	
+	## Handle move action
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
 		for cell in get_node("MoveCells").get_children():
 			if cell.visible and Rect2(cell.position - Vector2(.5, .5)*Global.config["game_map"]["tile"],
 					Vector2(1, 1)*Global.config["game_map"]["tile"]).has_point(event.position):
 				busy_cells.remove_at(busy_cells.find(Global.position_normilize(selected_entity.position)))
 				selected_entity.target = (Vector2(str_to_var(cell.name))+Vector2(.5, .3))*Global.config["game_map"]["tile"]
+				selected_entity.hitbox.disabled = true
 	
-	if event is InputEventMouseButton and event.button_index == 1 and event.pressed and \
-			!((upgrade_btn.is_hovered() and !upgrade_btn.disabled) or\
-			  (sell_btn.is_hovered() and !sell_btn.disabled) or\
-			  (rest_btn.is_hovered() and !rest_btn.disabled)):
-		## Select new active entity
+	## Select new active entity
+	if event is InputEventMouseButton and event.button_index == 1 and event.pressed and\
+			Global.map_rect.expand(Vector2(-1, 0)*Global.config["game_map"]["tile"]).has_point(event.position):
+		if selected_entity != null:
+			# Disable selection for previous
+			selected_entity.highlighting.visible = false
 		var find :bool = false
 		for entity in get_node("Entities").get_children():
-			if selected_entity != null:
-				selected_entity.highlighting.visible = false
 			if Rect2(entity.position - Vector2(1, 1)*Global.config["game_map"]["tile"]/2, 
 					 Vector2(1, 1)*Global.config["game_map"]["tile"]).has_point(event.position):
+				if selected_entity == entity:
+					break
+				# Set new selection
 				selected_entity = entity
 				selected_entity.highlighting.visible = true
 				find = true
@@ -243,18 +266,19 @@ func _input(event :InputEvent) -> void:
 		if !find:
 			selected_entity = null
 
+## Draw move cells for selected figure
 func draw_move() -> void:
 	for cell in get_node("MoveCells").get_children():
-		cell.visible = false
+		cell.visible = false  # Disable all
 	
 	if selected_entity == null or selected_entity.rest_active:
-		return
+		return  # If no selected figure or selected rest now
 	
 	for direction in selected_entity.data["move"]:
 		for i in range(1, selected_entity.data["move"][direction]+1):
 			var cell_pos = Global.position_normilize(selected_entity.position) + i*str_to_var(direction)
 			if cell_pos in busy_cells or !Global.map_rect.has_point(cell_pos*Global.config["game_map"]["tile"]):
-				break
+				break  # Stop if on line figure or map edge
 			get_node("MoveCells/%s" % var_to_str(Vector2i(cell_pos))).visible = true
 
 func _notification(what :int) -> void:
@@ -263,6 +287,8 @@ func _notification(what :int) -> void:
 		save_game()
 		get_tree().quit()
 
+## UI functions
+# Upgrade active figure
 func upgrade_active() -> void:
 	upgrade_btn.get_child(0).position.y -= 8
 	selected_entity.level += 1
@@ -270,11 +296,13 @@ func upgrade_active() -> void:
 	crown_count -= selected_entity.data["level%s"%selected_entity.level]["cost"]
 	selected_entity.disabled_actions.append(Entity.Actions.UPGRADE)
 
+# Sell active figure
 func sell_active() -> void:
-	sell_btn.get_child(0).position.y -= 8
+	# sell_btn.get_child(0).position.y -= 8
 	crown_count += selected_entity.data["level%s"%selected_entity.level]["cost"]/2
 	selected_entity.kill()
 
+# Send to rest active figure
 func rest_active() -> void:
 	selected_entity.rest_active = !selected_entity.rest_active
 	if selected_entity.rest_active:
@@ -282,19 +310,32 @@ func rest_active() -> void:
 	else:
 		selected_entity.texture.play("idle")
 
+# Toggle preview mode
 func toggle_preview(toggled_on :bool, entity_name :int) -> void:
+	if selected_entity != null:
+		# Disable selection
+		selected_entity.highlighting.visible = false
+		selected_entity = null
+	
 	if toggled_on:
 		Global.status = Global.GameState.PREVIEW
-		cur_preview = entity_name
+		cur_preview = entity_name  # Figure that draw on preview
 	else:
 		Global.status = Global.GameState.PROCESS
-		preview_map.clear()
+		preview_map.clear()  # Clear preview
 
-func get_elf() -> String:
+# Open helpbook
+func open_help():
+	help_btn.get_child(0).position.y -= 8
+	get_tree().paused = true
+	helpbook.visible = true
+
+## Get random elf ID
+func get_elf() -> int:
 	var elf_type = randf()
-	for type in Global.config["waves"]["wave%s" % cur_wave]["spawn_chance"]:
-		if elf_type > Global.config["waves"]["wave%s" % cur_wave]["spawn_chance"][type]:
-			return type
+	for type in range(len(Global.config["waves"]["wave%s" % cur_wave]["spawn_chance"])):
+		if elf_type < Global.config["waves"]["wave%s" % cur_wave]["spawn_chance"][type]:
+			return Entity.Name.FOREST_ELF + type
 		elf_type -= Global.config["waves"]["wave%s" % cur_wave]["spawn_chance"][type]
-	return "forest_elf" # if error occurred
+	return Entity.Name.FOREST_ELF  # Forest elf if error occurred
 

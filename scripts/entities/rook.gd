@@ -13,6 +13,7 @@ func _init(pos :Vector2, index :int) -> void:
 	add_child(audio)
 	
 	# Configure node
+	hpbar.visible = false
 	disabled_actions = [Actions.UPGRADE, Actions.SELL, Actions.REST]
 	type = Type.FIGURE
 	iname = Name.ROOK

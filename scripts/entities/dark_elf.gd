@@ -1,20 +1,18 @@
-class_name Elf extends Entity
+class_name DarkElf extends Entity
 
 var skill_target :Entity
-var elf_types = ["forest", "dark"]
 
-func _init(pos :Vector2, index :int, elf_type :Name = Name.FOREST_ELF) -> void:
+func _init(pos :Vector2, index :int) -> void:
 	# load data from configs
-	var etype :String = elf_types[elf_type-Name.FOREST_ELF]
-	name = "%s_elf-%s" % [etype, index]
-	data = JSON.parse_string(FileAccess.get_file_as_string("res://sources/entities/%s_elf.json" % etype))
+	name = "forest_elf-%s" % index
+	data = JSON.parse_string(FileAccess.get_file_as_string("res://sources/entities/forest_elf.json"))
 	
 	super(pos, index)  # Parent init
 	
 	texture.flip_h = true
 	
 	type = Type.ELF
-	iname = elf_type
+	iname = Name.FOREST_ELF
 	speed = 70
 	target = Vector2(0, position.y)
 

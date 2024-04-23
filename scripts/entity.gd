@@ -35,7 +35,7 @@ var skillbox :Area2D = Area2D.new()
 var hpbar :Sprite2D = Sprite2D.new()
 var hpvalue :Sprite2D = Sprite2D.new()
 
-func _init(pos :Vector2, index :int) -> void:
+func _init(pos :Vector2, index :int, entity_type :String = "") -> void:
 	# Configure texture
 	texture.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	texture.sprite_frames = load("res://animations/%s.tres" % name.split("-")[0])
@@ -94,6 +94,7 @@ func _physics_process(delta :float) -> void:
 		if just_end and type == Type.FIGURE:
 			get_node("/root/Game").busy_cells.append(Global.position_normilize(position))
 			get_node("/root/Game").selected_entity = self
+			hitbox.disabled = false
 			just_end = false
 
 func _process(delta :float) -> void:
@@ -109,7 +110,7 @@ func _process(delta :float) -> void:
 	hpvalue.scale.x = (data["level%s"%level]["hits"]-damage) / data["level%s"%level]["hits"]
 	hpvalue.position.x = -1.7*(1-hpvalue.scale.x)*hpbar.scale.x
 	
-	if skill_cooldown <= 0 and !rest_active:
+	if skill_cooldown <= 0 and !rest_active and !hitbox.disabled:
 		skill_cooldown = 0
 		skill()
 	elif !rest_active:
@@ -132,9 +133,9 @@ func change_hits(raw_value :float, target :Entity = null) -> void:
 		damage = 0
 	if target == null: return
 	
-	if data["counterattack"] and damage > data["level%s" % level]["hits"] + bonus_hits:
+	if raw_value > 0 and data["counterattack"] and damage > data["level%s" % level]["hits"] + bonus_hits:
 		target.change_hits(.1*data["level%s" % level]["attack"])
-	elif data["counterattack"]:
+	elif raw_value > 0 and data["counterattack"]:
 		target.change_hits(.2*(data["level%s" % level]["attack"] + bonus_value))
 		bonus_value = 0
 
@@ -144,7 +145,8 @@ func skill() -> void:
 func kill() -> void:
 	var game :Game = get_node("/root/Game")
 	
-	game.busy_cells.remove_at(game.busy_cells.find(Global.position_normilize(position)))
+	if type == Type.FIGURE:
+		game.busy_cells.remove_at(game.busy_cells.find(Global.position_normilize(position)))
 	if type == Type.FIGURE:
 		game.total_entities[iname] -= 1
 	

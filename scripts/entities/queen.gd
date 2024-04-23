@@ -8,7 +8,7 @@ func _init(pos :Vector2, index :int) -> void:
 	
 	# Configure node
 	type = Type.FIGURE
-	iname = Name.KING
+	iname = Name.QUEEN
 	speed = 500
 
 func get_info() -> String:
@@ -22,6 +22,6 @@ func get_info() -> String:
 func skill() -> void:
 	for entity in skillbox.get_overlapping_bodies():
 		if entity.type == Type.FIGURE and entity.iname == Name.KING:
-			entity.bonus_value += data["level%s"%level]["crown"]
+			entity.bonus_value = data["level%s"%level]["crown"]
 		elif entity.type == Type.FIGURE:
-			entity.bonus_value += data["level%s"%level]["attack"]
+			entity.bonus_value = data["level%s"%level]["attack"]

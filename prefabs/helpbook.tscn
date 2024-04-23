@@ -1,23 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://xbs21ow38ut5"]
+[gd_scene load_steps=8 format=3 uid="uid://xbs21ow38ut5"]
 
-[ext_resource type="Texture2D" uid="uid://c0pgolifj3jpu" path="res://textures/helpbook/help_notebook1.png" id="1_tth7y"]
-[ext_resource type="Texture2D" uid="uid://dkjk7u3almipw" path="res://textures/helpbook/help_notebook.png" id="2_gdsgj"]
+[ext_resource type="Script" path="res://scripts/helpbook.gd" id="1_ii0wf"]
+[ext_resource type="Texture2D" uid="uid://dkjk7u3almipw" path="res://textures/helpbook/UI/help_notebook.png" id="2_1k8i6"]
 [ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/menu_theme.tres" id="3_jod2d"]
-[ext_resource type="Texture2D" uid="uid://crccy2de1kppi" path="res://textures/helpbook/pawn_figure.png" id="4_wrpf7"]
-[ext_resource type="Texture2D" uid="uid://brncxl24lqolp" path="res://textures/helpbook/arrow-left.png" id="5_n1ymq"]
-[ext_resource type="Texture2D" uid="uid://cov1wbg73s7lw" path="res://textures/helpbook/arrow-right.png" id="6_cf3rq"]
+[ext_resource type="Texture2D" uid="uid://c0pgolifj3jpu" path="res://textures/helpbook/UI/help_notebook1.png" id="3_wvfgu"]
+[ext_resource type="Texture2D" uid="uid://brncxl24lqolp" path="res://textures/helpbook/UI/arrow-left.png" id="6_ddrvt"]
+[ext_resource type="Texture2D" uid="uid://cov1wbg73s7lw" path="res://textures/helpbook/UI/arrow-right.png" id="7_mrwxf"]
+[ext_resource type="Texture2D" uid="uid://bthdu5kgw56o3" path="res://textures/helpbook/UI/close.png" id="7_v5cd6"]
 
 [node name="Helpbook" type="Node2D"]
+script = ExtResource("1_ii0wf")
 
 [node name="Notebook" type="Node2D" parent="."]
 position = Vector2(960, 540)
 scale = Vector2(16, 16)
 
-[node name="HelpNotebook1" type="Sprite2D" parent="Notebook"]
-texture = ExtResource("1_tth7y")
-
 [node name="HelpNotebook" type="Sprite2D" parent="Notebook"]
-texture = ExtResource("2_gdsgj")
+texture = ExtResource("2_1k8i6")
+
+[node name="HelpNotebook1" type="Sprite2D" parent="Notebook"]
+texture = ExtResource("3_wvfgu")
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
@@ -43,7 +45,6 @@ offset_right = 875.0
 offset_bottom = 270.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
-text = "Заголовок"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -64,7 +65,6 @@ offset_left = 1090.0
 offset_top = 200.0
 offset_right = 1690.0
 offset_bottom = 850.0
-texture = ExtResource("4_wrpf7")
 
 [node name="SideTextBlock" type="Label" parent="GUI"]
 layout_mode = 0
@@ -94,7 +94,7 @@ offset_left = 240.0
 offset_top = 820.0
 offset_right = 315.0
 offset_bottom = 870.0
-texture_normal = ExtResource("5_n1ymq")
+texture_normal = ExtResource("6_ddrvt")
 stretch_mode = 0
 
 [node name="ButtonRight" type="TextureButton" parent="GUI"]
@@ -103,5 +103,14 @@ offset_left = 1605.0
 offset_top = 820.0
 offset_right = 1680.0
 offset_bottom = 870.0
-texture_normal = ExtResource("6_cf3rq")
+texture_normal = ExtResource("7_mrwxf")
+stretch_mode = 0
+
+[node name="CloseButton" type="TextureButton" parent="GUI"]
+layout_mode = 0
+offset_left = 1695.0
+offset_top = 240.0
+offset_right = 1823.0
+offset_bottom = 304.0
+texture_normal = ExtResource("7_v5cd6")
 stretch_mode = 0

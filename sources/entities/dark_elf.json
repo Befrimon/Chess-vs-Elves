@@ -1,0 +1,10 @@
+{
+	"name": "Тёмный эльф",
+	"description": "Опасный противник, он более живучий, сильный и быстрый, чем лесной эльф",
+	"counterattack": true,
+	
+	"skillbox": {"Vector2(-1, 0)": 0.3},
+	"move": {},
+	
+	"level1": {"hits": 2, "attack": 2, "cooldown": 1},
+}

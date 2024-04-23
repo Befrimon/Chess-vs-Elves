@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6vmqwoxc4lq7"]
+[gd_scene load_steps=14 format=3 uid="uid://c6vmqwoxc4lq7"]
 
 [ext_resource type="Texture2D" uid="uid://cd3sagon28alv" path="res://textures/GUI/paper.png" id="1_b67tq"]
 [ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/menu_theme.tres" id="1_tv8sx"]
@@ -7,6 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://cdparavv8ffoy" path="res://textures/GUI/button_normal.png" id="4_if20c"]
 [ext_resource type="Texture2D" uid="uid://cvftw0hgqeday" path="res://textures/GUI/button_pressed.png" id="5_c75lg"]
 [ext_resource type="Texture2D" uid="uid://bkej6gv2dk683" path="res://textures/GUI/button_disabled.png" id="6_ade8y"]
+[ext_resource type="Texture2D" uid="uid://dbdtcfph8v5ay" path="res://textures/GUI/small_button_normal.png" id="8_hmy6w"]
+[ext_resource type="Texture2D" uid="uid://ceiqbx55gqtpj" path="res://textures/GUI/small_button_pressed.png" id="9_3eqxq"]
+[ext_resource type="Texture2D" uid="uid://b54sls1f1qxmn" path="res://textures/GUI/small_button_disabled.png" id="10_04itq"]
+[ext_resource type="Texture2D" uid="uid://bg6o856kdf2ag" path="res://textures/GUI/HELP.png" id="11_8vkkw"]
+[ext_resource type="Texture2D" uid="uid://c087ecf12utxy" path="res://textures/GUI/pause.png" id="11_mg5tu"]
+[ext_resource type="Texture2D" uid="uid://dgdvs4m8v1qgx" path="res://textures/GUI/home.png" id="12_55swo"]
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -61,6 +67,7 @@ offset_top = 70.0
 offset_right = 530.0
 offset_bottom = 280.0
 theme_override_font_sizes/font_size = 36
+autowrap_mode = 2
 
 [node name="EntityButtons" type="Control" parent="."]
 anchors_preset = 0
@@ -135,9 +142,76 @@ offset_top = 30.0
 offset_right = 270.0
 offset_bottom = 480.0
 
+[node name="SmallButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1610.0
+offset_top = 380.0
+offset_right = 1890.0
+offset_bottom = 460.0
+
+[node name="PauseBtn" type="TextureButton" parent="SmallButtons"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+texture_normal = ExtResource("8_hmy6w")
+texture_pressed = ExtResource("9_3eqxq")
+texture_disabled = ExtResource("10_04itq")
+stretch_mode = 0
+metadata/click_action = 3
+
+[node name="Icon" type="TextureRect" parent="SmallButtons/PauseBtn"]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 75.0
+offset_bottom = 70.0
+texture = ExtResource("11_mg5tu")
+
+[node name="MenuBtn" type="TextureButton" parent="SmallButtons"]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 180.0
+offset_bottom = 80.0
+texture_normal = ExtResource("8_hmy6w")
+texture_pressed = ExtResource("9_3eqxq")
+texture_disabled = ExtResource("10_04itq")
+stretch_mode = 0
+metadata/click_action = 4
+
+[node name="Icon" type="TextureRect" parent="SmallButtons/MenuBtn"]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 75.0
+offset_bottom = 70.0
+texture = ExtResource("12_55swo")
+
+[node name="HelpBtn" type="TextureButton" parent="SmallButtons"]
+layout_mode = 0
+offset_left = 200.0
+offset_right = 280.0
+offset_bottom = 80.0
+texture_normal = ExtResource("8_hmy6w")
+texture_pressed = ExtResource("9_3eqxq")
+texture_disabled = ExtResource("10_04itq")
+stretch_mode = 0
+metadata/click_action = 4
+
+[node name="Icon" type="TextureRect" parent="SmallButtons/HelpBtn"]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 75.0
+offset_bottom = 70.0
+texture = ExtResource("11_8vkkw")
+
 [connection signal="button_down" from="EntityButtons/UpgradeButton" to="." method="_on_btn_down" binds= [&"EntityButtons/UpgradeButton"]]
 [connection signal="button_up" from="EntityButtons/UpgradeButton" to="." method="_on_btn_up" binds= [&"EntityButtons/UpgradeButton"]]
 [connection signal="button_down" from="EntityButtons/SellButton" to="." method="_on_btn_down" binds= [&"EntityButtons/SellButton"]]
 [connection signal="button_up" from="EntityButtons/SellButton" to="." method="_on_btn_up" binds= [&"EntityButtons/SellButton"]]
 [connection signal="button_down" from="EntityButtons/RestButton" to="." method="_on_btn_down" binds= [&"EntityButtons/RestButton"]]
 [connection signal="button_up" from="EntityButtons/RestButton" to="." method="_on_btn_up" binds= [&"EntityButtons/RestButton"]]
+[connection signal="button_down" from="SmallButtons/PauseBtn" to="." method="_on_btn_down" binds= ["SmallButtons/PauseBtn"]]
+[connection signal="button_up" from="SmallButtons/PauseBtn" to="." method="_on_btn_up" binds= ["SmallButtons/PauseBtn"]]
+[connection signal="button_down" from="SmallButtons/MenuBtn" to="." method="_on_btn_down" binds= ["SmallButtons/MenuBtn"]]
+[connection signal="button_up" from="SmallButtons/MenuBtn" to="." method="_on_btn_up" binds= ["SmallButtons/MenuBtn"]]
+[connection signal="button_down" from="SmallButtons/HelpBtn" to="." method="_on_btn_down" binds= ["SmallButtons/HelpBtn"]]
+[connection signal="button_up" from="SmallButtons/HelpBtn" to="." method="_on_btn_up" binds= ["SmallButtons/HelpBtn"]]

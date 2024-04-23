@@ -1,0 +1,79 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://c4eqw5ns7tdq"]
+
+[ext_resource type="Texture2D" uid="uid://b0idbam533xjf" path="res://textures/entities/dark_elf.png" id="1_6qgot"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saox0"]
+atlas = ExtResource("1_6qgot")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s0bl"]
+atlas = ExtResource("1_6qgot")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trbf8"]
+atlas = ExtResource("1_6qgot")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfrhf"]
+atlas = ExtResource("1_6qgot")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_powro"]
+atlas = ExtResource("1_6qgot")
+region = Rect2(44, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3p4oo"]
+atlas = ExtResource("1_6qgot")
+region = Rect2(0, 22, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aoh4m"]
+atlas = ExtResource("1_6qgot")
+region = Rect2(22, 22, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rwga"]
+atlas = ExtResource("1_6qgot")
+region = Rect2(44, 22, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kopo"]
+atlas = ExtResource("1_6qgot")
+region = Rect2(0, 44, 22, 22)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saox0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s0bl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trbf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfrhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_powro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3p4oo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aoh4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rwga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kopo")
+}],
+"loop": true,
+"name": &"run",
+"speed": 14.0
+}]
