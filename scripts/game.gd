@@ -3,7 +3,7 @@ class_name Game extends Node2D
 ## Declare variables
 # Child nodes
 var tile_map :TileMap = TileMap.new()  # Replace later on texture (BackgroundMap node)
-var preview_map :TileMap = TileMap.new()
+var shadow_map :TileMap = TileMap.new()
 var entities :Node2D
 var helpbook :Node2D
 
@@ -45,11 +45,11 @@ func _ready() -> void:
 					/ Vector2(tile_map.tile_set.tile_size)
 	add_child(tile_map)
 	
-	preview_map.tile_set = load("res://sources/preview.tres")
-	preview_map.scale = Vector2(1, 1) * Global.config["game_map"]["tile"]\
-					/ Vector2(preview_map.tile_set.tile_size)
-	preview_map.position.y += -.3*Global.config["game_map"]["tile"]
-	add_child(preview_map)
+	shadow_map.tile_set = load("res://sources/preview.tres")
+	shadow_map.scale = Vector2(1, 1) * Global.config["game_map"]["tile"]\
+					/ Vector2(shadow_map.tile_set.tile_size)
+	shadow_map.position.y += -.3*Global.config["game_map"]["tile"]
+	add_child(shadow_map)
 	
 	## Generate map
 	var map_size :Vector2i = Vector2i(get_viewport_rect().size / Global.config["game_map"]["tile"])
@@ -70,7 +70,7 @@ func _ready() -> void:
 			else:
 				tile_map.set_cell(0, Vector2i(x, y), 2, Vector2i.ZERO)
 	
-	## Configure entity buttons
+	## Configure GUI buttons
 	upgrade_btn = get_node("GUI/EntityButtons/UpgradeButton")
 	sell_btn = get_node("GUI/EntityButtons/SellButton")
 	rest_btn = get_node("GUI/EntityButtons/RestButton")
@@ -90,6 +90,7 @@ func _ready() -> void:
 func save_game() -> void:
 	# Create dictionary
 	var data :Dictionary = {
+		"name": Time.get_datetime_string_from_system(false, true),
 		"wave": cur_wave,
 		"timer": timer,
 		"wave_duration": wave_duration,
@@ -111,22 +112,31 @@ func save_game() -> void:
 		}
 	
 	# Save data
-	FileAccess.open("user://save.json", FileAccess.WRITE).store_string(JSON.stringify(data, "\t"))
+	var time :Dictionary = Time.get_datetime_dict_from_system()
+	var filename :String = "".join([time["year"], time["month"], time["day"], time["hour"], time["minute"], time["second"]])
+	FileAccess.open("user://saves/%s.json" % filename, FileAccess.WRITE).store_string(JSON.stringify(data, "\t"))
+	
+	DirAccess.remove_absolute("user://saves/%s" % Global.load_path)
+	Global.load_path = "%s.json" % filename
 
 func new_game() -> void:
 	crown_count = Global.config["start_crown_count"]
 	wave_duration = Global.config["waves"]["wave0"]["duration"]
 	
-	## Spawn rooks
+	# Spawn rooks
 	for y in range(str_to_var(Global.config["game_map"]["size"]).y):
 		var tile = Global.config["game_map"]["tile"]
 		var new_pos :Vector2 = (str_to_var(Global.config["game_map"]["position"]) + Vector2(-1, y))*tile
 		get_node("Entities").add_child(Rook.new(new_pos, entity_count))
 		entity_count += 1
-	save_game()
+	
+	# Configure load path
+	var time :Dictionary = Time.get_datetime_dict_from_system()
+	var filename :String = "".join([time["year"], time["month"], time["day"], time["hour"], time["minute"], time["second"]])
+	Global.load_path = "%s.json" % filename
 
 func load_game() -> void:
-	var save = JSON.parse_string(FileAccess.get_file_as_string("user://save.json"))
+	var save = JSON.parse_string(FileAccess.get_file_as_string("user://saves/%s" % Global.load_path))
 	
 	# load variables
 	cur_wave = save["wave"]
@@ -139,14 +149,17 @@ func load_game() -> void:
 	# load entity
 	for entity in save["entities"]:
 		var data :Dictionary = save["entities"][entity]
-		var new_entity = entity_ids[data["iname"]]\
+		var new_entity :Entity = entity_ids[data["iname"]]\
 				.new(str_to_var(data["position"]), int(entity.split("-")[1]))
 		new_entity.level = data["level"]
 		new_entity.exp = data["exp"]
 		new_entity.damage = data["damage"]
 		new_entity.skill_cooldown = data["cooldown"]
-		busy_cells.append(Global.position_normilize(position))
+		busy_cells.append(Global.position_normilize(new_entity.position))
 		get_node("Entities").add_child(new_entity)
+		
+		if new_entity.type == Entity.Type.FIGURE:
+			total_entities[new_entity.iname] += 1
 
 func _process(delta :float) -> void:
 	timer += delta  # Update timer
@@ -218,9 +231,9 @@ func _process(delta :float) -> void:
 func _input(event :InputEvent) -> void:
 	## Draw preview figure
 	if event is InputEventMouseMotion and Global.status == Global.GameState.PREVIEW:
-		preview_map.clear()
+		shadow_map.clear()
 		if Global.map_rect.has_point(event.position):
-			preview_map.set_cell(0, Global.position_normilize(event.position), cur_preview, Vector2.ZERO)
+			shadow_map.set_cell(0, Global.position_normilize(event.position), cur_preview, Vector2.ZERO)
 	
 	## Create new figure
 	if event is InputEventMouseButton and event.button_index == 1 and Global.status == Global.GameState.PREVIEW:
@@ -248,13 +261,13 @@ func _input(event :InputEvent) -> void:
 	
 	## Select new active entity
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed and\
-			Global.map_rect.expand(Vector2(-1, 0)*Global.config["game_map"]["tile"]).has_point(event.position):
+			Global.map_rect.grow_side(SIDE_LEFT, Global.config["game_map"]["tile"]).has_point(event.position):
 		if selected_entity != null:
 			# Disable selection for previous
 			selected_entity.highlighting.visible = false
 		var find :bool = false
 		for entity in get_node("Entities").get_children():
-			if Rect2(entity.position - Vector2(1, 1)*Global.config["game_map"]["tile"]/2, 
+			if Rect2(entity.position - Vector2(1, 1)*Global.config["game_map"]["tile"]/2,
 					 Vector2(1, 1)*Global.config["game_map"]["tile"]).has_point(event.position):
 				if selected_entity == entity:
 					break
@@ -281,16 +294,10 @@ func draw_move() -> void:
 				break  # Stop if on line figure or map edge
 			get_node("MoveCells/%s" % var_to_str(Vector2i(cell_pos))).visible = true
 
-func _notification(what :int) -> void:
-	# Hadle close event and save game
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_game()
-		get_tree().quit()
-
 ## UI functions
 # Upgrade active figure
 func upgrade_active() -> void:
-	upgrade_btn.get_child(0).position.y -= 8
+	# upgrade_btn.get_child(0).position.y -= 8
 	selected_entity.level += 1
 	selected_entity.damage = 0
 	crown_count -= selected_entity.data["level%s"%selected_entity.level]["cost"]
@@ -322,7 +329,7 @@ func toggle_preview(toggled_on :bool, entity_name :int) -> void:
 		cur_preview = entity_name  # Figure that draw on preview
 	else:
 		Global.status = Global.GameState.PROCESS
-		preview_map.clear()  # Clear preview
+		shadow_map.clear()  # Clear preview
 
 # Open helpbook
 func open_help():

@@ -1,33 +1,27 @@
 extends Node2D
 
-enum Action {NEW_GAME = 0, LOAD_GAME = 1, OPTIONS = 2, HELP = 3, QUIT = 4, CLOSE_CONFIRM = 5, 
-	CLOSE_REJECT = 6, DELETE_CONFIRM = 7, DELTE_REJECT = 8}
+enum Action {OPEN_GAME = 0, OPTIONS = 1, SHOP = 2, STATS = 3, HELP = 4, QUIT = 5,
+			NEW_GAME = 6, LOAD_GAME = 7, DELETE_SAVE = 8,
+			CONFIRM_ACCEPT = -1, CONFIRM_DENY = -2, OPEN_MENU = -3}
 
 var map_size :Vector2i
-var tile_map :TileMap = TileMap.new()
+var tile_map :TileMap
 var chess_tiles :Dictionary = {}
 var chess_delay :float = 0
 
-var close_window :TextureRect
-var close_move :String = "false"
-var close_target :Vector2
-
-var delete_window :TextureRect
-var delete_move :String = "false"
-var delete_target :Vector2
+var shading :ColorRect
+var confirm_window :Window
+var accept_action :Callable
 
 func _ready() -> void:
-	close_window = get_node("CloseConfirm/ConfirmWindow")
-	delete_window = get_node("DeleteConfirm/ConfirmWindow")
+	get_tree().paused = false
+	shading = get_node('Shading')
+	confirm_window = get_node("ConfirmDialog")
 	
-	## Create tile map
-	tile_map.tile_set = load("res://sources/map_tiles.tres")
+	## Configure tile map
+	tile_map = get_node("TileMap")
 	tile_map.scale = Vector2(1, 1) * Global.config["game_map"]["tile"]\
 					/ Vector2(tile_map.tile_set.tile_size)
-	tile_map.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	tile_map.z_index = -1
-	tile_map.add_layer(1)
-	add_child(tile_map)
 	
 	map_size = Vector2i(get_viewport_rect().size / Global.config["game_map"]["tile"])
 	for x in range(map_size.x+1):
@@ -35,14 +29,31 @@ func _ready() -> void:
 			tile_map.set_cell(0, Vector2i(x, y), 2, Vector2i.ZERO)
 	
 	## Configure buttons
-	for btn in get_node("GUI/MainButtons").get_children()\
-			 + get_node("GUI/SmallButtons").get_children()\
-			 + get_node("CloseConfirm/ConfirmWindow/Buttons").get_children()\
-			 + get_node("DeleteConfirm/ConfirmWindow/Buttons").get_children():
+	for btn in get_node("MainMenu/MainButtons").get_children()\
+			 + get_node("MainMenu/SmallButtons").get_children()\
+			 + get_node("ConfirmDialog/Buttons").get_children()\
+			 + [get_node("SavesMenu/BackBtn")]:
 		btn.pressed.connect(_on_btn_pressed.bind(btn.get_meta("click_action")))
+		btn.button_down.connect(_on_btn_down.bind(btn.get_path()))
+		btn.button_up.connect(_on_btn_up.bind(btn.get_path()))
 	
-	if !FileAccess.file_exists("user://save.json"):
-		get_node("GUI/MainButtons/LoadGameBtn").disabled = true
+	## Load save files
+	var saves :PackedStringArray = DirAccess.get_files_at("user://saves")
+	saves.reverse()
+	for save in saves:
+		var data = JSON.parse_string(FileAccess.get_file_as_string("user://saves/%s" % save))
+		var save_item = load("res://prefabs/save_item.tscn").instantiate()
+		save_item.get_node("InfoLabels/Title").text = data["name"]
+		save_item.get_node("InfoLabels/WaveInfo").text = "%s секунд - %s волна" % [int(data["timer"]), data["wave"]]
+		save_item.get_node("InfoLabels/CrownInfo").text = "%s корон" % data["crown_count"]
+		# save_item.get_node("InfoLabels/SpellInfo").text = "%s заклинаний" % data[]
+		save_item.get_node("Buttons/ResumeButton").pressed.connect(load_game.bind(save))
+		save_item.get_node("Buttons/DeleteButton").pressed.connect(delete_save.bind(save_item, save))
+		get_node("SavesMenu/SavesContainer/VerticalContainer").add_child(save_item)
+	var new_game_btn :TextureButton = TextureButton.new()
+	new_game_btn.texture_normal = load("res://textures/GUI/new_game.png")
+	new_game_btn.pressed.connect(new_game)
+	get_node("SavesMenu/SavesContainer/VerticalContainer").add_child(new_game_btn)
 
 var timer :float = 0
 func _process(delta :float) -> void:
@@ -61,72 +72,49 @@ func _process(delta :float) -> void:
 		if timer > chess_tiles[tile]:
 			tile_map.erase_cell(1, tile)
 			chess_tiles.erase(tile)
-	
-	## GUI animations
-	if close_move == "open" and close_window.position != close_target:
-		close_window.position.y -= 50
-	elif close_move == "hide" and close_window.position != close_target:
-		close_window.position.y += 50
-	elif close_move == "hide":
-		get_node("CloseConfirm").visible = false
-	
-	if delete_move == "open" and delete_window.position != delete_target:
-		delete_window.position.y -= 50
-	elif delete_move == "hide" and delete_window.position != delete_target:
-		delete_window.position.y += 50
-	elif delete_move == "hide":
-		get_node("DeleteConfirm").visible = false
 
 func _on_btn_pressed(action :Action) -> void:
 	match action:
-		# Main buttons
-		Action.NEW_GAME: new_game()
-		Action.LOAD_GAME:
-			Global.status = Global.GameState.LOAD
-			get_tree().change_scene_to_file("res://scenes/game.tscn")
+		## Button actions
+		Action.OPEN_GAME:
+			get_node("MainMenu").visible = false
+			get_node("SavesMenu").visible = true
 		Action.OPTIONS: pass
-		Action.HELP: pass
-		Action.QUIT: open_close_confirm()
+		Action.HELP: add_child(load("res://prefabs/helpbook.tscn").instantiate())
+		Action.QUIT:
+			confirm_window.get_node("Title/Label").text = "Выйти из игры?"
+			shading.visible = true
+			confirm_window.visible = true
+			accept_action = Callable(get_tree(), "quit")
+		
+		Action.OPEN_MENU:
+			for item in get_children():
+				if "Menu" in item.name:
+					item.visible = false
+			get_node("MainMenu").visible = true
 		
 		# Confirm buttons
-		Action.CLOSE_CONFIRM: hide_close_confirm()
-		Action.CLOSE_REJECT: get_tree().quit(0)
-		
-		Action.DELETE_CONFIRM: hide_delete_confirm()
-		Action.DELTE_REJECT: 
-			Global.status = Global.GameState.NEW
-			get_tree().change_scene_to_file("res://scenes/game.tscn")
+		Action.CONFIRM_ACCEPT: accept_action.call()
+		Action.CONFIRM_DENY:
+			shading.visible = false
+			confirm_window.visible = false
 
 func new_game() -> void:
-	if FileAccess.file_exists("user://save.json"):
-		open_delete_confirm()
-		return
 	Global.status = Global.GameState.NEW
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 
-func open_delete_confirm() -> void:
-	delete_window.position.y = 1100
-	delete_target = Vector2(610, 300)
-	delete_move = "open"
-	get_node("DeleteConfirm").visible = true
+func load_game(path :String) -> void:
+	Global.status = Global.GameState.LOAD
+	Global.load_path = path
+	get_tree().change_scene_to_file("res://scenes/game.tscn")
 
-func hide_delete_confirm() -> void:
-	delete_target = Vector2(610, 1100)
-	delete_move = "hide"
-
-func open_close_confirm() -> void:
-	close_window.position.y = 1100
-	close_target = Vector2(610, 300)
-	close_move = "open"
-	get_node("CloseConfirm").visible = true
-
-func hide_close_confirm() -> void:
-	close_target = Vector2(610, 1100)
-	close_move = "hide"
+func delete_save(item :TextureRect, path :String) -> void:
+	DirAccess.remove_absolute("user://saves/%s" % path)
+	get_node("SavesMenu/SavesContainer/VerticalContainer").remove_child(item)
 
 ## Move button text/icon on click
 func _on_btn_down(btn_name :String) -> void:
-	get_node("GUI/"+btn_name).get_child(0).position.y += 8
+	get_node(btn_name).get_child(0).position.y += 8
 
 func _on_btn_up(btn_name :String) -> void:
-	get_node("GUI/"+btn_name).get_child(0).position.y -= 8
+	get_node(btn_name).get_child(0).position.y -= 8

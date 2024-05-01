@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctdsurspv4oet"]
+
+[ext_resource type="Texture2D" uid="uid://ct7a02f1df4ct" path="res://textures/GUI/save_board.png" id="1_7ndoq"]
+[ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/menu_theme.tres" id="2_t64jl"]
+[ext_resource type="Texture2D" uid="uid://c4mmfdf2vp0w1" path="res://textures/GUI/button_normal.png" id="4_70psr"]
+[ext_resource type="Texture2D" uid="uid://3y4lv2wjbwmo" path="res://textures/GUI/button_pressed.png" id="5_bru62"]
+[ext_resource type="Texture2D" uid="uid://dyriaprwl3nit" path="res://textures/GUI/button_disabled.png" id="6_fv2cj"]
+
+[node name="SavesMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_t64jl")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 120.0
+offset_right = 1590.0
+offset_bottom = 960.0
+texture = ExtResource("1_7ndoq")
+
+[node name="SavesContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 395.0
+offset_top = 200.0
+offset_right = 1525.0
+offset_bottom = 830.0
+
+[node name="VerticalContainer" type="VBoxContainer" parent="SavesContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="BackBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 910.0
+offset_right = 600.0
+offset_bottom = 990.0
+texture_normal = ExtResource("4_70psr")
+texture_pressed = ExtResource("5_bru62")
+texture_disabled = ExtResource("6_fv2cj")
+stretch_mode = 0
+metadata/click_action = -3
+
+[node name="Label" type="Label" parent="BackBtn"]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 30
+text = "В меню"
+horizontal_alignment = 1
+vertical_alignment = 1

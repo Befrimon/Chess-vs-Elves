@@ -1,14 +1,15 @@
 [gd_scene load_steps=8 format=3 uid="uid://xbs21ow38ut5"]
 
 [ext_resource type="Script" path="res://scripts/helpbook.gd" id="1_ii0wf"]
-[ext_resource type="Texture2D" uid="uid://dkjk7u3almipw" path="res://textures/helpbook/UI/help_notebook.png" id="2_1k8i6"]
+[ext_resource type="Texture2D" uid="uid://bs8qaw8ct7f3x" path="res://textures/helpbook/UI/help_notebook.png" id="2_1k8i6"]
 [ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/menu_theme.tres" id="3_jod2d"]
-[ext_resource type="Texture2D" uid="uid://c0pgolifj3jpu" path="res://textures/helpbook/UI/help_notebook1.png" id="3_wvfgu"]
-[ext_resource type="Texture2D" uid="uid://brncxl24lqolp" path="res://textures/helpbook/UI/arrow-left.png" id="6_ddrvt"]
-[ext_resource type="Texture2D" uid="uid://cov1wbg73s7lw" path="res://textures/helpbook/UI/arrow-right.png" id="7_mrwxf"]
-[ext_resource type="Texture2D" uid="uid://bthdu5kgw56o3" path="res://textures/helpbook/UI/close.png" id="7_v5cd6"]
+[ext_resource type="Texture2D" uid="uid://t4hy738h5o85" path="res://textures/helpbook/UI/help_notebook1.png" id="3_wvfgu"]
+[ext_resource type="Texture2D" uid="uid://dfafm8mjheqwe" path="res://textures/helpbook/UI/arrow-left.png" id="6_ddrvt"]
+[ext_resource type="Texture2D" uid="uid://c62j20owrjl85" path="res://textures/helpbook/UI/arrow-right.png" id="7_mrwxf"]
+[ext_resource type="Texture2D" uid="uid://yiw0ylhp6nk1" path="res://textures/helpbook/UI/close.png" id="7_v5cd6"]
 
 [node name="Helpbook" type="Node2D"]
+z_index = 1
 script = ExtResource("1_ii0wf")
 
 [node name="Notebook" type="Node2D" parent="."]
@@ -48,16 +49,17 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BigTextBlock" type="Label" parent="GUI"]
+[node name="BigTextBlock" type="RichTextLabel" parent="GUI"]
 layout_mode = 0
 offset_left = 225.0
 offset_top = 280.0
 offset_right = 865.0
 offset_bottom = 830.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 36
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 38
+bbcode_enabled = true
 autowrap_mode = 2
-clip_text = true
 
 [node name="HelpImage" type="TextureRect" parent="GUI"]
 layout_mode = 0

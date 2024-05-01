@@ -1,18 +1,19 @@
-[gd_scene load_steps=14 format=3 uid="uid://c6vmqwoxc4lq7"]
+[gd_scene load_steps=15 format=3 uid="uid://c6vmqwoxc4lq7"]
 
-[ext_resource type="Texture2D" uid="uid://cd3sagon28alv" path="res://textures/GUI/paper.png" id="1_b67tq"]
+[ext_resource type="Texture2D" uid="uid://cqqs3gh48f34i" path="res://textures/GUI/paper.png" id="1_b67tq"]
 [ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/menu_theme.tres" id="1_tv8sx"]
 [ext_resource type="Script" path="res://scripts/game_ui.gd" id="2_3iju2"]
-[ext_resource type="Texture2D" uid="uid://ce7mf01vqtboq" path="res://textures/GUI/info_board.png" id="3_djhjv"]
-[ext_resource type="Texture2D" uid="uid://cdparavv8ffoy" path="res://textures/GUI/button_normal.png" id="4_if20c"]
-[ext_resource type="Texture2D" uid="uid://cvftw0hgqeday" path="res://textures/GUI/button_pressed.png" id="5_c75lg"]
-[ext_resource type="Texture2D" uid="uid://bkej6gv2dk683" path="res://textures/GUI/button_disabled.png" id="6_ade8y"]
-[ext_resource type="Texture2D" uid="uid://dbdtcfph8v5ay" path="res://textures/GUI/small_button_normal.png" id="8_hmy6w"]
-[ext_resource type="Texture2D" uid="uid://ceiqbx55gqtpj" path="res://textures/GUI/small_button_pressed.png" id="9_3eqxq"]
-[ext_resource type="Texture2D" uid="uid://b54sls1f1qxmn" path="res://textures/GUI/small_button_disabled.png" id="10_04itq"]
-[ext_resource type="Texture2D" uid="uid://bg6o856kdf2ag" path="res://textures/GUI/HELP.png" id="11_8vkkw"]
-[ext_resource type="Texture2D" uid="uid://c087ecf12utxy" path="res://textures/GUI/pause.png" id="11_mg5tu"]
-[ext_resource type="Texture2D" uid="uid://dgdvs4m8v1qgx" path="res://textures/GUI/home.png" id="12_55swo"]
+[ext_resource type="Texture2D" uid="uid://cv43fc7ns0rx1" path="res://textures/GUI/info_board.png" id="3_djhjv"]
+[ext_resource type="Texture2D" uid="uid://c4mmfdf2vp0w1" path="res://textures/GUI/button_normal.png" id="4_if20c"]
+[ext_resource type="Texture2D" uid="uid://3y4lv2wjbwmo" path="res://textures/GUI/button_pressed.png" id="5_c75lg"]
+[ext_resource type="Texture2D" uid="uid://dyriaprwl3nit" path="res://textures/GUI/button_disabled.png" id="6_ade8y"]
+[ext_resource type="Texture2D" uid="uid://d26t3h32ryjqw" path="res://textures/GUI/small_button_normal.png" id="8_hmy6w"]
+[ext_resource type="Texture2D" uid="uid://b27sosc83miuh" path="res://textures/GUI/small_button_pressed.png" id="9_3eqxq"]
+[ext_resource type="Texture2D" uid="uid://dp55286jqoq3r" path="res://textures/GUI/small_button_disabled.png" id="10_04itq"]
+[ext_resource type="Texture2D" uid="uid://b5s0aox0188wv" path="res://textures/GUI/HELP.png" id="11_8vkkw"]
+[ext_resource type="Texture2D" uid="uid://bu0d3wgr411gk" path="res://textures/GUI/pause.png" id="11_mg5tu"]
+[ext_resource type="Texture2D" uid="uid://dgtxqi53nsl8s" path="res://textures/GUI/home.png" id="12_55swo"]
+[ext_resource type="Texture2D" uid="uid://cwct773wkp8t7" path="res://textures/GUI/game_menu.png" id="14_ngx8a"]
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -203,8 +204,121 @@ offset_right = 75.0
 offset_bottom = 70.0
 texture = ExtResource("11_8vkkw")
 
-[connection signal="button_down" from="EntityButtons/UpgradeButton" to="." method="_on_btn_down" binds= [&"EntityButtons/UpgradeButton"]]
-[connection signal="button_up" from="EntityButtons/UpgradeButton" to="." method="_on_btn_up" binds= [&"EntityButtons/UpgradeButton"]]
+[node name="GameMenu" type="TextureRect" parent="."]
+process_mode = 3
+visible = false
+z_index = 10
+layout_mode = 0
+offset_left = 685.0
+offset_top = 190.0
+offset_right = 1235.0
+offset_bottom = 890.0
+texture = ExtResource("14_ngx8a")
+
+[node name="Shading" type="ColorRect" parent="GameMenu"]
+show_behind_parent = true
+offset_left = -685.0
+offset_top = -190.0
+offset_right = 1235.0
+offset_bottom = 890.0
+color = Color(0, 0, 0, 0.54902)
+
+[node name="Title" type="Label" parent="GameMenu"]
+layout_mode = 0
+offset_right = 550.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "ПАУЗА"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Buttons" type="VBoxContainer" parent="GameMenu"]
+layout_mode = 0
+offset_top = 150.0
+offset_right = 550.0
+offset_bottom = 580.0
+
+[node name="ResumeButton" type="TextureButton" parent="GameMenu/Buttons"]
+custom_minimum_size = Vector2(350, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+texture_normal = ExtResource("4_if20c")
+texture_pressed = ExtResource("5_c75lg")
+texture_disabled = ExtResource("6_ade8y")
+stretch_mode = 0
+metadata/action = 1
+
+[node name="Label" type="Label" parent="GameMenu/Buttons/ResumeButton"]
+layout_mode = 0
+offset_right = 350.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 30
+text = "Продолжить"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveButton" type="TextureButton" parent="GameMenu/Buttons"]
+custom_minimum_size = Vector2(350, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+texture_normal = ExtResource("4_if20c")
+texture_pressed = ExtResource("5_c75lg")
+texture_disabled = ExtResource("6_ade8y")
+stretch_mode = 0
+metadata/action = 1
+
+[node name="Label" type="Label" parent="GameMenu/Buttons/SaveButton"]
+layout_mode = 0
+offset_right = 350.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 30
+text = "Сохранить"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="GameMenu/Buttons"]
+custom_minimum_size = Vector2(350, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+texture_normal = ExtResource("4_if20c")
+texture_pressed = ExtResource("5_c75lg")
+texture_disabled = ExtResource("6_ade8y")
+stretch_mode = 0
+metadata/action = 2
+
+[node name="Label" type="Label" parent="GameMenu/Buttons/ExitButton"]
+layout_mode = 0
+offset_right = 350.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 30
+text = "Выйти в меню"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="TextureButton" parent="GameMenu/Buttons"]
+custom_minimum_size = Vector2(350, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+texture_normal = ExtResource("4_if20c")
+texture_pressed = ExtResource("5_c75lg")
+texture_disabled = ExtResource("6_ade8y")
+stretch_mode = 0
+metadata/action = 3
+
+[node name="Label" type="Label" parent="GameMenu/Buttons/CloseButton"]
+layout_mode = 0
+offset_right = 350.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 30
+text = "Выйти из игры"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="button_down" from="EntityButtons/SellButton" to="." method="_on_btn_down" binds= [&"EntityButtons/SellButton"]]
 [connection signal="button_up" from="EntityButtons/SellButton" to="." method="_on_btn_up" binds= [&"EntityButtons/SellButton"]]
 [connection signal="button_down" from="EntityButtons/RestButton" to="." method="_on_btn_down" binds= [&"EntityButtons/RestButton"]]

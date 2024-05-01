@@ -4,7 +4,7 @@ enum Chapter {FIGURES, ELVES}
 
 var pages :Dictionary = {
 	Chapter.FIGURES: ["rook", "king", "pawn", "bishop", "knight", "queen"],
-	Chapter.ELVES: ["forest_elf"]
+	Chapter.ELVES: ["forest_elf", "dark_elf"]
 }
 var entities :Array[Entity] = [Rook.new(Vector2.ZERO, 0), Pawn.new(Vector2.ZERO, 0), King.new(Vector2.ZERO, 0), Bishop.new(Vector2.ZERO, 0), Knight.new(Vector2.ZERO, 0), Queen.new(Vector2.ZERO, 0)]
 
@@ -13,7 +13,7 @@ var cur_chapter :Chapter = Chapter.FIGURES
 
 # Child nodes
 var title :Label
-var main_description :Label
+var main_description :RichTextLabel
 var top_small_description :Label
 var bottom_small_description :Label
 var help_image :TextureRect
@@ -41,7 +41,7 @@ func change_page(delta :int) -> void:
 		"res://sources/entities/%s.json" % pages[cur_chapter][cur_page]))
 	title.text = data["name"]
 	help_image.texture = load("res://textures/helpbook/entity/%s.png" % pages[cur_chapter][cur_page])
-	main_description.text = data["description"] + "\n\n" + entities[cur_page].get_info()
+	main_description.text = data["description"]# + "\n\n" + entities[cur_page].get_info()
 
 func close_help() -> void:
 	visible = false

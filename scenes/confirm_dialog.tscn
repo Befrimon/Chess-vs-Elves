@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://bho40i1x3gxfi"]
+
+[ext_resource type="Texture2D" uid="uid://c7ss4he28tipm" path="res://textures/GUI/confirm.png" id="1_6t8aa"]
+[ext_resource type="Texture2D" uid="uid://urvtixpsmvc4" path="res://textures/GUI/title.png" id="1_87o78"]
+[ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/menu_theme.tres" id="1_go8yn"]
+[ext_resource type="Texture2D" uid="uid://c4mmfdf2vp0w1" path="res://textures/GUI/button_normal.png" id="3_ikfdl"]
+[ext_resource type="Texture2D" uid="uid://3y4lv2wjbwmo" path="res://textures/GUI/button_pressed.png" id="4_45iap"]
+[ext_resource type="Texture2D" uid="uid://dyriaprwl3nit" path="res://textures/GUI/button_disabled.png" id="5_2effw"]
+
+[node name="ConfirmDialog" type="Window"]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+title = "Chess Popup"
+initial_position = 1
+size = Vector2i(700, 300)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+popup_window = true
+theme = ExtResource("1_go8yn")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6t8aa")
+
+[node name="Title" type="TextureRect" parent="."]
+offset_left = 50.0
+offset_top = 20.0
+offset_right = 650.0
+offset_bottom = 140.0
+size_flags_vertical = 3
+texture = ExtResource("1_87o78")
+
+[node name="Label" type="Label" parent="Title"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DenyBtn" type="TextureButton" parent="Buttons"]
+offset_left = 80.0
+offset_top = 180.0
+offset_right = 300.0
+offset_bottom = 250.0
+texture_normal = ExtResource("3_ikfdl")
+texture_pressed = ExtResource("4_45iap")
+texture_disabled = ExtResource("5_2effw")
+stretch_mode = 0
+metadata/click_action = -2
+
+[node name="Label" type="Label" parent="Buttons/DenyBtn"]
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 32
+text = "Нет"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AcceptBtn" type="TextureButton" parent="Buttons"]
+offset_left = 400.0
+offset_top = 180.0
+offset_right = 620.0
+offset_bottom = 250.0
+texture_normal = ExtResource("3_ikfdl")
+texture_pressed = ExtResource("4_45iap")
+texture_disabled = ExtResource("5_2effw")
+stretch_mode = 0
+metadata/click_action = -1
+
+[node name="Label" type="Label" parent="Buttons/AcceptBtn"]
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 32
+text = "Да"
+horizontal_alignment = 1
+vertical_alignment = 1

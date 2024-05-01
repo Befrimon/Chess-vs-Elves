@@ -1,0 +1,168 @@
+[gd_scene load_steps=12 format=3 uid="uid://dgyjsisoaxdf0"]
+
+[ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/menu_theme.tres" id="1_1ko6e"]
+[ext_resource type="Texture2D" uid="uid://urvtixpsmvc4" path="res://textures/GUI/title.png" id="1_dbe6g"]
+[ext_resource type="Texture2D" uid="uid://c4mmfdf2vp0w1" path="res://textures/GUI/button_normal.png" id="2_u7sgv"]
+[ext_resource type="Texture2D" uid="uid://3y4lv2wjbwmo" path="res://textures/GUI/button_pressed.png" id="3_r2l7q"]
+[ext_resource type="Texture2D" uid="uid://dyriaprwl3nit" path="res://textures/GUI/button_disabled.png" id="4_sx6ra"]
+[ext_resource type="Texture2D" uid="uid://d26t3h32ryjqw" path="res://textures/GUI/small_button_normal.png" id="5_36esh"]
+[ext_resource type="Texture2D" uid="uid://b27sosc83miuh" path="res://textures/GUI/small_button_pressed.png" id="6_cbubd"]
+[ext_resource type="Texture2D" uid="uid://dp55286jqoq3r" path="res://textures/GUI/small_button_disabled.png" id="7_8tchs"]
+[ext_resource type="Texture2D" uid="uid://c7x63bywwlvbp" path="res://textures/GUI/stats.png" id="8_ro8lx"]
+[ext_resource type="Texture2D" uid="uid://b5s0aox0188wv" path="res://textures/GUI/HELP.png" id="9_abde5"]
+[ext_resource type="Texture2D" uid="uid://c5sxdvlsdyvtk" path="res://textures/GUI/power.png" id="10_ix3we"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1ko6e")
+
+[node name="Title" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 80.0
+offset_right = 1410.0
+offset_bottom = 230.0
+texture = ExtResource("1_dbe6g")
+
+[node name="Label" type="Label" parent="Title"]
+layout_mode = 0
+offset_right = 900.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 60
+text = "Шахматы против Эльфов"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 660.0
+offset_top = 350.0
+offset_right = 1260.0
+offset_bottom = 950.0
+
+[node name="PlayBtn" type="TextureButton" parent="MainButtons"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 120.0
+texture_normal = ExtResource("2_u7sgv")
+texture_pressed = ExtResource("3_r2l7q")
+texture_disabled = ExtResource("4_sx6ra")
+stretch_mode = 0
+metadata/click_action = 0
+
+[node name="Label" type="Label" parent="MainButtons/PlayBtn"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 42
+text = "Играть"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsBtn" type="TextureButton" parent="MainButtons"]
+layout_mode = 0
+offset_top = 150.0
+offset_right = 600.0
+offset_bottom = 270.0
+texture_normal = ExtResource("2_u7sgv")
+texture_pressed = ExtResource("3_r2l7q")
+texture_disabled = ExtResource("4_sx6ra")
+stretch_mode = 0
+metadata/click_action = 1
+
+[node name="Label" type="Label" parent="MainButtons/OptionsBtn"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 46
+text = "Настройки"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShopBtn" type="TextureButton" parent="MainButtons"]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 600.0
+offset_bottom = 420.0
+texture_normal = ExtResource("2_u7sgv")
+texture_pressed = ExtResource("3_r2l7q")
+texture_disabled = ExtResource("4_sx6ra")
+stretch_mode = 0
+metadata/click_action = 2
+
+[node name="Label" type="Label" parent="MainButtons/ShopBtn"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 46
+text = "Магазин"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SmallButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1780.0
+offset_top = 630.0
+offset_right = 1900.0
+offset_bottom = 1080.0
+
+[node name="StatsBtn" type="TextureButton" parent="SmallButtons"]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 120.0
+texture_normal = ExtResource("5_36esh")
+texture_pressed = ExtResource("6_cbubd")
+texture_disabled = ExtResource("7_8tchs")
+stretch_mode = 0
+metadata/click_action = 3
+
+[node name="Icon" type="TextureRect" parent="SmallButtons/StatsBtn"]
+layout_mode = 0
+offset_left = 10.0
+offset_right = 110.0
+offset_bottom = 100.0
+texture = ExtResource("8_ro8lx")
+
+[node name="HelpBtn" type="TextureButton" parent="SmallButtons"]
+layout_mode = 0
+offset_top = 150.0
+offset_right = 120.0
+offset_bottom = 270.0
+texture_normal = ExtResource("5_36esh")
+texture_pressed = ExtResource("6_cbubd")
+texture_disabled = ExtResource("7_8tchs")
+stretch_mode = 0
+metadata/click_action = 4
+
+[node name="Icon" type="TextureRect" parent="SmallButtons/HelpBtn"]
+layout_mode = 0
+offset_left = 10.0
+offset_right = 110.0
+offset_bottom = 100.0
+texture = ExtResource("9_abde5")
+
+[node name="QuitBtn" type="TextureButton" parent="SmallButtons"]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 120.0
+offset_bottom = 420.0
+texture_normal = ExtResource("5_36esh")
+texture_pressed = ExtResource("6_cbubd")
+texture_disabled = ExtResource("7_8tchs")
+stretch_mode = 0
+metadata/click_action = 5
+
+[node name="Icon" type="TextureRect" parent="SmallButtons/QuitBtn"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 100.0
+offset_bottom = 95.0
+texture = ExtResource("10_ix3we")

@@ -1,0 +1,36 @@
+{
+	"version": "beta 1.2",
+	
+	"tutorial": false,
+	"gametime": 0,
+	"max_wave": 0,
+	"rook_use": 0,
+	"spawn_stat": {
+		"pawn": 0,
+		"king": 0,
+		"bishop": 0,
+		"knight": 0,
+		"queen": 0
+	},
+	"kill_stat": {
+		"forest_elf": 0,
+		"dark_elf": 0,
+		"high_elf": 0
+	},
+	
+	"silver": 50,
+	"fig_levels": {
+		"pawn": 1,
+		"king": 1,
+		"bishop": 1,
+		"knight": 1,
+		"queen": 1
+	},
+	"spell_count": {
+		"13rooks": 0,
+		"light_ray": 0,
+		"avada_kedavra": 0,
+		"extra_figure": 0,
+		"calm": 0
+	}
+}

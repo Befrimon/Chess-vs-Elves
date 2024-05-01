@@ -10,9 +10,13 @@ var data :Dictionary
 
 var type :Type = Type.UNKNOWN
 var iname :Name = Name.UNKNOWN
+
 var damage :float = 0  # The damage received
+var crit_chance :float = 0
+var crit_percent :float = 0
 var bonus_hits :int = 0
 var bonus_value :float = 0
+
 var level :int = 1
 var exp :int = 0
 var skill_cooldown :float = 0

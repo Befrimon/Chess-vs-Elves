@@ -1,0 +1,104 @@
+[gd_scene load_steps=6 format=3 uid="uid://bt1ibh3o5xq2u"]
+
+[ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/menu_theme.tres" id="1_qgni0"]
+[ext_resource type="Texture2D" uid="uid://ce8kri7xrntrb" path="res://textures/GUI/save_item.png" id="2_ovhs5"]
+[ext_resource type="Texture2D" uid="uid://c4mmfdf2vp0w1" path="res://textures/GUI/button_normal.png" id="3_fnliu"]
+[ext_resource type="Texture2D" uid="uid://3y4lv2wjbwmo" path="res://textures/GUI/button_pressed.png" id="4_6d3sx"]
+[ext_resource type="Texture2D" uid="uid://dyriaprwl3nit" path="res://textures/GUI/button_disabled.png" id="5_qax7w"]
+
+[node name="SaveItem" type="TextureRect"]
+theme = ExtResource("1_qgni0")
+texture = ExtResource("2_ovhs5")
+
+[node name="InfoLabels" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="InfoLabels"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 510.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "12/08/2024 18:50:23"
+vertical_alignment = 1
+
+[node name="WaveInfo" type="Label" parent="InfoLabels"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 100.0
+offset_right = 510.0
+offset_bottom = 133.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "465 секунд - 4 волна"
+
+[node name="CrownInfo" type="Label" parent="InfoLabels"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 140.0
+offset_right = 510.0
+offset_bottom = 173.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "425 корон"
+
+[node name="SpellInfo" type="Label" parent="InfoLabels"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 180.0
+offset_right = 510.0
+offset_bottom = 213.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "0 заклинаний"
+
+[node name="Buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ResumeButton" type="TextureButton" parent="Buttons"]
+layout_mode = 0
+offset_left = 750.0
+offset_top = 35.0
+offset_right = 950.0
+offset_bottom = 115.0
+texture_normal = ExtResource("3_fnliu")
+texture_pressed = ExtResource("4_6d3sx")
+texture_disabled = ExtResource("5_qax7w")
+stretch_mode = 0
+metadata/action = 0
+
+[node name="Label" type="Label" parent="Buttons/ResumeButton"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 30
+text = "Играть"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeleteButton" type="TextureButton" parent="Buttons"]
+layout_mode = 0
+offset_left = 750.0
+offset_top = 135.0
+offset_right = 950.0
+offset_bottom = 215.0
+texture_normal = ExtResource("3_fnliu")
+texture_pressed = ExtResource("4_6d3sx")
+texture_disabled = ExtResource("5_qax7w")
+stretch_mode = 0
+metadata/action = 0
+
+[node name="Label" type="Label" parent="Buttons/DeleteButton"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 30
+text = "Удалить"
+horizontal_alignment = 1
+vertical_alignment = 1
