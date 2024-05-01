@@ -217,6 +217,7 @@ texture = ExtResource("14_ngx8a")
 
 [node name="Shading" type="ColorRect" parent="GameMenu"]
 show_behind_parent = true
+layout_mode = 0
 offset_left = -685.0
 offset_top = -190.0
 offset_right = 1235.0
