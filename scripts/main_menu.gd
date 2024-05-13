@@ -32,7 +32,7 @@ func _ready() -> void:
 	for btn in get_node("MainMenu/MainButtons").get_children()\
 			 + get_node("MainMenu/SmallButtons").get_children()\
 			 + get_node("ConfirmDialog/Buttons").get_children()\
-			 + [get_node("SavesMenu/BackBtn")]:
+			 + [get_node("SavesMenu/BackBtn"), get_node("NReleasedMenu/BackBtn")]:
 		btn.pressed.connect(_on_btn_pressed.bind(btn.get_meta("click_action")))
 		btn.button_down.connect(_on_btn_down.bind(btn.get_path()))
 		btn.button_up.connect(_on_btn_up.bind(btn.get_path()))
@@ -79,7 +79,18 @@ func _on_btn_pressed(action :Action) -> void:
 		Action.OPEN_GAME:
 			get_node("MainMenu").visible = false
 			get_node("SavesMenu").visible = true
-		Action.OPTIONS: pass
+		Action.OPTIONS:
+			## TODO options menu
+			get_node("MainMenu").visible = false
+			get_node("NReleasedMenu").visible = true
+		Action.SHOP:
+			## TODO shop menu
+			get_node("MainMenu").visible = false
+			get_node("NReleasedMenu").visible = true
+		Action.STATS:
+			## TODO statistic menu
+			get_node("MainMenu").visible = false
+			get_node("NReleasedMenu").visible = true
 		Action.HELP: add_child(load("res://prefabs/helpbook.tscn").instantiate())
 		Action.QUIT:
 			confirm_window.get_node("Title/Label").text = "Выйти из игры?"

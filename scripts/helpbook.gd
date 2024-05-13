@@ -42,6 +42,8 @@ func change_page(delta :int) -> void:
 	title.text = data["name"]
 	help_image.texture = load("res://textures/helpbook/entity/%s.png" % pages[cur_chapter][cur_page])
 	main_description.text = data["description"]# + "\n\n" + entities[cur_page].get_info()
+	top_small_description.text = data["side_text"][0]
+	bottom_small_description.text = data["side_text"][1]
 
 func close_help() -> void:
 	visible = false

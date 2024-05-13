@@ -32,6 +32,13 @@ func _ready() -> void:
 	get_node("GameMenu/Buttons/ExitButton").pressed.connect(get_tree().change_scene_to_file.bind("res://scenes/start_menu.tscn"))
 	get_node("GameMenu/Buttons/CloseButton").pressed.connect(get_tree().quit)
 
+func _input(event :InputEvent) -> void:
+	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
+		if get_tree().paused:
+			resume_game()
+		else:
+			open_menu()
+
 ## Move button text/icon on click
 func _on_btn_down(btn_name :String) -> void:
 	get_node(btn_name).get_child(0).position.y += 8

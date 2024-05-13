@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://wrjdlsaa6uk1"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shading" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="left" type="ColorRect" parent="Shading"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.54902)
+
+[node name="right" type="ColorRect" parent="Shading"]
+layout_mode = 0
+offset_left = 1320.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.54902)
+
+[node name="top" type="ColorRect" parent="Shading"]
+layout_mode = 0
+offset_left = 600.0
+offset_right = 1320.0
+offset_bottom = 300.0
+color = Color(0, 0, 0, 0.54902)
+
+[node name="bottom" type="ColorRect" parent="Shading"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 480.0
+offset_right = 1320.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.54902)

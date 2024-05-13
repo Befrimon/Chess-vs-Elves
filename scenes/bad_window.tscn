@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmgth7lhdrvav"]
+
+[ext_resource type="Script" path="res://scripts/bad_window.gd" id="1_5avvf"]
+
+[node name="BadWindow" type="Node2D"]
+script = ExtResource("1_5avvf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

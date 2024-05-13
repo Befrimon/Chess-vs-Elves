@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgfug44ljxqev"]
+[gd_scene load_steps=7 format=3 uid="uid://bgfug44ljxqev"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_s4kcx"]
 [ext_resource type="TileSet" uid="uid://b57rp6exwdv2p" path="res://sources/map_tiles.tres" id="2_2ttlk"]
 [ext_resource type="PackedScene" uid="uid://dgyjsisoaxdf0" path="res://prefabs/menus/main_menu.tscn" id="2_vkj8k"]
 [ext_resource type="PackedScene" uid="uid://ctdsurspv4oet" path="res://prefabs/menus/saves_menu.tscn" id="4_dihc5"]
+[ext_resource type="PackedScene" uid="uid://dmjkra0yaysw0" path="res://prefabs/menus/not_released_menu.tscn" id="5_kxnec"]
 [ext_resource type="PackedScene" uid="uid://bho40i1x3gxfi" path="res://scenes/confirm_dialog.tscn" id="9_vyvmk"]
 
 [node name="StartMenu" type="Node2D"]
@@ -18,6 +19,9 @@ layer_1/tile_data = PackedInt32Array()
 [node name="MainMenu" parent="." instance=ExtResource("2_vkj8k")]
 
 [node name="SavesMenu" parent="." instance=ExtResource("4_dihc5")]
+visible = false
+
+[node name="NReleasedMenu" parent="." instance=ExtResource("5_kxnec")]
 visible = false
 
 [node name="Shading" type="ColorRect" parent="."]

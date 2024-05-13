@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmjkra0yaysw0"]
+
+[ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/menu_theme.tres" id="1_eubyj"]
+[ext_resource type="Texture2D" uid="uid://ct7a02f1df4ct" path="res://textures/GUI/save_board.png" id="2_jij8r"]
+[ext_resource type="Texture2D" uid="uid://c4mmfdf2vp0w1" path="res://textures/GUI/button_normal.png" id="3_bpwnt"]
+[ext_resource type="Texture2D" uid="uid://3y4lv2wjbwmo" path="res://textures/GUI/button_pressed.png" id="4_mgnvb"]
+[ext_resource type="Texture2D" uid="uid://dyriaprwl3nit" path="res://textures/GUI/button_disabled.png" id="5_3r341"]
+
+[node name="NReleasedMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_eubyj")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = 330.0
+offset_top = 120.0
+offset_right = 1590.0
+offset_bottom = 960.0
+texture = ExtResource("2_jij8r")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 660.0
+offset_top = 300.0
+offset_right = 1260.0
+offset_bottom = 381.0
+theme_override_font_sizes/font_size = 80
+text = "Coming Soon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackBtn" type="TextureButton" parent="."]
+offset_left = 350.0
+offset_top = 910.0
+offset_right = 600.0
+offset_bottom = 990.0
+texture_normal = ExtResource("3_bpwnt")
+texture_pressed = ExtResource("4_mgnvb")
+texture_disabled = ExtResource("5_3r341")
+stretch_mode = 0
+metadata/click_action = -3
+
+[node name="Label" type="Label" parent="BackBtn"]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 30
+text = "В меню"
+horizontal_alignment = 1
+vertical_alignment = 1

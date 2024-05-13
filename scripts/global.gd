@@ -27,6 +27,10 @@ func _ready() -> void:
 	else:
 		userdata = JSON.parse_string(FileAccess.get_file_as_string("user://data.json"))
 	file.close()
+	
+	# Check is tutorial complete
+	if !userdata["tutorial"]:
+		pass
 
 func _notification(what :int) -> void:
 	# Hadle close event and save game
