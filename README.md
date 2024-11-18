@@ -14,7 +14,7 @@
 <h3 align="center">Chess vs Elves</h3>
 
   <p align="center">
-    A parody of "Plants vs Zombies", with chess and elves
+    A parody of "Plants vs Zombies", but with chess and elves
     <br />
     <a href="https://github.com/Befrimon/Chess-vs-Elves/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
@@ -67,7 +67,9 @@ There are no restrictions for desktop versions. To run on Android devices, you n
     - [ ] Entity sounds
     - [ ] Other sounds
 - [ ] Multi-language Support
-    - [ ] English
+    - [ ] Russian
+    - [x] English
+    - [ ] ...
 
 See the [open issues](https://github.com/Befrimon/Chess-vs-Elves/issues) for a full list of proposed features (and known issues).
 

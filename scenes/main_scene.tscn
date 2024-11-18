@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://c1xmsxctlcf0n"]
+
+[ext_resource type="Texture2D" uid="uid://b73fj3m6tnfux" path="res://textures/gui/title_bg.png" id="1_0ucb8"]
+[ext_resource type="Texture2D" uid="uid://chhk7put5wr6v" path="res://textures/menu-tiles/black-tile.png" id="1_t7eh1"]
+[ext_resource type="Texture2D" uid="uid://bda41j8bkam7s" path="res://textures/menu-tiles/white-tile.png" id="2_75oe2"]
+[ext_resource type="Theme" uid="uid://0eahjdxywxxa" path="res://sources/ui_theme.tres" id="2_u8s62"]
+[ext_resource type="Script" path="res://scripts/anim_background.gd" id="3_v4u61"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mgq7o"]
+texture = ExtResource("1_t7eh1")
+texture_region_size = Vector2i(40, 40)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5rqcl"]
+texture = ExtResource("2_75oe2")
+texture_region_size = Vector2i(40, 40)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_4cebo"]
+tile_size = Vector2i(40, 40)
+sources/0 = SubResource("TileSetAtlasSource_mgq7o")
+sources/1 = SubResource("TileSetAtlasSource_5rqcl")
+
+[node name="MainScene" type="Node2D"]
+
+[node name="AnimBackground" type="TileMapLayer" parent="."]
+scale = Vector2(2, 2)
+tile_set = SubResource("TileSet_4cebo")
+script = ExtResource("3_v4u61")
+
+[node name="Canvas" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="TextureRect" parent="Canvas"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 70.0
+offset_right = 400.0
+offset_bottom = 220.0
+grow_horizontal = 2
+texture = ExtResource("1_0ucb8")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Canvas/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_u8s62")
+theme_override_font_sizes/font_size = 60
+text = "TITLE"
+horizontal_alignment = 1
+vertical_alignment = 1

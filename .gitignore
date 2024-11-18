@@ -7,5 +7,7 @@ addons/
 *.cfg
 
 # In-dev
+.idea/
+textures-old/
 textures/figures/
 animations-new/
